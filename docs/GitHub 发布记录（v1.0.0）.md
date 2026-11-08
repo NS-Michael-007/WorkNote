@@ -51,7 +51,22 @@ Release：<https://github.com/NS-Michael-007/WorkNote/releases/tag/v1.0.0>
    - 精确闹钟：应用声明了 `USE_EXACT_ALARM`，装好后默认就是已开启状态
 7. 恢复后核对：四项都显示"已开启"；【我】页下层的「提醒时响铃 / 提醒时震动 / 提醒时亮屏 / 优先使用精确闹钟」四个开关本来就是默认打开，与换装前一致；「提醒铃声」仍是"系统默认"（换装前也没选过自定义铃声）。
 
-## 五、复现命令（以后发新版照这个走）
+## 五、v1.0.1 这次更新了什么
+
+2026-11-08 下午，接手「主界面便签行右侧日期不显示年」这条修正：
+
+- 改动点：`app/src/main/java/com/workspace/worknote/util/TimeUtil.kt` 两处
+  - `friendly()`（有提醒时间的行）：`monthDayOf(ts)` → `fullDate(ts)`，`11月20日 09:00` 变成 `2026年11月20日 09:00`
+  - `dayLabel()`（没提醒时间、只显示关联日期的行）：`monthDayFmt().format()` → `fullDate()`，`11月20日` 变成 `2026年11月20日`
+  - 「今天 / 明天」仍是相对说法
+- 连带同步：详情页「提醒时间」、强提醒卡片「提醒时间」都跟着带年
+- iOS：`ios-app/Sources/Core/TimeKey.swift` 的 `friendlyDay` 加上年份
+- 鸿蒙：`Index.ets` 的 `dateLabel()` / `remindLabel()` 本来就带年，没动
+- 版本：`versionCode 2` / `versionName 1.0.1`，签名与 1.0.0 同一把私钥（SHA-256 `2d9ebfc0…d0b2`），可 `adb install -r` 覆盖升级、不动数据
+- Release：<https://github.com/NS-Michael-007/WorkNote/releases/tag/v1.0.1>（id 438121645），三个附件：`WorkNote-1.0.1-android-release.apk`（5,024,504 字节）、`WorkNote-1.0.1-ios-source.zip`（49,491 字节）、`WorkNote-1.0.1-harmony-source.zip`（32,050 字节）
+- 旧版 1.0.0 的三个产物已归档到本地 `dist\1.0.0\`
+
+## 六、复现命令（以后发新版照这个走）
 
 ```powershell
 Set-Location "C:\Users\NAN SHENG CSUR\Doubao\chats\2026-11-08\new-chat-1"
