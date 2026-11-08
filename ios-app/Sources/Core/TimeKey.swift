@@ -82,7 +82,7 @@ public enum TimeKey {
         return String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0)
     }
 
-    /// 相对日期文案：今天 / 明天 / 11月9日 周日
+    /// 相对日期文案：今天 / 明天 / 昨天 / 带年份的具体日期（2026年11月9日 周日）
     public static func friendlyDay(_ date: Date, now: Date = Date()) -> String {
         let today = calendar.startOfDay(for: now)
         let target = calendar.startOfDay(for: date)
@@ -90,11 +90,11 @@ public enum TimeKey {
         if delta == 0 { return "今天" }
         if delta == 1 { return "明天" }
         if delta == -1 { return "昨天" }
-        let c = calendar.dateComponents([.month, .day, .weekday], from: date)
+        let c = calendar.dateComponents([.year, .month, .day, .weekday], from: date)
         let weekdayNames = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
         let idx = (c.weekday ?? 1) - 1
         let name = weekdayNames[max(0, min(6, idx))]
-        return "\(c.month ?? 0)月\(c.day ?? 0)日 \(name)"
+        return "\(c.year ?? 0)年\(c.month ?? 0)月\(c.day ?? 0)日 \(name)"
     }
 
     /// 某天的星期名，用于日程页

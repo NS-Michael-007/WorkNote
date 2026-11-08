@@ -43,7 +43,7 @@ object TimeUtil {
 
     fun monthLabel(year: Int, month: Int): String = s(R.string.month_fmt, year, month)
 
-    /** 列表右侧显示的时间：今天 / 明天 / 具体日期 */
+    /** 列表右侧显示的时间：今天 / 明天 / 带年份的具体日期（2026年11月8日 09:00） */
     fun friendly(ts: Long): String {
         if (ts <= 0L) return s(R.string.date_not_set)
         val key = keyOf(ts)
@@ -53,15 +53,15 @@ object TimeUtil {
         if (key == keyOf(now() + 86_400_000L)) {
             return s(R.string.date_prefix_fmt, s(R.string.day_tomorrow), timeOf(ts))
         }
-        return s(R.string.date_prefix_fmt, monthDayOf(ts), timeOf(ts))
+        return s(R.string.date_prefix_fmt, fullDate(ts), timeOf(ts))
     }
 
-    /** 只显示日期，用于详情页展示关联日期 */
+    /** 只显示日期，用于详情页展示关联日期；非今天/明天时带年份（2026年11月8日） */
     fun dayLabel(key: String): String {
         val cal = parseKey(key) ?: return key
         if (key == todayKey()) return s(R.string.day_today)
         if (key == keyOf(now() + 86_400_000L)) return s(R.string.day_tomorrow)
-        return monthDayFmt().format(cal.time)
+        return fullDate(cal.timeInMillis)
     }
 
     private fun yearMonthDayFmt(): SimpleDateFormat {
