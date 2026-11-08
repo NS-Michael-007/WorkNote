@@ -43,7 +43,13 @@ Release：<https://github.com/NS-Michael-007/WorkNote/releases/tag/v1.0.0>
 2. `adb uninstall com.workspace.worknote`（debug 与 release 签名不同，必须卸载）。
 3. `adb install` release 包 —— realme 的安装器会拦一次"检测结果：涉及敏感权限"，要在手机上点「继续安装」才继续（这一步是系统行为，不是 adb 卡住）。
 4. 装好后核对：`dumpsys package` 读到 `versionName=1.0.0`；`run-as` 报 `package not debuggable`，确认装的是正式包而不是调试包。
-5. 待办：App 里【我】→ 从备份恢复，把上面的 `.taskbak.json` 导回去（换装必然清库，这一步必须手动做一次）。
+5. 数据恢复（已完成）：App【我】→「从备份恢复（会覆盖本地数据）」→ 系统文件选择器切到"文件"→"全部文件"→ Download → 工作便签提醒 → `WorkNote_20261108_1355.taskbak.json` → 确认「覆盖导入」。恢复后主界面那条便签回来了，关联日期"今天"、提醒时间"未设置"，跟备份里一致。
+6. **换装后必须重开四项权限**（这一步最容易漏）：卸载重装会把所有授权清零，App 会显示"强提醒权限（必须全开）"下四项都是"未开启"。realme 上 `adb shell appops set` 与 `pm grant` 都会被拒（shell 没有 `MANAGE_APP_OPS_MODES` / `GRANT_RUNTIME_PERMISSIONS`），只能走系统设置界面点：
+   - 悬浮窗：`am start -a android.settings.MANAGE_APP_OVERLAY_PERMISSION -d package:com.workspace.worknote`，把「授予悬浮窗权限」打开
+   - 通知：`am start -a android.settings.APP_NOTIFICATION_SETTINGS --es android.provider.extra.APP_PACKAGE com.workspace.worknote`，打开「允许通知」，并把「置顶通知」也开（前台常驻通知要它）
+   - 忽略电池优化：`adb shell dumpsys deviceidle whitelist +com.workspace.worknote` 可以成功，这一项不用点界面
+   - 精确闹钟：应用声明了 `USE_EXACT_ALARM`，装好后默认就是已开启状态
+7. 恢复后核对：四项都显示"已开启"；【我】页下层的「提醒时响铃 / 提醒时震动 / 提醒时亮屏 / 优先使用精确闹钟」四个开关本来就是默认打开，与换装前一致；「提醒铃声」仍是"系统默认"（换装前也没选过自定义铃声）。
 
 ## 五、复现命令（以后发新版照这个走）
 
