@@ -50,6 +50,8 @@ open WorkNote.xcodeproj      # 用 Xcode 选真机运行，签名用你自己的
 
 `project.yml` 里默认关闭了自动签名（`CODE_SIGNING_ALLOWED` 关），真机跑之前要在 Xcode 的 Signing & Capabilities 里选自己的 Team。
 
+> CI 现状：仓库里带了 `.github/workflows/ios.yml`（macOS runner 上编译 + 跑单测 + 装模拟器截图），但本账号当前的 macOS runner 配额用不了，两个 job 一创建就被 cancel（0 步执行）。所以 **iOS 代码至今没有一次真实编译记录**，想验收只能在你自己的 Mac 上跑。
+
 ### HarmonyOS NEXT（源码，需自编）
 
 用 DevEco Studio 打开 `ohos-app/`，`compatibleSdkVersion` 是 `5.0.0(12)`。真机安装需要先在 DevEco 里配好签名（自动签名或手动 p12 + p7b），否则只能跑模拟器。
