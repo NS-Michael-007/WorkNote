@@ -1,0 +1,13 @@
+{
+  "color": [
+    { "name": "start_window_background", "value": "#045C36" },
+    { "name": "brand_green", "value": "#07C160" },
+    { "name": "page_bg", "value": "#EDEDED" },
+    { "name": "card_bg", "value": "#FFFFFF" },
+    { "name": "text_primary", "value": "#191919" },
+    { "name": "text_secondary", "value": "#888888" },
+    { "name": "divider", "value": "#E5E5E5" },
+    { "name": "tab_bar_bg", "value": "#F7F7F7" },
+    { "name": "badge_red", "value": "#FA5151" }
+  ]
+}

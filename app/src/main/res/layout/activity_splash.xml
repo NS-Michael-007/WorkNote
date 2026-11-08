@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 启动页：品牌绿渐变 + 白色卡片托住图标 + 名称 / 口号 / 版本 -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/splashRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/splashCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- 图标卡片：白底 + 轻投影，把绿色图标从绿色背景上分离出来 -->
+        <FrameLayout
+            android:id="@+id/splashCard"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/bg_splash_card"
+            android:elevation="12dp">
+
+            <ImageView
+                android:id="@+id/splashIcon"
+                android:layout_width="106dp"
+                android:layout_height="106dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_launcher_app" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/splashTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:letterSpacing="0.1"
+            android:text="@string/app_name"
+            android:textColor="@color/splash_title"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/splashSlogan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:letterSpacing="0.03"
+            android:text="@string/splash_slogan"
+            android:textColor="@color/splash_slogan"
+            android:textSize="@dimen/text_body" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/splashVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:letterSpacing="0.06"
+        android:textColor="@color/splash_version"
+        android:textSize="@dimen/text_hint" />
+</FrameLayout>

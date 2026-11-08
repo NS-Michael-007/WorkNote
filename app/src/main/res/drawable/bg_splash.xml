@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 启动页底色：品牌绿渐变 + 中心柔光（冷启动第一帧就是绿的，不白屏、不跳色） -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:centerColor="@color/splash_mid"
+                android:endColor="@color/splash_bottom"
+                android:startColor="@color/splash_top"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- 中上部一团柔光，让图标卡片像被“打亮”而不是硬贴上去 -->
+    <item android:gravity="center_horizontal|top">
+        <shape android:shape="oval">
+            <gradient
+                android:centerX="0.5"
+                android:centerY="0.5"
+                android:endColor="#00FFFFFF"
+                android:gradientRadius="230dp"
+                android:startColor="#1FFFFFFF"
+                android:type="radial" />
+            <size
+                android:width="460dp"
+                android:height="460dp" />
+        </shape>
+    </item>
+
+    <!-- 顶部再压一层极淡的白，撑住状态栏区域 -->
+    <item android:gravity="top">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:endColor="#00FFFFFF"
+                android:startColor="#22FFFFFF"
+                android:type="linear" />
+            <size android:height="260dp" />
+        </shape>
+    </item>
+</layer-list>

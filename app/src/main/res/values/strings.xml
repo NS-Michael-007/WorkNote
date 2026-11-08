@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">工作便签提醒</string>
+    <string name="tab_home">主界面</string>
+    <string name="tab_schedule">日程</string>
+    <string name="tab_profile">我</string>
+    <string name="channel_reminder">强提醒前台服务</string>
+    <string name="channel_reminder_desc">保持强提醒卡片可以弹出，请勿关闭</string>
+    <string name="channel_task">任务提醒</string>
+
+    <!-- 权限 -->
+    <string name="perm_section_title">强提醒权限（必须全开）</string>
+    <string name="perm_section_hint">少一项，置顶提醒卡片就可能弹不出来（安卓系统限制）</string>
+    <string name="perm_overlay">悬浮窗权限</string>
+    <string name="perm_battery">忽略电池优化</string>
+    <string name="perm_notify">通知权限</string>
+    <string name="perm_exact">闹钟与提醒（精确闹钟）</string>
+    <string name="status_on">已开启</string>
+    <string name="status_off">未开启，点这里去开启</string>
+    <string name="status_go">去开启</string>
+
+    <!-- 界面与显示 -->
+    <string name="appearance_section">界面与显示</string>
+    <string name="appearance_hint">只改本机显示，不影响提醒时间和提醒内容</string>
+    <string name="bg_title">背景图</string>
+    <string name="bg_default">默认纯色</string>
+    <string name="bg_custom">已自定义</string>
+    <string name="bg_pick">从相册选一张图</string>
+    <string name="bg_reset">恢复默认背景</string>
+    <string name="bg_dialog">背景图</string>
+    <string name="bg_failed">这张图读不出来，换一张试试</string>
+    <string name="bg_applied">背景图已更新</string>
+    <string name="bg_reset_done">已恢复默认背景</string>
+    <string name="dark_title">深色模式</string>
+    <string name="dark_follow">跟随系统</string>
+    <string name="dark_light">浅色</string>
+    <string name="dark_night">深色</string>
+    <string name="dark_dialog">深色模式</string>
+    <string name="font_title">字体大小</string>
+    <string name="font_level_fmt">第 %1$d 档</string>
+    <string name="font_preview">预览：这是便签正文的字号效果</string>
+    <string name="font_dialog">字体大小（1 最小，10 最大）</string>
+    <string name="lang_title">语言</string>
+    <string name="lang_follow">跟随系统</string>
+    <string name="lang_zh">简体中文</string>
+    <string name="lang_zh_hant">繁體中文</string>
+    <string name="lang_en">English</string>
+    <string name="lang_dialog">语言 / Language</string>
+    <string name="translate_title">便签文字翻译</string>
+    <string name="translate_sub">调用手机里的翻译应用，没装的话会复制到剪贴板</string>
+    <string name="translate_dialog">翻译便签文字</string>
+    <string name="translate_dialog_msg">打开任意一条便签，点底部的「翻译便签文字」，会把标题和备注交给系统翻译应用处理。</string>
+
+    <!-- 存储空间 -->
+    <string name="storage_section">存储空间</string>
+    <string name="storage_title">存储空间</string>
+    <string name="storage_notes_fmt">便签 %1$d 条</string>
+    <string name="storage_db_fmt">数据库 %1$s</string>
+    <string name="storage_bg_fmt">背景图 %1$s</string>
+    <string name="storage_bg_none">背景图 未设置</string>
+    <string name="storage_clear">清理缓存</string>
+    <string name="storage_cleared">缓存已清理</string>
+    <string name="storage_dialog">存储空间</string>
+
+    <!-- 通知 -->
+    <string name="notify_section">通知</string>
+    <string name="notify_sound">提醒时响铃</string>
+    <string name="notify_vibrate">提醒时震动</string>
+    <string name="notify_screen_on">提醒时亮屏</string>
+    <string name="ringtone_title">提醒铃声</string>
+    <string name="ringtone_hint">选一首本地音乐，到点就响这一首</string>
+    <string name="ringtone_default">系统默认</string>
+    <string name="ringtone_dialog">提醒铃声</string>
+    <string name="ringtone_pick">选择本地音乐</string>
+    <string name="ringtone_reset">恢复系统默认铃声</string>
+    <string name="ringtone_applied">已换成「%1$s」</string>
+    <string name="ringtone_reset_done">已恢复系统默认铃声</string>
+    <string name="ringtone_unreadable">这个音频读不出来，换一个试试</string>
+    <string name="ringtone_import_failed">设置铃声失败：%1$s</string>
+
+    <!-- 闹钟与提醒 -->
+    <string name="alarm_section">闹钟与提醒</string>
+    <string name="alarm_delay_title">默认延后时长</string>
+    <string name="alarm_repeat_title">默认重弹间隔</string>
+    <string name="alarm_exact_title">优先使用精确闹钟</string>
+    <string name="alarm_exact_sub">关掉后系统可能晚几分钟才弹卡片，省一点电</string>
+    <string name="alarm_rescheduled">已按新设置重排全部提醒</string>
+    <string name="minutes_fmt">%1$d 分钟</string>
+
+    <!-- 备份 -->
+    <string name="backup_section">数据备份</string>
+    <string name="backup_hint">备份文件存到手机「下载」目录，卸载 App 不会删掉；换手机时把它带到新机恢复</string>
+    <string name="backup_export">导出备份（.taskbak）</string>
+    <string name="backup_import">从备份恢复（会覆盖本地数据）</string>
+    <string name="import_confirm">会先清空当前本地全部便签，再导入备份文件里的内容；定时提醒会重新排一遍。确定继续吗？</string>
+    <string name="import_ok">覆盖导入</string>
+
+    <!-- 关于 -->
+    <string name="about_section">关于</string>
+    <string name="about_version_fmt">版本 %1$s</string>
+    <string name="about_text">开源自用项目，不上架应用商店</string>
+
+    <!-- 便签编辑 -->
+    <string name="note_edit_new">新建便签</string>
+    <string name="note_edit_edit">编辑这条便签</string>
+    <string name="note_title_label">便签标题</string>
+    <string name="note_title_hint">例如：提交周报</string>
+    <string name="note_remark_label">备注说明</string>
+    <string name="note_remark_hint">例如：今天 18:00 前交给主管</string>
+    <string name="note_date_label">关联日期（会归到日程这一天）</string>
+    <string name="reminder_section">提醒方式（可多选组合）</string>
+    <string name="reminder_section_hint">三种可以一起开；到点会弹出置顶卡片，不点按钮关不掉</string>
+    <string name="rmd_timed">定时提醒</string>
+    <string name="rmd_loop">循环重复</string>
+    <string name="rmd_repeat">未处理就再弹</string>
+    <string name="rmd_interval_hint">重弹间隔（分钟，默认 %1$d）</string>
+    <string name="action_section">自定义操作按钮</string>
+    <string name="action_section_hint">这里配的按钮，就是强提醒卡片上能点的按钮；每条便签可以不一样</string>
+    <string name="action_add">＋ 添加一个按钮</string>
+    <string name="action_save">保存便签</string>
+    <string name="action_done">我已处理</string>
+    <string name="action_delay">延后 %1$d 分钟</string>
+    <string name="action_close">先关掉</string>
+    <string name="action_delay_label">延后</string>
+    <string name="action_close_label">仅关闭</string>
+    <string name="action_done_label">标记完成</string>
+    <string name="loop_none">不循环</string>
+    <string name="loop_daily">每天，同一时间再提醒</string>
+    <string name="loop_weekly">每周，同一天同一时间再提醒</string>
+    <string name="loop_monthly">每月，同一天同一时间再提醒</string>
+    <string name="loop_dialog">循环周期</string>
+    <string name="rmd_loop_daily">每天</string>
+    <string name="rmd_loop_weekly">每周</string>
+    <string name="rmd_loop_monthly">每月</string>
+
+    <!-- 其他页面 -->
+    <string name="back">返回</string>
+    <string name="more">更多</string>
+    <string name="recycle_bin">回收站</string>
+    <string name="recycle_empty">回收站是空的</string>
+    <string name="note_delete">删除（进回收站）</string>
+    <string name="detail_actions">这条便签的按钮</string>
+    <string name="detail_action_hint">点一下等于在强提醒卡片上点同一个按钮</string>
+    <string name="card_hint">点上面的按钮处理后，这张卡片才会消失</string>
+    <string name="home_empty">还没有便签，点右上角 ＋ 新建一条</string>
+    <string name="new_note">新建便签</string>
+
+    <!-- 日程年月选择 -->
+    <string name="pick_month">选择年月</string>
+    <string name="pick_year">年份</string>
+    <string name="pick_today">回到本月</string>
+    <string name="month_fmt">%1$d年%2$d月</string>
+    <string name="pick_date_title">选择关联日期</string>
+    <string name="pick_time_title">选择提醒时间</string>
+    <string name="fmt_today_mark">%1$s（今天）</string>
+    <string name="unit_year_fmt">%1$d年</string>
+    <string name="unit_month_fmt">%1$d月</string>
+    <string name="unit_day_fmt">%1$d日</string>
+    <string name="unit_hour_fmt">%1$d时</string>
+    <string name="unit_minute_fmt">%1$d分</string>
+    <string name="month_unit_suffix">月</string>
+
+    <!-- 日期与时间 -->
+    <string name="date_not_set">未设置</string>
+    <string name="day_today">今天</string>
+    <string name="day_tomorrow">明天</string>
+    <string name="date_prefix_fmt">%1$s %2$s</string>
+    <string name="weekday_0">周日</string>
+    <string name="weekday_1">周一</string>
+    <string name="weekday_2">周二</string>
+    <string name="weekday_3">周三</string>
+    <string name="weekday_4">周四</string>
+    <string name="weekday_5">周五</string>
+    <string name="weekday_6">周六</string>
+
+    <!-- 主界面菜单与空态 -->
+    <string name="home_empty_keyword">没有匹配「%1$s」的便签</string>
+    <string name="home_empty_active">当前没有待处理的便签</string>
+    <string name="menu_show_all">显示全部便签</string>
+    <string name="menu_active_only">只看未处理</string>
+    <string name="menu_search">搜索便签</string>
+    <string name="search_title">搜索便签</string>
+    <string name="search_hint">输入标题或备注里的关键字</string>
+    <string name="search_action">搜索</string>
+    <string name="search_clear">清除</string>
+
+    <!-- 便签编辑里的提示 -->
+    <string name="err_title_required">先写一个便签标题</string>
+    <string name="err_time_required">先选一个提醒时间</string>
+    <string name="action_type_dialog">这个按钮点了做什么</string>
+    <string name="action_type_done_full">标记完成（这条便签结束）</string>
+    <string name="action_type_delay_full">延后 %1$d 分钟再提醒</string>
+    <string name="action_type_close_full">只关卡片，任务继续待处理</string>
+    <string name="action_btn_hint">按钮文字，例如 我已提交</string>
+    <string name="action_delete">删除</string>
+    <string name="pick_time_hint">点这里选提醒时间</string>
+
+    <!-- 提示语 -->
+    <string name="backup_saved_fmt">备份已保存：%1$s</string>
+    <string name="backup_failed_fmt">导出失败：%1$s</string>
+    <string name="import_done_fmt">已导入 %1$d 条便签</string>
+    <string name="import_failed_fmt">导入失败：%1$s</string>
+    <string name="no_storage_perm">没有存储权限，导不出到下载目录</string>
+    <string name="err_backup_no_target">系统没有返回可写入的位置</string>
+    <string name="err_backup_write">写文件失败</string>
+    <string name="err_backup_no_dir">无法创建下载目录</string>
+    <string name="err_backup_read">读不到这个文件</string>
+    <string name="err_backup_not_ours">不是本应用的备份文件</string>
+    <string name="err_backup_empty">备份里没有便签</string>
+    <string name="cant_open_settings">打不开这个系统设置页，请手动到设置里开</string>
+    <string name="exact_not_needed">当前系统不需要单独开启</string>
+
+    <!-- 便签详情 -->
+    <string name="translate_btn">翻译便签文字</string>
+    <string name="translate_nothing">这条便签没有可翻译的文字</string>
+    <string name="translate_copied">没找到可用的翻译应用，已复制到剪贴板</string>
+    <string name="translate_chooser">选择翻译方式</string>
+    <string name="detail_no_remark">没有备注</string>
+    <string name="detail_date_fmt">关联日期：%1$s</string>
+    <string name="detail_time_fmt">提醒时间：%1$s</string>
+    <string name="detail_time_none">提醒时间：未设置</string>
+    <string name="detail_loop_fmt">循环：%1$s</string>
+    <string name="detail_repeat_fmt">未处理重弹：%1$s</string>
+    <string name="detail_repeat_every_fmt">每 %1$d 分钟</string>
+    <string name="detail_repeat_off">关闭</string>
+    <string name="detail_status_fmt">当前状态：%1$s</string>
+    <string name="st_pending">待提醒</string>
+    <string name="st_ready">已提醒，等你处理</string>
+    <string name="st_done">已处理</string>
+    <string name="st_postponed">已延后</string>
+    <string name="st_archived">已归档</string>
+    <string name="st_deleted">在回收站</string>
+    <string name="detail_delete_title">删除这条便签</string>
+    <string name="detail_delete_msg">会移到回收站，可以再恢复；确定删除吗？</string>
+    <string name="detail_deleted">已移入回收站</string>
+    <string name="detail_handled_fmt">已处理：%1$s</string>
+    <string name="looping_label">循环提醒中</string>
+    <string name="badge_pending">待</string>
+    <string name="day_of_month_fmt">%1$d 号</string>
+    <string name="date_empty_hint">这天还没有便签</string>
+    <string name="unnamed_note">未命名便签</string>
+    <string name="reminder_default_remark">到了提醒时间，先把这条便签处理掉</string>
+    <string name="rmd_meta_time">提醒时间 %1$s</string>
+    <string name="rmd_meta_date">关联日期 %1$s</string>
+    <string name="rmd_meta_daily">每天循环</string>
+    <string name="rmd_meta_weekly">每周循环</string>
+    <string name="rmd_meta_monthly">每月循环</string>
+    <string name="rmd_meta_repeat">未处理每 %1$d 分钟再弹</string>
+    <string name="rmd_meta_count">已提醒 %1$d 次</string>
+    <string name="bin_restore">恢复到主界面</string>
+    <string name="bin_purge">彻底删除（不可恢复）</string>
+    <string name="bin_restored">已恢复</string>
+    <string name="bin_purge_title">彻底删除</string>
+    <string name="bin_purge_msg">这条便签会从本地数据库删掉，只能靠以前的备份文件找回，确定吗？</string>
+    <string name="bin_purged">已彻底删除</string>
+    <string name="channel_alert_desc">便签到点时的强提醒</string>
+    <string name="splash_slogan">不处理就关不掉的强提醒</string></resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height">
+
+        <TextView
+            android:id="@+id/scheduleTitle"
+            style="@style/Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/page_margin"
+            android:gravity="center_vertical"
+            android:text="@string/tab_schedule" />
+
+        <TextView
+            android:id="@+id/btnPickMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/page_margin"
+            android:background="@drawable/bg_field"
+            android:clickable="true"
+            android:drawablePadding="2dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_body" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dayList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_bar_to_section"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/space_bar_to_section"
+        android:scrollbars="vertical" />
+</LinearLayout>

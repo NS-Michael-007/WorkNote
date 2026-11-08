@@ -1,0 +1,80 @@
+name: iOS 编译与模拟器验证
+
+# 为什么走 CI：iOS 编译必须有 macOS + Xcode，开发机是 Windows，
+# 这台机器上不可能本地编译，也不可能跑 iOS 模拟器。用 GitHub 的 macOS runner
+# 才能真正拿到「编译通过 + 模拟器里跑起来的样子」这两份证据。
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "ios-app/**"
+      - ".github/workflows/ios.yml"
+  pull_request:
+    paths:
+      - "ios-app/**"
+
+jobs:
+  build-and-test:
+    runs-on: macos-14
+    defaults:
+      run:
+        working-directory: ios-app
+
+    steps:
+      - name: 取代码
+        uses: actions/checkout@v4
+
+      - name: 显示 Xcode 版本
+        run: xcodebuild -version
+
+      - name: 安装 XcodeGen
+        run: brew install xcodegen
+
+      - name: 生成 Xcode 工程
+        run: xcodegen generate --spec project.yml
+
+      - name: 跑核心层单元测试（备份契约 + 排期）
+        run: |
+          set -o pipefail
+          rm -rf build
+          xcodebuild test \
+            -scheme WorkNoteCoreTests \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            -derivedDataPath build \
+            -resultBundlePath build/TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO | tail -n 80
+
+      - name: 编译 App
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -scheme WorkNote \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO | tail -n 80
+
+      - name: 装进模拟器并截图
+        run: |
+          set -e
+          DEVICE=$(xcrun simctl list devices available | grep -m1 "iPhone 15 (" | sed -E 's/.*\(([0-9A-F-]{36})\).*/\1/')
+          echo "使用模拟器: $DEVICE"
+          xcrun simctl boot "$DEVICE" || true
+          xcrun simctl bootstatus "$DEVICE" -b
+          APP="build/Build/Products/Debug-iphonesimulator/WorkNote.app"
+          xcrun simctl install "$DEVICE" "$APP"
+          xcrun simctl launch "$DEVICE" com.workspace.worknote
+          sleep 6
+          xcrun simctl io "$DEVICE" screenshot shot_home.png
+          echo "截图完成"
+
+      - name: 上传截图与测试报告
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-verification
+          path: |
+            ios-app/shot_home.png
+            ios-app/build/TestResults.xcresult
+          if-no-files-found: warn
+          retention-days: 14

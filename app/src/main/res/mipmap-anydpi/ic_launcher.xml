@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 低版本兜底（本项目 minSdk 26，理论上走不到，留一份防止个别 ROM 只认旧格式） -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_launcher_bg" />
+    <item android:drawable="@drawable/ic_launcher_fg" />
+</layer-list>

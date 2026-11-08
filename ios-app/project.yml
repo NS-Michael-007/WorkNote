@@ -1,0 +1,76 @@
+name: WorkNote
+options:
+  bundleIdPrefix: com.workspace
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    ALWAYS_SEARCH_USER_PATHS: NO
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+    CODE_SIGN_IDENTITY: ""
+    CODE_SIGNING_REQUIRED: NO
+    CODE_SIGNING_ALLOWED: NO
+
+targets:
+  WorkNote:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: Sources/Core
+      - path: Sources/App
+      - path: Sources/UI
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.workspace.worknote
+        PRODUCT_NAME: WorkNote
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_CFBundleDisplayName: 工作便签提醒
+        # 开发语言定为简体中文：三套 .lproj 里没有的语种一律回落到简中，而不是回落英文
+        INFOPLIST_KEY_CFBundleDevelopmentRegion: zh-Hans
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_EMIT_LOC_STRINGS: YES
+
+  WorkNoteCoreTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: Sources/Core
+      - path: Tests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.workspace.worknote.coretests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  WorkNote:
+    build:
+      targets:
+        WorkNote: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: false
+      targets:
+        - WorkNoteCoreTests
+
+  WorkNoteCoreTests:
+    build:
+      targets:
+        WorkNoteCoreTests: all
+    test:
+      config: Debug
+      targets:
+        - WorkNoteCoreTests

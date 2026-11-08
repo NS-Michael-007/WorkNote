@@ -1,0 +1,264 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Work Note main module"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Work Note"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Work Note"
+    },
+    {
+      "name": "perm_reminder_reason",
+      "value": "Needed to pop the strong reminder card on time"
+    },
+    {
+      "name": "perm_background_reason",
+      "value": "Keep the strong reminder card running in the foreground"
+    },
+    {
+      "name": "tab_home",
+      "value": "Home"
+    },
+    {
+      "name": "tab_schedule",
+      "value": "Schedule"
+    },
+    {
+      "name": "tab_profile",
+      "value": "Me"
+    },
+    {
+      "name": "home_title",
+      "value": "Home"
+    },
+    {
+      "name": "home_empty",
+      "value": "No notes yet — tap + in the top right to add one"
+    },
+    {
+      "name": "home_empty_active",
+      "value": "Nothing pending right now"
+    },
+    {
+      "name": "new_note",
+      "value": "New note"
+    },
+    {
+      "name": "more",
+      "value": "More"
+    },
+    {
+      "name": "recycle_bin",
+      "value": "Recycle bin"
+    },
+    {
+      "name": "schedule_title",
+      "value": "Schedule"
+    },
+    {
+      "name": "pick_month",
+      "value": "Choose month"
+    },
+    {
+      "name": "pick_year",
+      "value": "Year"
+    },
+    {
+      "name": "date_empty_hint",
+      "value": "No notes on this day"
+    },
+    {
+      "name": "day_of_month_fmt",
+      "value": "Day %d"
+    },
+    {
+      "name": "profile_title",
+      "value": "Me"
+    },
+    {
+      "name": "appearance_section",
+      "value": "Appearance"
+    },
+    {
+      "name": "dark_title",
+      "value": "Dark mode"
+    },
+    {
+      "name": "dark_follow",
+      "value": "Follow system"
+    },
+    {
+      "name": "dark_light",
+      "value": "Light"
+    },
+    {
+      "name": "dark_night",
+      "value": "Dark"
+    },
+    {
+      "name": "font_title",
+      "value": "Font size"
+    },
+    {
+      "name": "lang_title",
+      "value": "Language"
+    },
+    {
+      "name": "lang_follow",
+      "value": "Follow system"
+    },
+    {
+      "name": "lang_zh",
+      "value": "简体中文"
+    },
+    {
+      "name": "lang_zh_hant",
+      "value": "繁體中文"
+    },
+    {
+      "name": "lang_en",
+      "value": "English"
+    },
+    {
+      "name": "lang_restart_hint",
+      "value": "Reopen the app after switching language"
+    },
+    {
+      "name": "storage_section",
+      "value": "Storage"
+    },
+    {
+      "name": "backup_section",
+      "value": "Backup"
+    },
+    {
+      "name": "backup_export",
+      "value": "Export backup (.taskbak)"
+    },
+    {
+      "name": "backup_import",
+      "value": "Restore from backup (replaces local data)"
+    },
+    {
+      "name": "about_section",
+      "value": "About"
+    },
+    {
+      "name": "about_text",
+      "value": "Open-source personal project, not published to any app store"
+    },
+    {
+      "name": "note_title_label",
+      "value": "Title"
+    },
+    {
+      "name": "note_remark_label",
+      "value": "Remark"
+    },
+    {
+      "name": "note_date_label",
+      "value": "Date"
+    },
+    {
+      "name": "reminder_section",
+      "value": "Reminder modes (combine any)"
+    },
+    {
+      "name": "rmd_timed",
+      "value": "Timed reminder"
+    },
+    {
+      "name": "rmd_loop",
+      "value": "Repeat"
+    },
+    {
+      "name": "rmd_repeat",
+      "value": "Re-pop until handled"
+    },
+    {
+      "name": "action_section",
+      "value": "Custom action buttons"
+    },
+    {
+      "name": "save",
+      "value": "Save note"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "ok",
+      "value": "OK"
+    },
+    {
+      "name": "delete",
+      "value": "Delete"
+    },
+    {
+      "name": "notify_section",
+      "value": "Notifications"
+    },
+    {
+      "name": "ringtone_title",
+      "value": "Reminder sound"
+    },
+    {
+      "name": "ringtone_hint",
+      "value": "Pick a song from this device; it plays when a note is due"
+    },
+    {
+      "name": "ringtone_default",
+      "value": "System default"
+    },
+    {
+      "name": "ringtone_pick",
+      "value": "Choose a local audio file"
+    },
+    {
+      "name": "ringtone_reset",
+      "value": "Restore the system default"
+    },
+    {
+      "name": "ringtone_pick_failed",
+      "value": "Could not pick the audio: %s"
+    },
+    {
+      "name": "pick_date_title",
+      "value": "Choose the linked date"
+    },
+    {
+      "name": "pick_time_title",
+      "value": "Choose the reminder time"
+    },
+    {
+      "name": "day_today",
+      "value": "Today"
+    },
+    {
+      "name": "move_to_today",
+      "value": "Move to today"
+    },
+    {
+      "name": "remind_time_label",
+      "value": "Reminder time"
+    },
+    {
+      "name": "edit_note",
+      "value": "Edit note"
+    },
+    {
+      "name": "remind_none",
+      "value": "Not set"
+    },
+    {
+      "name": "mark_done",
+      "value": "Mark as done"
+    }
+  ]
+}

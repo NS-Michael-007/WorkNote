@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 繁體中文（BCP47: zh-Hant）。涵蓋台灣／香港用語，不放地區特定詞（例如不改「軟體」為「軟件」） -->
+<resources>
+    <string name="app_name">工作便籤提醒</string>
+    <string name="tab_home">主介面</string>
+    <string name="tab_schedule">日程</string>
+    <string name="tab_profile">我</string>
+    <string name="channel_reminder">強提醒前景服務</string>
+    <string name="channel_reminder_desc">保持強提醒卡片可以彈出，請勿關閉</string>
+    <string name="channel_task">任務提醒</string>
+
+    <!-- 權限 -->
+    <string name="perm_section_title">強提醒權限（必須全開）</string>
+    <string name="perm_section_hint">少一項，置頂提醒卡片就可能彈不出來（安卓系統限制）</string>
+    <string name="perm_overlay">懸浮視窗權限</string>
+    <string name="perm_battery">忽略電池最佳化</string>
+    <string name="perm_notify">通知權限</string>
+    <string name="perm_exact">鬧鐘與提醒（精確鬧鐘）</string>
+    <string name="status_on">已開啟</string>
+    <string name="status_off">未開啟，點這裡去開啟</string>
+    <string name="status_go">去開啟</string>
+
+    <!-- 介面與顯示 -->
+    <string name="appearance_section">介面與顯示</string>
+    <string name="appearance_hint">只改本機顯示，不影響提醒時間和提醒內容</string>
+    <string name="bg_title">背景圖</string>
+    <string name="bg_default">預設純色</string>
+    <string name="bg_custom">已自訂</string>
+    <string name="bg_pick">從相簿選一張圖</string>
+    <string name="bg_reset">還原預設背景</string>
+    <string name="bg_dialog">背景圖</string>
+    <string name="bg_failed">這張圖讀不出來，換一張試試</string>
+    <string name="bg_applied">背景圖已更新</string>
+    <string name="bg_reset_done">已還原預設背景</string>
+    <string name="dark_title">深色模式</string>
+    <string name="dark_follow">跟隨系統</string>
+    <string name="dark_light">淺色</string>
+    <string name="dark_night">深色</string>
+    <string name="dark_dialog">深色模式</string>
+    <string name="font_title">字體大小</string>
+    <string name="font_level_fmt">第 %1$d 檔</string>
+    <string name="font_preview">預覽：這是便籤內文的字號效果</string>
+    <string name="font_dialog">字體大小（1 最小，10 最大）</string>
+    <string name="lang_title">語言</string>
+    <string name="lang_follow">跟隨系統</string>
+    <string name="lang_zh">簡體中文</string>
+    <string name="lang_zh_hant">繁體中文</string>
+    <string name="lang_en">English</string>
+    <string name="lang_dialog">語言 / Language</string>
+    <string name="translate_title">便籤文字翻譯</string>
+    <string name="translate_sub">呼叫手機裡的翻譯應用程式，沒裝的話會複製到剪貼簿</string>
+    <string name="translate_dialog">翻譯便籤文字</string>
+    <string name="translate_dialog_msg">開啟任意一則便籤，點下方的「翻譯便籤文字」，會把標題和備註交給系統翻譯應用程式處理。</string>
+
+    <!-- 儲存空間 -->
+    <string name="storage_section">儲存空間</string>
+    <string name="storage_title">儲存空間</string>
+    <string name="storage_notes_fmt">便籤 %1$d 則</string>
+    <string name="storage_db_fmt">資料庫 %1$s</string>
+    <string name="storage_bg_fmt">背景圖 %1$s</string>
+    <string name="storage_bg_none">背景圖 未設定</string>
+    <string name="storage_clear">清除快取</string>
+    <string name="storage_cleared">快取已清除</string>
+    <string name="storage_dialog">儲存空間</string>
+
+    <!-- 通知 -->
+    <string name="notify_section">通知</string>
+    <string name="notify_sound">提醒時響鈴</string>
+    <string name="notify_vibrate">提醒時震動</string>
+    <string name="notify_screen_on">提醒時亮螢幕</string>
+    <string name="ringtone_title">提醒鈴聲</string>
+    <string name="ringtone_hint">選一首本機音樂，到點就響這一首</string>
+    <string name="ringtone_default">系統預設</string>
+    <string name="ringtone_dialog">提醒鈴聲</string>
+    <string name="ringtone_pick">選擇本機音樂</string>
+    <string name="ringtone_reset">還原系統預設鈴聲</string>
+    <string name="ringtone_applied">已換成「%1$s」</string>
+    <string name="ringtone_reset_done">已還原系統預設鈴聲</string>
+    <string name="ringtone_unreadable">這個音訊讀不出來，換一個試試</string>
+    <string name="ringtone_import_failed">設定鈴聲失敗：%1$s</string>
+
+    <!-- 鬧鐘與提醒 -->
+    <string name="alarm_section">鬧鐘與提醒</string>
+    <string name="alarm_delay_title">預設延後時長</string>
+    <string name="alarm_repeat_title">預設重彈間隔</string>
+    <string name="alarm_exact_title">優先使用精確鬧鐘</string>
+    <string name="alarm_exact_sub">關掉後系統可能晚幾分鐘才彈卡片，省一點電</string>
+    <string name="alarm_rescheduled">已依新設定重排全部提醒</string>
+    <string name="minutes_fmt">%1$d 分鐘</string>
+
+    <!-- 備份 -->
+    <string name="backup_section">資料備份</string>
+    <string name="backup_hint">備份檔存到手機「下載」目錄，解除安裝 App 不會刪掉；換手機時把它帶到新機還原</string>
+    <string name="backup_export">匯出備份（.taskbak）</string>
+    <string name="backup_import">從備份還原（會覆蓋本機資料）</string>
+    <string name="import_confirm">會先清空目前本機全部便籤，再匯入備份檔裡的內容；定時提醒會重新排一次。確定要繼續嗎？</string>
+    <string name="import_ok">覆蓋匯入</string>
+
+    <!-- 關於 -->
+    <string name="about_section">關於</string>
+    <string name="about_version_fmt">版本 %1$s</string>
+    <string name="about_text">開源自用專案，不上架應用程式商店</string>
+
+    <!-- 便籤編輯 -->
+    <string name="note_edit_new">新增便籤</string>
+    <string name="note_edit_edit">編輯這則便籤</string>
+    <string name="note_title_label">便籤標題</string>
+    <string name="note_title_hint">例如：提交週報</string>
+    <string name="note_remark_label">備註說明</string>
+    <string name="note_remark_hint">例如：今天 18:00 前交給主管</string>
+    <string name="note_date_label">關聯日期（會歸到日程這一天）</string>
+    <string name="reminder_section">提醒方式（可多選組合）</string>
+    <string name="reminder_section_hint">三種可以一起開；到點會彈出置頂卡片，不點按鈕關不掉</string>
+    <string name="rmd_timed">定時提醒</string>
+    <string name="rmd_loop">循環重複</string>
+    <string name="rmd_repeat">未處理就再彈</string>
+    <string name="rmd_interval_hint">重彈間隔（分鐘，預設 %1$d）</string>
+    <string name="action_section">自訂操作按鈕</string>
+    <string name="action_section_hint">這裡設的按鈕，就是強提醒卡片上能點的按鈕；每則便籤可以不一樣</string>
+    <string name="action_add">＋ 新增一個按鈕</string>
+    <string name="action_save">儲存便籤</string>
+    <string name="action_done">我已處理</string>
+    <string name="action_delay">延後 %1$d 分鐘</string>
+    <string name="action_close">先關掉</string>
+    <string name="action_delay_label">延後</string>
+    <string name="action_close_label">僅關閉</string>
+    <string name="action_done_label">標記完成</string>
+    <string name="loop_none">不循環</string>
+    <string name="loop_daily">每天，同一時間再提醒</string>
+    <string name="loop_weekly">每週，同一天同一時間再提醒</string>
+    <string name="loop_monthly">每月，同一天同一時間再提醒</string>
+    <string name="loop_dialog">循環週期</string>
+    <string name="rmd_loop_daily">每天</string>
+    <string name="rmd_loop_weekly">每週</string>
+    <string name="rmd_loop_monthly">每月</string>
+
+    <!-- 其他頁面 -->
+    <string name="back">返回</string>
+    <string name="more">更多</string>
+    <string name="recycle_bin">回收筒</string>
+    <string name="recycle_empty">回收筒是空的</string>
+    <string name="note_delete">刪除（移至回收筒）</string>
+    <string name="detail_actions">這則便籤的按鈕</string>
+    <string name="detail_action_hint">點一下等於在強提醒卡片上點同一個按鈕</string>
+    <string name="card_hint">點上面的按鈕處理後，這張卡片才會消失</string>
+    <string name="home_empty">還沒有便籤，點右上角 ＋ 新增一則</string>
+    <string name="new_note">新增便籤</string>
+
+    <!-- 日程年月選擇 -->
+    <string name="pick_month">選擇年月</string>
+    <string name="pick_year">年份</string>
+    <string name="pick_today">回到本月</string>
+    <string name="month_fmt">%1$d年%2$d月</string>
+    <string name="pick_date_title">選擇關聯日期</string>
+    <string name="pick_time_title">選擇提醒時間</string>
+    <string name="fmt_today_mark">%1$s（今天）</string>
+    <string name="unit_year_fmt">%1$d年</string>
+    <string name="unit_month_fmt">%1$d月</string>
+    <string name="unit_day_fmt">%1$d日</string>
+    <string name="unit_hour_fmt">%1$d時</string>
+    <string name="unit_minute_fmt">%1$d分</string>
+    <string name="month_unit_suffix">月</string>
+
+    <!-- 日期與時間 -->
+    <string name="date_not_set">未設定</string>
+    <string name="day_today">今天</string>
+    <string name="day_tomorrow">明天</string>
+    <string name="date_prefix_fmt">%1$s %2$s</string>
+    <string name="weekday_0">週日</string>
+    <string name="weekday_1">週一</string>
+    <string name="weekday_2">週二</string>
+    <string name="weekday_3">週三</string>
+    <string name="weekday_4">週四</string>
+    <string name="weekday_5">週五</string>
+    <string name="weekday_6">週六</string>
+
+    <!-- 主介面選單與空狀態 -->
+    <string name="home_empty_keyword">沒有符合「%1$s」的便籤</string>
+    <string name="home_empty_active">目前沒有待處理的便籤</string>
+    <string name="menu_show_all">顯示全部便籤</string>
+    <string name="menu_active_only">只看未處理</string>
+    <string name="menu_search">搜尋便籤</string>
+    <string name="search_title">搜尋便籤</string>
+    <string name="search_hint">輸入標題或備註裡的關鍵字</string>
+    <string name="search_action">搜尋</string>
+    <string name="search_clear">清除</string>
+
+    <!-- 便籤編輯裡的提示 -->
+    <string name="err_title_required">先寫一個便籤標題</string>
+    <string name="err_time_required">先選一個提醒時間</string>
+    <string name="action_type_dialog">這個按鈕點了做什麼</string>
+    <string name="action_type_done_full">標記完成（這則便籤結束）</string>
+    <string name="action_type_delay_full">延後 %1$d 分鐘再提醒</string>
+    <string name="action_type_close_full">只關卡片，任務繼續待處理</string>
+    <string name="action_btn_hint">按鈕文字，例如 我已提交</string>
+    <string name="action_delete">刪除</string>
+    <string name="pick_time_hint">點這裡選提醒時間</string>
+
+    <!-- 提示語 -->
+    <string name="backup_saved_fmt">備份已儲存：%1$s</string>
+    <string name="backup_failed_fmt">匯出失敗：%1$s</string>
+    <string name="import_done_fmt">已匯入 %1$d 則便籤</string>
+    <string name="import_failed_fmt">匯入失敗：%1$s</string>
+    <string name="no_storage_perm">沒有儲存權限，無法匯出到下載目錄</string>
+    <string name="err_backup_no_target">系統沒有回傳可寫入的位置</string>
+    <string name="err_backup_write">寫入檔案失敗</string>
+    <string name="err_backup_no_dir">無法建立下載目錄</string>
+    <string name="err_backup_read">讀不到這個檔案</string>
+    <string name="err_backup_not_ours">不是本應用程式的備份檔</string>
+    <string name="err_backup_empty">備份裡沒有便籤</string>
+    <string name="cant_open_settings">打不開這個系統設定頁，請手動到設定裡開啟</string>
+    <string name="exact_not_needed">目前系統不需要單獨開啟</string>
+
+    <!-- 便籤詳情 -->
+    <string name="translate_btn">翻譯便籤文字</string>
+    <string name="translate_nothing">這則便籤沒有可翻譯的文字</string>
+    <string name="translate_copied">找不到可用的翻譯應用程式，已複製到剪貼簿</string>
+    <string name="translate_chooser">選擇翻譯方式</string>
+    <string name="detail_no_remark">沒有備註</string>
+    <string name="detail_date_fmt">關聯日期：%1$s</string>
+    <string name="detail_time_fmt">提醒時間：%1$s</string>
+    <string name="detail_time_none">提醒時間：未設定</string>
+    <string name="detail_loop_fmt">循環：%1$s</string>
+    <string name="detail_repeat_fmt">未處理重彈：%1$s</string>
+    <string name="detail_repeat_every_fmt">每 %1$d 分鐘</string>
+    <string name="detail_repeat_off">關閉</string>
+    <string name="detail_status_fmt">目前狀態：%1$s</string>
+    <string name="st_pending">待提醒</string>
+    <string name="st_ready">已提醒，等你處理</string>
+    <string name="st_done">已處理</string>
+    <string name="st_postponed">已延後</string>
+    <string name="st_archived">已封存</string>
+    <string name="st_deleted">在回收筒</string>
+    <string name="detail_delete_title">刪除這則便籤</string>
+    <string name="detail_delete_msg">會移到回收筒，可以再還原；確定要刪除嗎？</string>
+    <string name="detail_deleted">已移入回收筒</string>
+    <string name="detail_handled_fmt">已處理：%1$s</string>
+    <string name="looping_label">循環提醒中</string>
+    <string name="badge_pending">待</string>
+    <string name="day_of_month_fmt">%1$d 號</string>
+    <string name="date_empty_hint">這天還沒有便籤</string>
+    <string name="unnamed_note">未命名便籤</string>
+    <string name="reminder_default_remark">到了提醒時間，先把這則便籤處理掉</string>
+    <string name="rmd_meta_time">提醒時間 %1$s</string>
+    <string name="rmd_meta_date">關聯日期 %1$s</string>
+    <string name="rmd_meta_daily">每天循環</string>
+    <string name="rmd_meta_weekly">每週循環</string>
+    <string name="rmd_meta_monthly">每月循環</string>
+    <string name="rmd_meta_repeat">未處理每 %1$d 分鐘再彈</string>
+    <string name="rmd_meta_count">已提醒 %1$d 次</string>
+    <string name="bin_restore">還原到主介面</string>
+    <string name="bin_purge">徹底刪除（無法還原）</string>
+    <string name="bin_restored">已還原</string>
+    <string name="bin_purge_title">徹底刪除</string>
+    <string name="bin_purge_msg">這則便籤會從本機資料庫刪掉，只能靠之前的備份檔找回，確定嗎？</string>
+    <string name="bin_purged">已徹底刪除</string>
+    <string name="channel_alert_desc">便籤到點時的強提醒</string>
+    <string name="splash_slogan">不處理就關不掉的強提醒</string>
+</resources>

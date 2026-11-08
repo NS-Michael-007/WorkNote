@@ -1,0 +1,264 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "工作便签提醒主模块"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "工作便签提醒"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "工作便签提醒"
+    },
+    {
+      "name": "perm_reminder_reason",
+      "value": "到点弹出强提醒卡片，需要提醒代理权限"
+    },
+    {
+      "name": "perm_background_reason",
+      "value": "保持强提醒卡片在前台运行"
+    },
+    {
+      "name": "tab_home",
+      "value": "主界面"
+    },
+    {
+      "name": "tab_schedule",
+      "value": "日程"
+    },
+    {
+      "name": "tab_profile",
+      "value": "我"
+    },
+    {
+      "name": "home_title",
+      "value": "主界面"
+    },
+    {
+      "name": "home_empty",
+      "value": "还没有便签，点右上角 ＋ 新建一条"
+    },
+    {
+      "name": "home_empty_active",
+      "value": "当前没有待处理的便签"
+    },
+    {
+      "name": "new_note",
+      "value": "新建便签"
+    },
+    {
+      "name": "more",
+      "value": "更多"
+    },
+    {
+      "name": "recycle_bin",
+      "value": "回收站"
+    },
+    {
+      "name": "schedule_title",
+      "value": "日程"
+    },
+    {
+      "name": "pick_month",
+      "value": "选择年月"
+    },
+    {
+      "name": "pick_year",
+      "value": "年份"
+    },
+    {
+      "name": "date_empty_hint",
+      "value": "这天还没有便签"
+    },
+    {
+      "name": "day_of_month_fmt",
+      "value": "%d 号"
+    },
+    {
+      "name": "profile_title",
+      "value": "我"
+    },
+    {
+      "name": "appearance_section",
+      "value": "界面与显示"
+    },
+    {
+      "name": "dark_title",
+      "value": "深色模式"
+    },
+    {
+      "name": "dark_follow",
+      "value": "跟随系统"
+    },
+    {
+      "name": "dark_light",
+      "value": "浅色"
+    },
+    {
+      "name": "dark_night",
+      "value": "深色"
+    },
+    {
+      "name": "font_title",
+      "value": "字体大小"
+    },
+    {
+      "name": "lang_title",
+      "value": "语言"
+    },
+    {
+      "name": "lang_follow",
+      "value": "跟随系统"
+    },
+    {
+      "name": "lang_zh",
+      "value": "简体中文"
+    },
+    {
+      "name": "lang_zh_hant",
+      "value": "繁體中文"
+    },
+    {
+      "name": "lang_en",
+      "value": "English"
+    },
+    {
+      "name": "lang_restart_hint",
+      "value": "切换语言后需要重新打开 App 才会生效"
+    },
+    {
+      "name": "storage_section",
+      "value": "存储空间"
+    },
+    {
+      "name": "backup_section",
+      "value": "数据备份"
+    },
+    {
+      "name": "backup_export",
+      "value": "导出备份（.taskbak）"
+    },
+    {
+      "name": "backup_import",
+      "value": "从备份恢复（会覆盖本地数据）"
+    },
+    {
+      "name": "about_section",
+      "value": "关于"
+    },
+    {
+      "name": "about_text",
+      "value": "开源自用项目，不上架应用商店"
+    },
+    {
+      "name": "note_title_label",
+      "value": "便签标题"
+    },
+    {
+      "name": "note_remark_label",
+      "value": "备注说明"
+    },
+    {
+      "name": "note_date_label",
+      "value": "关联日期"
+    },
+    {
+      "name": "reminder_section",
+      "value": "提醒方式（可多选组合）"
+    },
+    {
+      "name": "rmd_timed",
+      "value": "定时提醒"
+    },
+    {
+      "name": "rmd_loop",
+      "value": "循环重复"
+    },
+    {
+      "name": "rmd_repeat",
+      "value": "未处理就再弹"
+    },
+    {
+      "name": "action_section",
+      "value": "自定义操作按钮"
+    },
+    {
+      "name": "save",
+      "value": "保存便签"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "ok",
+      "value": "确定"
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    },
+    {
+      "name": "notify_section",
+      "value": "通知"
+    },
+    {
+      "name": "ringtone_title",
+      "value": "提醒铃声"
+    },
+    {
+      "name": "ringtone_hint",
+      "value": "选一首本地音乐，到点就响这一首"
+    },
+    {
+      "name": "ringtone_default",
+      "value": "系统默认"
+    },
+    {
+      "name": "ringtone_pick",
+      "value": "选择本地音乐"
+    },
+    {
+      "name": "ringtone_reset",
+      "value": "恢复系统默认铃声"
+    },
+    {
+      "name": "ringtone_pick_failed",
+      "value": "选择音频失败：%s"
+    },
+    {
+      "name": "pick_date_title",
+      "value": "选择关联日期"
+    },
+    {
+      "name": "pick_time_title",
+      "value": "选择提醒时间"
+    },
+    {
+      "name": "day_today",
+      "value": "今天"
+    },
+    {
+      "name": "move_to_today",
+      "value": "改到今天"
+    },
+    {
+      "name": "remind_time_label",
+      "value": "提醒时间"
+    },
+    {
+      "name": "edit_note",
+      "value": "编辑便签"
+    },
+    {
+      "name": "remind_none",
+      "value": "未设定"
+    },
+    {
+      "name": "mark_done",
+      "value": "标为已处理"
+    }
+  ]
+}

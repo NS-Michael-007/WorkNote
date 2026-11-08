@@ -1,0 +1,52 @@
+*.iml
+.gradle
+/.kotlin
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+app/build
+
+# 签名材料：绝对不要提交到任何仓库（含 GitHub 私有仓库）
+/keystore.properties
+/keystore/
+*.jks
+*.keystore
+
+# iOS：工程由 XcodeGen 生成，不提交 .xcodeproj 与构建产物
+ios-app/WorkNote.xcodeproj/
+ios-app/build/
+ios-app/*.xcworkspace/
+ios-app/**/xcuserdata/
+*.xcresult
+
+# 鸿蒙：DevEco 的构建产物与本地签名
+ohos-app/**/build/
+ohos-app/**/.hvigor/
+ohos-app/**/.cxx/
+ohos-app/local.properties
+*.p12
+*.cer
+
+# 发布产物：不进仓库，改为挂 GitHub Release 附件
+/dist/
+/release/
+
+# 调试过程中的截图、临时 dump、数据库副本、测试音频：一律不进公开仓库
+/shot_*.png
+/ui.xml
+/ui*.xml
+/w*.db
+/wn*.db
+/*.db
+/*.wav
+/testbg.jpg
+/backup_before_release_*.taskbak.json
+
+# 契约目录里由真机数据库导出的副本含个人便签内容，只留合成的 sample.taskbak
+/contract/real_worknote.db
+/contract/real_export.taskbak

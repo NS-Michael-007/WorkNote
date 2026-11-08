@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://worknote.local/contract/backup-v1.schema.json",
+  "title": "工作便签提醒 · 备份文件（.taskbak v1）",
+  "type": "object",
+  "required": ["app", "version", "exportedAt", "notes"],
+  "properties": {
+    "app": {
+      "description": "应用标识。Android 端写中文名，iOS / 鸿蒙可写 WorkNote，两端都要能认",
+      "type": "string",
+      "enum": ["工作便签提醒", "WorkNote"]
+    },
+    "version": {
+      "description": "备份格式版本号，当前固定为 1",
+      "type": "integer",
+      "const": 1
+    },
+    "exportedAt": {
+      "description": "导出时刻，Unix 毫秒时间戳（与设备时区无关）",
+      "type": "integer",
+      "minimum": 1
+    },
+    "notes": {
+      "description": "便签数组，至少一条；导入语义是「整体替换」，不是合并",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/note" }
+    }
+  },
+  "additionalProperties": true,
+  "definitions": {
+    "note": {
+      "type": "object",
+      "required": ["title", "dateKey", "remindAt", "loopType", "status", "createdAt"],
+      "properties": {
+        "title": {
+          "description": "标题，界面上单行显示",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "remark": {
+          "description": "备注，可为空字符串",
+          "type": "string",
+          "maxLength": 500
+        },
+        "dateKey": {
+          "description": "归属日期，本地日历日，格式 yyyy-MM-dd；日程页按它分组",
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "remindAt": {
+          "description": "提醒的绝对时刻，Unix 毫秒时间戳；0 表示这条不设定时提醒",
+          "type": "integer",
+          "minimum": 0
+        },
+        "loopType": {
+          "description": "循环方式；NONE 表示一次性",
+          "type": "string",
+          "enum": ["NONE", "DAILY", "WEEKLY", "MONTHLY"]
+        },
+        "repeatEnabled": {
+          "description": "未处理时是否隔一段时间再催一次",
+          "type": "boolean"
+        },
+        "repeatMinutes": {
+          "description": "再催间隔（分钟），默认 15",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1440
+        },
+        "status": {
+          "description": "状态；导入时除 DELETED 外一律回落 PENDING（见契约文档）",
+          "type": "string",
+          "enum": ["PENDING", "READY", "DONE", "POSTPONED", "ARCHIVED", "DELETED"]
+        },
+        "createdAt": {
+          "description": "创建时刻，Unix 毫秒时间戳",
+          "type": "integer",
+          "minimum": 1
+        },
+        "remindCount": {
+          "description": "已经被强提醒弹过几次；导入时各端重置为 0",
+          "type": "integer",
+          "minimum": 0
+        },
+        "actions": {
+          "description": "强提醒卡片上的自定义按钮；空数组表示用各端默认的「完成」按钮",
+          "type": "array",
+          "maxItems": 4,
+          "items": { "$ref": "#/definitions/action" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "action": {
+      "type": "object",
+      "required": ["text", "type"],
+      "properties": {
+        "text": {
+          "description": "按钮上显示的文字",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12
+        },
+        "type": {
+          "description": "DONE=标记完成 / DELAY=延后 / CLOSE=只关卡片保持待处理",
+          "type": "string",
+          "enum": ["DONE", "DELAY", "CLOSE"]
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

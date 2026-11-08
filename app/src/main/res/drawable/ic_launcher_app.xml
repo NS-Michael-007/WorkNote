@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  应用标记（启动页 / 低版本兜底共用；桌面图标走 mipmap 里的自适应图标）
+  语义：绿色底板 = 微信式底色；白色便签 = “一张待办”；红「!」角标 = “没处理就一直提醒”。
+  角标压在便签右下角，像贴纸一样盖住纸角，整体保持方形构图的呼吸感。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 底板 -->
+    <path
+        android:pathData="M28,4 h52 a24,24 0 0 1 24,24 v52 a24,24 0 0 1 -24,24 h-52 a24,24 0 0 1 -24,-24 v-52 a24,24 0 0 1 24,-24 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="18"
+                android:startY="8"
+                android:endX="92"
+                android:endY="100"
+                android:startColor="#12CE73"
+                android:endColor="#03A047" />
+        </aapt:attr>
+    </path>
+
+    <!-- 顶部高光 -->
+    <path
+        android:pathData="M28,4 h52 a24,24 0 0 1 24,24 v22 h-100 v-22 a24,24 0 0 1 24,-24 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="54"
+                android:startY="4"
+                android:endX="54"
+                android:endY="50"
+                android:startColor="#28FFFFFF"
+                android:endColor="#00FFFFFF" />
+        </aapt:attr>
+    </path>
+
+    <!-- 底部压暗 -->
+    <path
+        android:pathData="M4,50 h100 v30 a24,24 0 0 1 -24,24 h-52 a24,24 0 0 1 -24,-24 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="54"
+                android:startY="50"
+                android:endX="54"
+                android:endY="104"
+                android:startColor="#00103224"
+                android:endColor="#2E00210F" />
+        </aapt:attr>
+    </path>
+
+    <!-- 便签投影 -->
+    <path
+        android:fillColor="#14002C18"
+        android:pathData="M38.6,21.6 h23 l12,12 v39 a7,7 0 0 1 -7,7 h-28 a7,7 0 0 1 -7,-7 v-44 a7,7 0 0 1 7,-7 z" />
+
+    <!-- 便签纸 -->
+    <path
+        android:pathData="M37,19 h23 l12,12 v39 a7,7 0 0 1 -7,7 h-28 a7,7 0 0 1 -7,-7 v-44 a7,7 0 0 1 7,-7 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="30"
+                android:startY="19"
+                android:endX="72"
+                android:endY="77"
+                android:startColor="#FFFFFF"
+                android:endColor="#F0F9F3" />
+        </aapt:attr>
+    </path>
+
+    <!-- 折角 -->
+    <path android:pathData="M60,19 l12,12 h-12 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="60"
+                android:startY="19"
+                android:endX="72"
+                android:endY="31"
+                android:startColor="#E9F7EF"
+                android:endColor="#C9E7D6" />
+        </aapt:attr>
+    </path>
+
+    <!-- 三条待办线：两条长、第三条短且浅 -->
+    <path android:pathData="M38,33 h28 a2,2 0 0 1 0,4 h-28 a2,2 0 0 1 0,-4 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="36"
+                android:startY="33"
+                android:endX="68"
+                android:endY="37"
+                android:startColor="#10C46B"
+                android:endColor="#04A24E" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M38,43 h28 a2,2 0 0 1 0,4 h-28 a2,2 0 0 1 0,-4 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="36"
+                android:startY="43"
+                android:endX="68"
+                android:endY="47"
+                android:startColor="#10C46B"
+                android:endColor="#04A24E" />
+        </aapt:attr>
+    </path>
+    <path
+        android:fillColor="#8FE0B8"
+        android:pathData="M38,53 h13 a2,2 0 0 1 0,4 h-13 a2,2 0 0 1 0,-4 z" />
+
+    <!-- 未处理角标：白圈 + 红色径向渐变，压在便签右下角 -->
+    <path
+        android:fillColor="#1F00231A"
+        android:pathData="M70,54 a15,15 0 0 1 0,30 a15,15 0 0 1 0,-30 z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,53.6 a14.4,14.4 0 0 1 0,28.8 a14.4,14.4 0 0 1 0,-28.8 z" />
+    <path android:pathData="M70,56 a12,12 0 0 1 0,24 a12,12 0 0 1 0,-24 z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="radial"
+                android:centerX="66.6"
+                android:centerY="62.6"
+                android:gradientRadius="19"
+                android:startColor="#FF7466"
+                android:endColor="#DA1728" />
+        </aapt:attr>
+    </path>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M68.6,61.4 h2.8 a1.4,1.4 0 0 1 1.4,1.4 v5.6 a1.4,1.4 0 0 1 -1.4,1.4 h-2.8 a1.4,1.4 0 0 1 -1.4,-1.4 v-5.6 a1.4,1.4 0 0 1 1.4,-1.4 z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,72.4 a2,2 0 0 1 0,4 a2,2 0 0 1 0,-4 z" />
+</vector>

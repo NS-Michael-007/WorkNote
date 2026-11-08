@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Work Note</string>
+    <string name="tab_home">Notes</string>
+    <string name="tab_schedule">Schedule</string>
+    <string name="tab_profile">Me</string>
+    <string name="channel_reminder">Strong reminder service</string>
+    <string name="channel_reminder_desc">Keeps the pinned reminder card alive; please do not turn it off</string>
+    <string name="channel_task">Task alerts</string>
+
+    <!-- Permissions -->
+    <string name="perm_section_title">Reminder permissions (all required)</string>
+    <string name="perm_section_hint">Missing one may stop the pinned card from showing up (Android limitation)</string>
+    <string name="perm_overlay">Display over other apps</string>
+    <string name="perm_battery">Ignore battery optimization</string>
+    <string name="perm_notify">Notification permission</string>
+    <string name="perm_exact">Alarms &amp; reminders (exact alarms)</string>
+    <string name="status_on">On</string>
+    <string name="status_off">Not enabled, tap to enable</string>
+    <string name="status_go">Enable</string>
+
+    <!-- Appearance -->
+    <string name="appearance_section">Appearance</string>
+    <string name="appearance_hint">Display only — reminder time and content are unaffected</string>
+    <string name="bg_title">Background image</string>
+    <string name="bg_default">Plain color</string>
+    <string name="bg_custom">Custom image</string>
+    <string name="bg_pick">Pick an image</string>
+    <string name="bg_reset">Reset to default</string>
+    <string name="bg_dialog">Background image</string>
+    <string name="bg_failed">Cannot read this image, try another one</string>
+    <string name="bg_applied">Background updated</string>
+    <string name="bg_reset_done">Background reset</string>
+    <string name="dark_title">Dark mode</string>
+    <string name="dark_follow">Follow system</string>
+    <string name="dark_light">Light</string>
+    <string name="dark_night">Dark</string>
+    <string name="dark_dialog">Dark mode</string>
+    <string name="font_title">Font size</string>
+    <string name="font_level_fmt">Level %1$d</string>
+    <string name="font_preview">Preview: this is the body text size</string>
+    <string name="font_dialog">Font size (1 smallest, 10 largest)</string>
+    <string name="lang_title">Language</string>
+    <string name="lang_follow">Follow system</string>
+    <string name="lang_zh">简体中文</string>
+    <string name="lang_zh_hant">繁體中文</string>
+    <string name="lang_en">English</string>
+    <string name="lang_dialog">Language / 语言</string>
+    <string name="translate_title">Translate note text</string>
+    <string name="translate_sub">Uses the translation app on your phone; copies the text if none is installed</string>
+    <string name="translate_dialog">Translate note text</string>
+    <string name="translate_dialog_msg">Open a note and tap “Translate note text” at the bottom; the title and remark are handed to the system translation app.</string>
+
+    <!-- Storage -->
+    <string name="storage_section">Storage</string>
+    <string name="storage_title">Storage</string>
+    <string name="storage_notes_fmt">%1$d notes</string>
+    <string name="storage_db_fmt">Database %1$s</string>
+    <string name="storage_bg_fmt">Background %1$s</string>
+    <string name="storage_bg_none">Background not set</string>
+    <string name="storage_clear">Clear cache</string>
+    <string name="storage_cleared">Cache cleared</string>
+    <string name="storage_dialog">Storage</string>
+
+    <!-- Notifications -->
+    <string name="notify_section">Notifications</string>
+    <string name="notify_sound">Ring when reminding</string>
+    <string name="notify_vibrate">Vibrate when reminding</string>
+    <string name="notify_screen_on">Turn screen on</string>
+    <string name="ringtone_title">Reminder sound</string>
+    <string name="ringtone_hint">Pick a song from this device; it plays when a note is due</string>
+    <string name="ringtone_default">System default</string>
+    <string name="ringtone_dialog">Reminder sound</string>
+    <string name="ringtone_pick">Choose a local audio file</string>
+    <string name="ringtone_reset">Restore the system default</string>
+    <string name="ringtone_applied">Now using “%1$s”</string>
+    <string name="ringtone_reset_done">Restored the system default sound</string>
+    <string name="ringtone_unreadable">That audio file cannot be read — try another one</string>
+    <string name="ringtone_import_failed">Could not set the sound: %1$s</string>
+
+    <!-- Alarms -->
+    <string name="alarm_section">Alarms &amp; reminders</string>
+    <string name="alarm_delay_title">Default snooze length</string>
+    <string name="alarm_repeat_title">Default re-alert interval</string>
+    <string name="alarm_exact_title">Prefer exact alarms</string>
+    <string name="alarm_exact_sub">Turning it off may delay the card by a few minutes, but saves battery</string>
+    <string name="alarm_rescheduled">All reminders rescheduled</string>
+    <string name="minutes_fmt">%1$d min</string>
+
+    <!-- Backup -->
+    <string name="backup_section">Backup</string>
+    <string name="backup_hint">Backups go to the Downloads folder and survive uninstall; carry the file to a new phone to restore</string>
+    <string name="backup_export">Export backup (.taskbak)</string>
+    <string name="backup_import">Restore from backup (overwrites local data)</string>
+    <string name="import_confirm">All local notes will be cleared first, then the backup is imported and every reminder is rescheduled. Continue?</string>
+    <string name="import_ok">Overwrite and import</string>
+
+    <!-- About -->
+    <string name="about_section">About</string>
+    <string name="about_version_fmt">Version %1$s</string>
+    <string name="about_text">Personal open-source build, not published on any app store</string>
+
+    <!-- Note editor -->
+    <string name="note_edit_new">New note</string>
+    <string name="note_edit_edit">Edit note</string>
+    <string name="note_title_label">Title</string>
+    <string name="note_title_hint">e.g. Submit weekly report</string>
+    <string name="note_remark_label">Remark</string>
+    <string name="note_remark_hint">e.g. Hand it to the manager before 18:00</string>
+    <string name="note_date_label">Date (grouped under this day in Schedule)</string>
+    <string name="reminder_section">Reminder modes (combine any)</string>
+    <string name="reminder_section_hint">All three can be on; a pinned card appears and cannot be dismissed without tapping its buttons</string>
+    <string name="rmd_timed">Timed reminder</string>
+    <string name="rmd_loop">Repeat cycle</string>
+    <string name="rmd_repeat">Re-alert if unhandled</string>
+    <string name="rmd_interval_hint">Re-alert interval (minutes, default %1$d)</string>
+    <string name="action_section">Custom action buttons</string>
+    <string name="action_section_hint">These are the buttons on the pinned card; every note can have its own set</string>
+    <string name="action_add">+ Add a button</string>
+    <string name="action_save">Save note</string>
+    <string name="action_done">I handled it</string>
+    <string name="action_delay">Snooze %1$d min</string>
+    <string name="action_close">Dismiss card</string>
+    <string name="action_delay_label">Snooze</string>
+    <string name="action_close_label">Dismiss</string>
+    <string name="action_done_label">Done</string>
+    <string name="loop_none">No repeat</string>
+    <string name="loop_daily">Daily at the same time</string>
+    <string name="loop_weekly">Weekly on the same day and time</string>
+    <string name="loop_monthly">Monthly on the same day and time</string>
+    <string name="loop_dialog">Repeat cycle</string>
+    <string name="rmd_loop_daily">Daily</string>
+    <string name="rmd_loop_weekly">Weekly</string>
+    <string name="rmd_loop_monthly">Monthly</string>
+
+    <!-- Other screens -->
+    <string name="back">Back</string>
+    <string name="more">More</string>
+    <string name="recycle_bin">Recycle bin</string>
+    <string name="recycle_empty">Recycle bin is empty</string>
+    <string name="note_delete">Delete (to recycle bin)</string>
+    <string name="detail_actions">Buttons of this note</string>
+    <string name="detail_action_hint">Tapping here is the same as tapping that button on the pinned card</string>
+    <string name="card_hint">Tap a button above; only then the card goes away</string>
+    <string name="home_empty">No notes yet — tap + in the top right</string>
+    <string name="new_note">New note</string>
+
+    <!-- Month picker -->
+    <string name="pick_month">Choose year and month</string>
+    <string name="pick_year">Year</string>
+    <string name="pick_today">This month</string>
+    <string name="month_fmt">%1$d-%2$02d</string>
+    <string name="pick_date_title">Choose the linked date</string>
+    <string name="pick_time_title">Choose the reminder time</string>
+    <string name="fmt_today_mark">%1$s (today)</string>
+    <string name="unit_year_fmt">%1$dy</string>
+    <string name="unit_month_fmt">%1$dmo</string>
+    <string name="unit_day_fmt">%1$dd</string>
+    <string name="unit_hour_fmt">%1$dh</string>
+    <string name="unit_minute_fmt">%1$dmin</string>
+    <string name="month_unit_suffix">\u0020</string>
+
+    <!-- Date & time -->
+    <string name="date_not_set">Not set</string>
+    <string name="day_today">Today</string>
+    <string name="day_tomorrow">Tomorrow</string>
+    <string name="date_prefix_fmt">%1$s %2$s</string>
+    <string name="weekday_0">Sunday</string>
+    <string name="weekday_1">Monday</string>
+    <string name="weekday_2">Tuesday</string>
+    <string name="weekday_3">Wednesday</string>
+    <string name="weekday_4">Thursday</string>
+    <string name="weekday_5">Friday</string>
+    <string name="weekday_6">Saturday</string>
+
+    <!-- Home menu & empty states -->
+    <string name="home_empty_keyword">No notes match “%1$s”</string>
+    <string name="home_empty_active">Nothing pending right now</string>
+    <string name="menu_show_all">Show all notes</string>
+    <string name="menu_active_only">Pending only</string>
+    <string name="menu_search">Search notes</string>
+    <string name="search_title">Search notes</string>
+    <string name="search_hint">Keyword in title or remark</string>
+    <string name="search_action">Search</string>
+    <string name="search_clear">Clear</string>
+
+    <!-- Note editor hints -->
+    <string name="err_title_required">Give the note a title first</string>
+    <string name="err_time_required">Pick a reminder time first</string>
+    <string name="action_type_dialog">What should this button do</string>
+    <string name="action_type_done_full">Mark done (this note ends)</string>
+    <string name="action_type_delay_full">Snooze %1$d minutes</string>
+    <string name="action_type_close_full">Dismiss the card, task stays pending</string>
+    <string name="action_btn_hint">Button text, e.g. Submitted</string>
+    <string name="action_delete">Delete</string>
+    <string name="pick_time_hint">Tap to pick a reminder time</string>
+
+    <!-- Toasts -->
+    <string name="backup_saved_fmt">Backup saved: %1$s</string>
+    <string name="backup_failed_fmt">Export failed: %1$s</string>
+    <string name="import_done_fmt">Imported %1$d notes</string>
+    <string name="import_failed_fmt">Import failed: %1$s</string>
+    <string name="no_storage_perm">No storage permission, cannot write to Downloads</string>
+    <string name="err_backup_no_target">The system did not return a writable location</string>
+    <string name="err_backup_write">Failed to write the file</string>
+    <string name="err_backup_no_dir">Cannot create the Downloads folder</string>
+    <string name="err_backup_read">Cannot read that file</string>
+    <string name="err_backup_not_ours">Not a Work Note backup file</string>
+    <string name="err_backup_empty">The backup contains no notes</string>
+    <string name="cant_open_settings">Cannot open that system settings page, please enable it manually</string>
+    <string name="exact_not_needed">This system does not need it</string>
+
+    <!-- Note detail -->
+    <string name="translate_btn">Translate note text</string>
+    <string name="translate_nothing">Nothing to translate in this note</string>
+    <string name="translate_copied">No translation app found, text copied to clipboard</string>
+    <string name="translate_chooser">Choose how to translate</string>
+    <string name="detail_no_remark">No remark</string>
+    <string name="detail_date_fmt">Date: %1$s</string>
+    <string name="detail_time_fmt">Reminder: %1$s</string>
+    <string name="detail_time_none">Reminder: not set</string>
+    <string name="detail_loop_fmt">Repeat: %1$s</string>
+    <string name="detail_repeat_fmt">Re-alert: %1$s</string>
+    <string name="detail_repeat_every_fmt">every %1$d min</string>
+    <string name="detail_repeat_off">off</string>
+    <string name="detail_status_fmt">Status: %1$s</string>
+    <string name="st_pending">Scheduled</string>
+    <string name="st_ready">Alerted, waiting for you</string>
+    <string name="st_done">Done</string>
+    <string name="st_postponed">Snoozed</string>
+    <string name="st_archived">Archived</string>
+    <string name="st_deleted">In recycle bin</string>
+    <string name="detail_delete_title">Delete this note</string>
+    <string name="detail_delete_msg">It moves to the recycle bin and can be restored. Delete?</string>
+    <string name="detail_deleted">Moved to recycle bin</string>
+    <string name="detail_handled_fmt">Handled: %1$s</string>
+    <string name="looping_label">Repeating</string>
+    <string name="badge_pending">Due</string>
+    <string name="day_of_month_fmt">Day %1$d</string>
+    <string name="date_empty_hint">No notes on this day</string>
+    <string name="unnamed_note">Untitled note</string>
+    <string name="reminder_default_remark">It is reminder time — handle this note first</string>
+    <string name="rmd_meta_time">Reminder %1$s</string>
+    <string name="rmd_meta_date">Date %1$s</string>
+    <string name="rmd_meta_daily">Repeats daily</string>
+    <string name="rmd_meta_weekly">Repeats weekly</string>
+    <string name="rmd_meta_monthly">Repeats monthly</string>
+    <string name="rmd_meta_repeat">Re-alerts every %1$d min</string>
+    <string name="rmd_meta_count">Alerted %1$d times</string>
+    <string name="bin_restore">Restore to home</string>
+    <string name="bin_purge">Delete permanently (no undo)</string>
+    <string name="bin_restored">Restored</string>
+    <string name="bin_purge_title">Delete permanently</string>
+    <string name="bin_purge_msg">This note is removed from the local database and only an old backup can bring it back. Continue?</string>
+    <string name="bin_purged">Deleted permanently</string>
+    <string name="channel_alert_desc">Strong alert when a note is due</string>
+    <string name="splash_slogan">Stays on screen until it is handled</string></resources>

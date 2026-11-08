@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 自适应图标：单色层（Android 13+ 主题图标，系统自己上色） -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 便签轮廓 -->
+    <path
+        android:pathData="M42,28 h18 l10,10 v32 a6,6 0 0 1 -6,6 h-22 a6,6 0 0 1 -6,-6 v-36 a6,6 0 0 1 6,-6 z"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2.2" />
+    <!-- 折角 -->
+    <path
+        android:pathData="M60,28 v10 h10"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2.2" />
+    <!-- 两条待办线 -->
+    <path
+        android:pathData="M41,39.5 h20 M41,48.5 h20"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="2.2" />
+    <!-- 角标：圆环 + 点 -->
+    <path
+        android:pathData="M65,58 a8,8 0 0 1 0,16 a8,8 0 0 1 0,-16 z"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.2" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M65,64.5 a1.4,1.4 0 0 1 0,2.8 a1.4,1.4 0 0 1 0,-2.8 z" />
+</vector>

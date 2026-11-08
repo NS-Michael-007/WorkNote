@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="page_margin">16dp</dimen>
+    <dimen name="space_bar_to_section">12dp</dimen>
+    <dimen name="space_section_title">8dp</dimen>
+    <dimen name="space_item">10dp</dimen>
+    <dimen name="space_section">24dp</dimen>
+    <dimen name="top_bar_height">48dp</dimen>
+    <dimen name="tab_bar_height">56dp</dimen>
+    <dimen name="item_height">68dp</dimen>
+    <dimen name="icon_size">44dp</dimen>
+    <dimen name="badge_min">18dp</dimen>
+    <dimen name="date_row_height">52dp</dimen>
+    <dimen name="field_height">44dp</dimen>
+    <dimen name="field_radius">10dp</dimen>
+    <dimen name="overlay_margin">24dp</dimen>
+    <dimen name="overlay_title_gap">20dp</dimen>
+    <dimen name="overlay_btn_gap">12dp</dimen>
+    <dimen name="text_title">20sp</dimen>
+    <dimen name="text_item">16sp</dimen>
+    <dimen name="text_body">14sp</dimen>
+    <dimen name="text_hint">12sp</dimen>
+    <dimen name="text_tab">10sp</dimen>
+</resources>

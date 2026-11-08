@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="page_bg">#111111</color>
+    <color name="card_bg">#191919</color>
+    <color name="bar_bg">#111111</color>
+    <color name="text_primary">#D6D6D6</color>
+    <color name="text_secondary">#7F7F7F</color>
+    <color name="divider">#2A2A2A</color>
+    <color name="accent">#07C160</color>
+    <color name="accent_pressed">#06AD56</color>
+    <color name="badge_bg">#FA5151</color>
+    <color name="tab_bar_bg">#1A1A1A</color>
+    <color name="tab_unselected">#7F7F7F</color>
+    <color name="link">#8FA8C8</color>
+    <color name="btn_disabled_bg">#2C2C2C</color>
+    <color name="disabled_text">#8A8A8A</color>
+    <color name="overlay_mask">#CC000000</color>
+    <color name="card_overlay_bg">#1F1F1F</color>
+    <color name="ripple">#33FFFFFF</color>
+    <color name="surface_frost">#A61E1E1E</color>
+</resources>

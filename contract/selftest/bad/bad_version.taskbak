@@ -1,0 +1,46 @@
+{
+  "app": "工作便签提醒",
+  "version": 2,
+  "exportedAt": 1794189600000,
+  "notes": [
+    {
+      "title": "接待客人",
+      "remark": "刘总安排接待",
+      "dateKey": "2026-11-09",
+      "remindAt": 1794273000000,
+      "loopType": "NONE",
+      "repeatEnabled": true,
+      "repeatMinutes": 15,
+      "status": "PENDING",
+      "createdAt": 1794189000000,
+      "remindCount": 0,
+      "actions": [
+        {
+          "text": "已接待",
+          "type": "DONE"
+        },
+        {
+          "text": "再等 30 分钟",
+          "type": "DELAY"
+        },
+        {
+          "text": "先放着",
+          "type": "CLOSE"
+        }
+      ]
+    },
+    {
+      "title": "每周对账",
+      "remark": "",
+      "dateKey": "2026-11-09",
+      "remindAt": 1794359400000,
+      "loopType": "WEEKLY",
+      "repeatEnabled": false,
+      "repeatMinutes": 15,
+      "status": "PENDING",
+      "createdAt": 1794100000000,
+      "remindCount": 3,
+      "actions": []
+    }
+  ]
+}
