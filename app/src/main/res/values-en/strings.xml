@@ -258,9 +258,9 @@
 
     <!-- Schedule display modes -->
     <string name="sched_mode_title">Schedule display mode</string>
-    <string name="sched_mode_list">Dropdown (vertical list, day by day)</string>
+    <string name="sched_mode_list">Vertical (day by day)</string>
     <string name="sched_mode_calendar">Calendar (month grid)</string>
-    <string name="sched_mode_list_short">Dropdown</string>
+    <string name="sched_mode_list_short">Vertical</string>
     <string name="sched_mode_calendar_short">Calendar</string>
 
     <!-- Recycle bin: multi-select and delete all -->
@@ -300,8 +300,8 @@
 
     <string name="help_1_title">Home: the note list</string>
     <string name="help_1_body">One note per row: title and remark on the left, reminder time and a status badge on the right. The plus button at the top right creates a note, and its menu holds Show all notes / Only unhandled, Search notes and Recycle bin. Badge: a pending note shows the word for pending, a note that has already alerted but is not handled shows how many times it has alerted, a handled note shows no badge. Rows are ordered waiting-for-you, then pending, then postponed, then done. Tap any row to open the detail page.</string>
-    <string name="help_2_title">Schedule: dropdown mode and calendar mode</string>
-    <string name="help_2_body">Two buttons at the top right: the left one switches the display mode, the right one picks the year and month. Dropdown mode lists day 1 to the end of the month vertically, and tapping a day expands that day of notes; the badge is the number of notes still unhandled on that day. Calendar mode shows the whole month as a seven-column grid, and tapping a day lists that day of notes under the grid. Both modes read the same data, so switching changes nothing about your notes.</string>
+    <string name="help_2_title">Schedule: vertical mode and calendar mode</string>
+    <string name="help_2_body">Two buttons at the top right: the left one switches the display mode, the right one picks the year and month. Vertical mode lists day 1 to the end of the month vertically, and tapping a day expands that day of notes; the badge is the number of notes still unhandled on that day. Calendar mode shows the whole month as a seven-column grid, and tapping a day lists that day of notes under the grid. Both modes also change month by swiping sideways: swipe left for the next month, swipe right for the previous one, and the header, the grid and that day of notes refresh together. Both modes read the same data, so switching changes nothing about your notes.</string>
     <string name="help_3_title">Creating and editing a note</string>
     <string name="help_3_body">Fields: title (required), remark, linked date, reminder modes (timed alert, repeat loop and re-alert while unhandled, any combination of the three), and your own action buttons. Saving schedules the system alarm immediately. Editing a note cancels the old alarm first and then schedules the new time, so no stale alarm is left behind.</string>
     <string name="help_4_title">How linked date, timed reminder and loop work together</string>

@@ -222,15 +222,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         container.addView(group)
         currentGroup = group
 
-        val collapsed = AppSettings.collapsedSections(requireContext()).contains(key)
-        applyCollapsed(header, group, collapsed)
+        val expanded = AppSettings.expandedSections(requireContext()).contains(key)
+        applyCollapsed(header, group, !expanded)
         header.root.setOnClickListener {
-            // 现在看得见就收起来，看不见就展开
-            val collapseNow = group.visibility == View.VISIBLE
-            applyCollapsed(header, group, collapseNow)
-            val ids = AppSettings.collapsedSections(requireContext()).toMutableSet()
-            if (collapseNow) ids.add(key) else ids.remove(key)
-            AppSettings.setCollapsedSections(requireContext(), ids)
+            // 默认全是收起的：点一下展开，再点一下收起
+            val expandNow = group.visibility != View.VISIBLE
+            applyCollapsed(header, group, !expandNow)
+            val ids = AppSettings.expandedSections(requireContext()).toMutableSet()
+            if (expandNow) ids.add(key) else ids.remove(key)
+            AppSettings.setExpandedSections(requireContext(), ids)
         }
     }
 

@@ -258,9 +258,9 @@
 
     <!-- 日程显示模式 -->
     <string name="sched_mode_title">日程显示模式</string>
-    <string name="sched_mode_list">下拉模式（垂直列表，逐日展开）</string>
+    <string name="sched_mode_list">垂直模式（逐日展开）</string>
     <string name="sched_mode_calendar">日历模式（整月网格）</string>
-    <string name="sched_mode_list_short">下拉</string>
+    <string name="sched_mode_list_short">垂直</string>
     <string name="sched_mode_calendar_short">日历</string>
 
     <!-- 回收站：多选与全部删除 -->
@@ -300,8 +300,8 @@
 
     <string name="help_1_title">主界面：便签列表</string>
     <string name="help_1_body">一条便签一行：左边是标题与备注，右边是提醒时间与状态角标。右上角 ＋ 新建便签，旁边的菜单里有「显示全部便签 / 只看未处理」「搜索便签」「回收站」。角标含义：待提醒显示「待」，已经弹过卡片但没处理显示已弹次数，已处理不再显示角标。列表按「等你处理 → 待提醒 → 已延后 → 已处理」的先后排，点任意一行进入详情页。</string>
-    <string name="help_2_title">日程：下拉模式与日历模式</string>
-    <string name="help_2_body">顶部右边两个按钮：左边是显示模式，右边是选年月。下拉模式把当月 1 号到月末纵向罗列，点某一天展开当天便签，角标是这天还没处理完的条数。日历模式是整月七列网格，点某一天在网格下方列出当天便签。两种模式看的是同一份数据，只是呈现方式不同，切换不影响任何便签内容。</string>
+    <string name="help_2_title">日程：垂直模式与日历模式</string>
+    <string name="help_2_body">顶部右边两个按钮：左边是显示模式，右边是选年月。垂直模式把当月 1 号到月末纵向罗列，点某一天展开当天便签，角标是这天还没处理完的条数。日历模式是整月七列网格，点某一天在网格下方列出当天便签。两种模式都能左右滑动翻月：左滑到下个月，右滑回上个月，表头、网格和当天的便签一起刷新。两种模式看的是同一份数据，只是呈现方式不同，切换不影响任何便签内容。</string>
     <string name="help_3_title">新建与编辑便签</string>
     <string name="help_3_body">要填的项：便签标题（必填）、备注说明、关联日期、提醒方式（定时提醒 / 循环重复 / 未处理就再弹，三种可以任意组合）、自定义操作按钮。点保存后立刻按当前设置排好系统闹钟；修改一条便签会先取消旧闹钟，再按新时间重排，不会留下旧的提醒。</string>
     <string name="help_4_title">关联日期、定时提醒、循环怎么配合</string>

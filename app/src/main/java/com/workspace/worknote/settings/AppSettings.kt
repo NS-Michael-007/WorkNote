@@ -101,12 +101,12 @@ object AppSettings {
     fun setUseExactAlarm(context: Context, on: Boolean) = setBool(context, "exact_alarm", on)
 
     // ---------------- 设置页分组折叠 ----------------
-    /** 记哪些分组是收起来的；不在集合里就是展开（默认全部展开） */
-    fun collapsedSections(context: Context): Set<String> =
-        p(context).getStringSet("collapsed_sections", emptySet()) ?: emptySet()
+    /** 记哪些分组是展开的；不在集合里就是收起（默认全部收起，点标题才展开） */
+    fun expandedSections(context: Context): Set<String> =
+        p(context).getStringSet("expanded_sections", emptySet()) ?: emptySet()
 
-    fun setCollapsedSections(context: Context, ids: Set<String>) {
-        p(context).edit().putStringSet("collapsed_sections", ids).apply()
+    fun setExpandedSections(context: Context, ids: Set<String>) {
+        p(context).edit().putStringSet("expanded_sections", ids).apply()
     }
 
     // ---------------- 日程显示模式 ----------------

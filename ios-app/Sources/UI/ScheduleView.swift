@@ -1,7 +1,8 @@
 import SwiftUI
 
 /// 日程页：两种显示模式，看的是同一份数据。
-/// 下拉模式——纵列 1 号到月末（原来的做法）；日历模式——整月七列网格，点某天在下方列出当天便签。
+/// 垂直模式——纵列 1 号到月末；日历模式——整月七列网格，点某天在下方列出当天便签。
+/// 两种模式都支持左右滑动翻月：左滑下个月、右滑上个月。
 /// 右上角一次性选年月（与 Android 版一致）。
 struct ScheduleView: View {
     @EnvironmentObject private var model: AppModel
@@ -49,7 +50,7 @@ struct ScheduleView: View {
         }
     }
 
-    // MARK: - 下拉模式
+    // MARK: - 垂直模式
 
     private var listMode: some View {
         List {
@@ -59,6 +60,7 @@ struct ScheduleView: View {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
+        .simultaneousGesture(monthSwipe)
     }
 
     // MARK: - 日历模式
@@ -93,6 +95,40 @@ struct ScheduleView: View {
             }
             .padding(.top, 8)
         }
+        .simultaneousGesture(monthSwipe)
+    }
+
+    // MARK: - 左右滑动翻月
+
+    /// 左滑下个月、右滑上个月；纵向为主的手势交给列表自己滚，不抢
+    private var monthSwipe: some Gesture {
+        DragGesture(minimumDistance: 30)
+            .onEnded { value in
+                let dx = value.translation.width
+                let dy = value.translation.height
+                guard abs(dx) > 50, abs(dx) > abs(dy) * 1.5 else { return }
+                shiftMonth(dx < 0 ? 1 : -1)
+            }
+    }
+
+    /// 翻到相邻月份：看的正是本月就选中今天，其它月份选 1 号；网格、表头与当天便签一起刷新
+    private func shiftMonth(_ delta: Int) {
+        var newYear = year
+        var newMonth = month + delta
+        if newMonth > 12 {
+            newYear += 1
+            newMonth = 1
+        }
+        if newMonth < 1 {
+            newYear -= 1
+            newMonth = 12
+        }
+        year = newYear
+        month = newMonth
+        let today = Date()
+        let sameMonth = TimeKey.calendar.component(.year, from: today) == newYear
+            && TimeKey.calendar.component(.month, from: today) == newMonth
+        selectedDay = sameMonth ? TimeKey.calendar.component(.day, from: today) : 1
     }
 
     @ViewBuilder

@@ -190,16 +190,16 @@ struct ProfileView: View {
     }
 
     private func isCollapsed(_ key: String) -> Bool {
-        settings.collapsedSections.contains(key)
+        !settings.expandedSections.contains(key)
     }
 
-    /// 分组标题行：点一下收起 / 展开整组，组内每一行内容与行为都不动
+    /// 分组标题行：默认全部收起，点一下展开、再点收起，组内每一行内容与行为都不动
     private func sectionHeader(_ title: String) -> some View {
         Button {
-            if settings.collapsedSections.contains(title) {
-                settings.collapsedSections.remove(title)
+            if settings.expandedSections.contains(title) {
+                settings.expandedSections.remove(title)
             } else {
-                settings.collapsedSections.insert(title)
+                settings.expandedSections.insert(title)
             }
         } label: {
             HStack {

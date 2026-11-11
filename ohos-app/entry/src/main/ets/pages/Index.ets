@@ -11,8 +11,8 @@ import { Alerts } from '../model/Alerts';
 import { I18n } from '@kit.LocalizationKit';
 import { Speech } from '../model/Speech';
 
-// 两个跨次启动要记住的设置项：收起了哪几个分组（| 分隔）、日程用哪种显示模式
-PersistentStorage.persistProp('collapsed_keys', '');
+// 两个跨次启动要记住的设置项：展开过的分组（| 分隔，默认全收起）、日程用哪种显示模式
+PersistentStorage.persistProp('expanded_keys', '');
 PersistentStorage.persistProp('schedule_mode', 'list');
 
 /** 功能说明页的一小节：标题 + 正文，都走资源，三套语言同键 */
@@ -52,7 +52,7 @@ struct Index {
   // 日历模式下当前点中的是哪一天
   @State selectedDay: number = new Date().getDate();
   // 收起的分组（| 分隔），与日程显示模式一起由 PersistentStorage 落盘
-  @StorageLink('collapsed_keys') collapsedKeys: string = '';
+  @StorageLink('expanded_keys') expandedKeys: string = '';
   @StorageLink('schedule_mode') scheduleMode: string = 'list';
 
   private store: NoteStore = NoteStore.get();
@@ -391,7 +391,7 @@ struct Index {
     .backgroundColor($r('app.color.page_bg'))
   }
 
-  /** 下拉模式：纵向 1 号到月末（原来的做法，未改动） */
+  /** 垂直模式：纵向 1 号到月末，支持左右滑动翻月 */
   @Builder
   dayListPanel() {
     List() {
@@ -415,6 +415,11 @@ struct Index {
       }, (day: number) => `${this.monthYear}-${this.monthMonth}-${day}`)
     }
     .layoutWeight(1)
+    .gesture(PanGesture().onActionEnd((event: GestureEvent) => {
+      if (Math.abs(event.offsetX) > 60 && Math.abs(event.offsetX) > Math.abs(event.offsetY) * 1.5) {
+        this.shiftMonth(event.offsetX < 0 ? 1 : -1);
+      }
+    }))
   }
 
   /** 日历模式：整月七列网格，点某天在下面列出当天便签 */
@@ -508,6 +513,11 @@ struct Index {
       .padding({ left: 16, right: 16, top: 8, bottom: 12 })
     }
     .layoutWeight(1)
+    .gesture(PanGesture().onActionEnd((event: GestureEvent) => {
+      if (Math.abs(event.offsetX) > 60 && Math.abs(event.offsetX) > Math.abs(event.offsetY) * 1.5) {
+        this.shiftMonth(event.offsetX < 0 ? 1 : -1);
+      }
+    }))
     .alignItems(HorizontalAlign.Start)
   }
 
@@ -1151,22 +1161,42 @@ struct Index {
     this.editing = false;
   }
 
+  /** 默认全部收起：只有点开过的分组才记在 expanded_keys 里 */
   private isSectionCollapsed(key: string): boolean {
-    if (this.collapsedKeys.length === 0) {
-      return false;
-    }
-    return this.collapsedKeys.split('|').indexOf(key) >= 0;
+    return this.expandedKeys.split('|').indexOf(key) < 0;
   }
 
   private toggleSection(key: string): void {
-    const list = this.collapsedKeys.length > 0 ? this.collapsedKeys.split('|') : [];
+    const list = this.expandedKeys.length > 0 ? this.expandedKeys.split('|') : [];
     const idx = list.indexOf(key);
     if (idx >= 0) {
       list.splice(idx, 1);
     } else {
       list.push(key);
     }
-    this.collapsedKeys = list.join('|');
+    this.expandedKeys = list.join('|');
+  }
+
+  /** 左右滑动翻月：左滑下个月、右滑上个月；表头、网格与当天便签一起刷新 */
+  private shiftMonth(delta: number): void {
+    let y: number = this.monthYear;
+    let m: number = this.monthMonth + delta;
+    if (m > 12) {
+      y += 1;
+      m = 1;
+    }
+    if (m < 1) {
+      y -= 1;
+      m = 12;
+    }
+    this.monthYear = y;
+    this.monthMonth = m;
+    const now = new Date();
+    if (y === now.getFullYear() && m === now.getMonth() + 1) {
+      this.selectedDay = now.getDate();
+    } else {
+      this.selectedDay = 1;
+    }
   }
 
   private showModeDialog(): void {

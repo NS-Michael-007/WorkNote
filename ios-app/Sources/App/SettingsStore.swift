@@ -47,24 +47,24 @@ public final class SettingsStore: ObservableObject {
         public static let delayMinutes = "delay_minutes"
         public static let repeatMinutes = "repeat_minutes"
         public static let backgroundPath = "background_path"
-        public static let collapsedSections = "collapsed_sections"
+        public static let expandedSections = "expanded_sections"
         public static let scheduleMode = "schedule_mode"
         public static let helpTts = "help_tts"
     }
 
-    /// 日程显示模式。与 Android 端取值一致：list = 下拉（逐日展开），calendar = 整月网格
+    /// 日程显示模式。与 Android 端取值一致：list = 垂直（逐日展开），calendar = 整月网格
     public enum ScheduleMode: String, CaseIterable, Identifiable {
         case list, calendar
         public var id: String { rawValue }
         public var titleZh: String {
             switch self {
-            case .list: return "下拉模式（垂直列表，逐日展开）"
+            case .list: return "垂直模式（逐日展开）"
             case .calendar: return "日历模式（整月网格）"
             }
         }
         public var shortZh: String {
             switch self {
-            case .list: return "下拉"
+            case .list: return "垂直"
             case .calendar: return "日历"
             }
         }
@@ -100,11 +100,12 @@ public final class SettingsStore: ObservableObject {
     @Published public var backgroundPath: String {
         didSet { defaults.set(backgroundPath, forKey: Keys.backgroundPath) }
     }
-    /// 设置页里被收起的分组名（分组名本身就是键，与 Android 的 collapsed_sections 对齐）
-    @Published public var collapsedSections: Set<String> {
-        didSet { defaults.set(Array(collapsedSections), forKey: Keys.collapsedSections) }
+    /// 设置页里被展开的分组名（分组名本身就是键，与 Android 的 expanded_sections 对齐）；
+    /// 不在集合里就是收起，默认全部收起
+    @Published public var expandedSections: Set<String> {
+        didSet { defaults.set(Array(expandedSections), forKey: Keys.expandedSections) }
     }
-    /// 日程显示模式：默认下拉
+    /// 日程显示模式：默认垂直
     @Published public var scheduleMode: ScheduleMode {
         didSet { defaults.set(scheduleMode.rawValue, forKey: Keys.scheduleMode) }
     }
@@ -125,7 +126,7 @@ public final class SettingsStore: ObservableObject {
         delayMinutes = defaults.object(forKey: Keys.delayMinutes) as? Int ?? 30
         repeatMinutes = defaults.object(forKey: Keys.repeatMinutes) as? Int ?? 15
         backgroundPath = defaults.string(forKey: Keys.backgroundPath) ?? ""
-        collapsedSections = Set(defaults.stringArray(forKey: Keys.collapsedSections) ?? [])
+        expandedSections = Set(defaults.stringArray(forKey: Keys.expandedSections) ?? [])
         scheduleMode = ScheduleMode(rawValue: defaults.string(forKey: Keys.scheduleMode) ?? "list") ?? .list
         helpTts = defaults.object(forKey: Keys.helpTts) as? Bool ?? false
     }

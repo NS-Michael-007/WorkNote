@@ -358,7 +358,7 @@
     },
     {
       "name": "sched_mode_list",
-      "value": "Dropdown (vertical list, day by day)"
+      "value": "Vertical (day by day)"
     },
     {
       "name": "sched_mode_calendar",
@@ -366,7 +366,7 @@
     },
     {
       "name": "sched_mode_list_short",
-      "value": "Dropdown"
+      "value": "Vertical"
     },
     {
       "name": "sched_mode_calendar_short",
@@ -382,11 +382,11 @@
     },
     {
       "name": "help_2_title",
-      "value": "Schedule: dropdown mode and calendar mode"
+      "value": "Schedule: vertical mode and calendar mode"
     },
     {
       "name": "help_2_body",
-      "value": "Two buttons at the top right: the left one switches the display mode, the right one picks the year and month. Dropdown mode lists day 1 to the end of the month vertically, and tapping a day expands that day of notes; the badge is the number of notes still unhandled on that day. Calendar mode shows the whole month as a seven-column grid, and tapping a day lists that day of notes under the grid. Both modes read the same data, so switching changes nothing about your notes."
+      "value": "Two buttons at the top right: the left one switches the display mode, the right one picks the year and month. Vertical mode lists day 1 to the end of the month vertically, and tapping a day expands that day of notes; the badge is the number of notes still unhandled on that day. Calendar mode shows the whole month as a seven-column grid, and tapping a day lists that day of notes under the grid. Both modes also change month by swiping sideways: swipe left for the next month, swipe right for the previous one, and the header, the grid and that day of notes refresh together. Both modes read the same data, so switching changes nothing about your notes."
     },
     {
       "name": "help_3_title",

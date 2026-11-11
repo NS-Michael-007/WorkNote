@@ -50,7 +50,7 @@
             android:textSize="@dimen/text_body" />
     </LinearLayout>
 
-    <!-- 下拉模式：当月 1 号到月末纵向罗列，点某天展开当天便签 -->
+    <!-- 垂直模式：当月 1 号到月末纵向罗列，点某天展开当天便签 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dayList"
         android:layout_width="match_parent"

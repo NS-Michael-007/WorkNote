@@ -5,9 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import kotlin.math.abs
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -26,8 +29,9 @@ import java.util.Calendar
 
 /**
  * 日程：两种显示模式，看的是同一份数据。
- * 下拉模式——当月 1 号到月末纵向罗列，点某天展开当天便签（原来的做法）；
+ * 垂直模式——当月 1 号到月末纵向罗列，点某天展开当天便签；
  * 日历模式——整月七列网格，点某天在网格下方列出当天便签。
+ * 两种模式都能左右滑动翻月：左滑下一个月，右滑上一个月。
  */
 class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
 
@@ -72,6 +76,11 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
         viewBinding.calendarGrid.layoutManager = GridLayoutManager(requireContext(), 7)
         viewBinding.calendarGrid.adapter = calendarAdapter
         viewBinding.calendarGrid.isNestedScrollingEnabled = false
+
+        // 两种模式都支持左右滑动翻月：左滑下个月、右滑上个月
+        attachMonthSwipe(viewBinding.dayList)
+        attachMonthSwipe(viewBinding.calendarScroll)
+        attachMonthSwipe(viewBinding.calendarGrid)
 
         // 年月一次性选好（滚轮选年 + 十二宫格选月），不再点箭头一月一月翻
         viewBinding.btnPickMonth.setOnClickListener {
@@ -157,6 +166,50 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
             getString(R.string.month_fmt, year, month) + " ▾"
     }
 
+    // ---------------- 左右滑动翻月 ----------------
+
+    /** 两种模式共用：左滑看下个月，右滑看上个月；纵向为主的手势交给列表自己滚，不抢 */
+    private fun attachMonthSwipe(target: View) {
+        val minDistance = 48 * resources.displayMetrics.density
+        val detector = GestureDetector(requireContext(), object : GestureDetector.SimpleOnGestureListener() {
+            override fun onDown(e: MotionEvent): Boolean = false
+            override fun onFling(e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+                if (e1 == null) return false
+                val dx = e2.x - e1.x
+                val dy = e2.y - e1.y
+                if (abs(dx) < minDistance) return false
+                if (abs(dx) < abs(dy) * 1.5f) return false
+                if (abs(velocityX) < 120f) return false
+                shiftMonth(if (dx < 0) 1 else -1)
+                return true
+            }
+        })
+        target.setOnTouchListener { _, event -> detector.onTouchEvent(event) }
+    }
+
+    /** 翻到相邻月份：看的正是本月就选中今天，其它月份选 1 号；表头、整月网格与当天便签一起刷新 */
+    private fun shiftMonth(delta: Int) {
+        var newYear = year
+        var newMonth = month + delta
+        if (newMonth > 12) {
+            newYear += 1
+            newMonth = 1
+        }
+        if (newMonth < 1) {
+            newYear -= 1
+            newMonth = 12
+        }
+        year = newYear
+        month = newMonth
+        expandedKeys.clear()
+        selectedDay = if (newYear == TimeUtil.todayYear() && newMonth == TimeUtil.todayMonth())
+            TimeUtil.todayDay() else 1
+        renderMonthLabel()
+        load()
+        binding?.dayList?.scrollToPosition(0)
+        binding?.calendarScroll?.scrollTo(0, 0)
+    }
+
     // ---------------- 数据 ----------------
 
     private fun load() {
@@ -235,7 +288,7 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
         }
     }
 
-    // ---------------- 下拉模式 ----------------
+    // ---------------- 垂直模式 ----------------
 
     private fun toggle(index: Int) {
         if (index !in rows.indices) return
