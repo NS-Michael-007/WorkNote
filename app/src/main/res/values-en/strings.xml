@@ -322,4 +322,17 @@
     <string name="help_11_body">Dark mode: follow system, light or dark. Font size from 1 to 10. A background picture picked from the gallery is shared by Home, Schedule and Me, blurred so that text on the white cards stays readable. Four language options: follow system, Simplified Chinese, Traditional Chinese, English. Note translation uses a translation app installed on the phone.</string>
     <string name="help_12_title">Data and privacy</string>
     <string name="help_12_body">All notes live only in the local SQLite database (worknote.db). There are no network requests, no account, no cloud sync and no analytics. Uninstalling the app removes the database with it, so export a backup from the Me page before switching phones.</string>
+    <string name="help_13_title">Bluetooth earbuds and the ringtone</string>
+    <string name="help_13_body">When a reminder fires and the phone is connected to Bluetooth earbuds or a Bluetooth speaker, the ringtone goes through the earbuds and the phone speaker stays silent. With no Bluetooth connection it plays out loud as before. Vibration happens either way. Earbuds that are plugged in but not connected count as no Bluetooth.</string>
+    <string name="help_14_title">Translating an English note</string>
+    <string name="help_14_body">Notes written while the app is set to English are in English. To read them in Chinese, long-press the body, copy it, and paste it into the phone’s own translator: the Android Translate app or Google Translate, the iOS Translate app, or the HarmonyOS translation service. The app itself is offline and ships no translation engine, so there is no one-tap translate button.</string>
+    <string name="help_15_title">Creating a note from a trip screenshot</string>
+    <string name="help_15_body">The new-note page starts with "Recognise trip from screenshot". Pick a flight, train, airport pickup or itinerary screenshot and the app reads the text on-device, fills in the title (flight number, train number or route), the date and the time, and puts the original text into the note body. Recognition stays on the device and the image is never uploaded. Handwriting, blurry shots and several trips crammed into one screenshot can be misread, so check it before saving.</string>
+    <string name="note_scan_trip">Recognise trip from screenshot (flight / train / pickup)</string>
+    <string name="note_scan_trip_hint">Pick a flight, train or itinerary screenshot from your gallery. Recognition runs on-device and the image is never uploaded; check the result before saving.</string>
+    <string name="scan_trip_working">Reading the screenshot…</string>
+    <string name="scan_trip_failed">Could not read it: %1$s</string>
+    <string name="scan_trip_empty">No text found in this image — try a clearer one</string>
+    <string name="scan_trip_applied">Filled in from the screenshot — please check it</string>
+    <string name="scan_trip_time_missing">Trip found, but no date or time — pick one yourself</string>
 </resources>

@@ -43,7 +43,10 @@ class HelpActivity : BaseActivity() {
         R.string.help_9_title, R.string.help_9_body,
         R.string.help_10_title, R.string.help_10_body,
         R.string.help_11_title, R.string.help_11_body,
-        R.string.help_12_title, R.string.help_12_body
+        R.string.help_12_title, R.string.help_12_body,
+        R.string.help_13_title, R.string.help_13_body,
+        R.string.help_14_title, R.string.help_14_body,
+        R.string.help_15_title, R.string.help_15_body
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

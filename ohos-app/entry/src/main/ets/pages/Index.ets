@@ -8,6 +8,7 @@ import { Note, NoteStatus } from '../model/Note';
 import { todayKey } from '../model/TimeKey';
 import { RingtoneStore } from '../model/RingtoneStore';
 import { Alerts } from '../model/Alerts';
+import { TripScanner } from '../model/TripScanner';
 import { I18n } from '@kit.LocalizationKit';
 import { Speech } from '../model/Speech';
 
@@ -137,6 +138,28 @@ struct Index {
 
       Scroll() {
         Column({ space: 12 }) {
+          Column() {
+            // 选一张行程截图，本机识别文字后自动填标题 / 日期 / 时间；图片不上传
+            Text($r('app.string.note_scan_trip'))
+              .fontSize(16)
+              .fontColor($r('app.color.brand_green'))
+              .width('100%')
+              .textAlign(TextAlign.Center)
+              .padding({ top: 10, bottom: 10 })
+              .onClick(() => {
+                this.pickTripShot();
+              })
+            Text($r('app.string.note_scan_trip_hint'))
+              .fontSize(12)
+              .fontColor($r('app.color.text_secondary'))
+              .margin({ top: 4 })
+          }
+          .alignItems(HorizontalAlign.Start)
+          .width('100%')
+          .padding(16)
+          .backgroundColor($r('app.color.card_bg'))
+          .borderRadius(12)
+
           Column() {
             Text($r('app.string.note_title_label'))
               .fontSize(12)
@@ -948,6 +971,9 @@ struct Index {
     out.push(new HelpItem($r('app.string.help_10_title'), $r('app.string.help_10_body')));
     out.push(new HelpItem($r('app.string.help_11_title'), $r('app.string.help_11_body')));
     out.push(new HelpItem($r('app.string.help_12_title'), $r('app.string.help_12_body')));
+    out.push(new HelpItem($r('app.string.help_13_title'), $r('app.string.help_13_body')));
+    out.push(new HelpItem($r('app.string.help_14_title'), $r('app.string.help_14_body')));
+    out.push(new HelpItem($r('app.string.help_15_title'), $r('app.string.help_15_body')));
     return out;
   }
 
@@ -1429,6 +1455,42 @@ struct Index {
         }
       }
     });
+  }
+
+  /** 选一张行程截图 → 本机识别 → 回填表单；抓不到的字段留空，不猜 */
+  private async pickTripShot(): Promise<void> {
+    const uri = await TripScanner.pickImage();
+    if (uri.length === 0) {
+      return;
+    }
+    this.getUIContext().getPromptAction().showToast({ message: $r('app.string.scan_trip_working') });
+    const text = await TripScanner.recognise(uri);
+    if (text.length === 0) {
+      this.getUIContext().getPromptAction().showToast({ message: $r('app.string.scan_trip_empty') });
+      return;
+    }
+    const guess = TripScanner.parse(text);
+    if (this.editTitle.trim().length === 0) {
+      this.editTitle = guess.title;
+    }
+    if (this.editRemark.trim().length === 0) {
+      this.editRemark = guess.detail;
+    }
+
+    const now = new Date();
+    const year = guess.year > 0 ? guess.year : now.getFullYear();
+    const month = guess.month > 0 ? guess.month : now.getMonth() + 1;
+    const day = guess.day > 0 ? guess.day : now.getDate();
+    const hour = guess.hour >= 0 ? guess.hour : now.getHours();
+    const minute = guess.minute >= 0 ? guess.minute : 0;
+    const picked = new Date(year, month - 1, day, hour, minute, 0, 0);
+    if (!isNaN(picked.getTime())) {
+      this.editDateKey = `${picked.getFullYear()}-${this.two(picked.getMonth() + 1)}-${this.two(picked.getDate())}`;
+      this.editRemindAt = picked.getTime();
+      this.getUIContext().getPromptAction().showToast({ message: $r('app.string.scan_trip_applied') });
+    } else {
+      this.getUIContext().getPromptAction().showToast({ message: $r('app.string.scan_trip_time_missing') });
+    }
   }
 
   /** 提醒时间：先选年月日，再选时分，两步走完就是一个完整时间点 */

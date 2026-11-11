@@ -21,8 +21,8 @@ android {
         applicationId = "com.workspace.worknote"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
-        versionName = "2.1.0"
+        versionCode = 4
+        versionName = "2.2.0"
     }
 
     signingConfigs {
@@ -63,4 +63,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.core:core-ktx:1.13.1")
+    // 离线中文文字识别（自带模型，不依赖 Google Play 服务，图片不出本机）
+    implementation("com.google.mlkit:text-recognition-chinese:16.0.0")
 }

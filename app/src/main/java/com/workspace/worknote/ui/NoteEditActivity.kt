@@ -3,15 +3,20 @@ package com.workspace.worknote.ui
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions
 import com.workspace.worknote.R
 import com.workspace.worknote.data.ActionType
 import com.workspace.worknote.data.LoopType
@@ -21,6 +26,7 @@ import com.workspace.worknote.data.Status
 import com.workspace.worknote.data.Store
 import com.workspace.worknote.databinding.ActivityNoteEditBinding
 import com.workspace.worknote.logic.ReminderScheduler
+import com.workspace.worknote.logic.TripParser
 import com.workspace.worknote.logic.UiBus
 import com.workspace.worknote.settings.AppSettings
 import com.workspace.worknote.util.TimeUtil
@@ -46,6 +52,11 @@ class NoteEditActivity : BaseActivity() {
         val typeView: TextView,
         var type: String
     )
+
+    /** 选一张行程截图，本地识别文字后回填表单；识别用机型自带的离线上模型，图片不出本机 */
+    private val pickTripImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) recognizeTrip(uri)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +113,7 @@ class NoteEditActivity : BaseActivity() {
         binding.inputTime.setOnClickListener { if (binding.swTimed.isChecked) pickTime() }
         binding.inputLoop.setOnClickListener { if (binding.swLoop.isChecked) pickLoop() }
         binding.btnAddAction.setOnClickListener { addActionRow(NoteAction("", ActionType.DONE)) }
+        binding.btnScanTrip.setOnClickListener { pickTripImage.launch("image/*") }
         binding.btnSave.setOnClickListener { save() }
 
         updateEnables()
@@ -257,6 +269,54 @@ class NoteEditActivity : BaseActivity() {
         row.addView(delete)
         binding.actionsContainer.addView(row)
         actionRows.add(holder)
+    }
+
+    // ---------------- 行程截图识别 ----------------
+
+    private fun recognizeTrip(uri: Uri) {
+        toast(getString(R.string.scan_trip_working))
+        runCatching {
+            val image = InputImage.fromFilePath(this, uri)
+            TextRecognition.getClient(ChineseTextRecognizerOptions.Builder().build())
+                .process(image)
+                .addOnSuccessListener { result -> applyTrip(result.text) }
+                .addOnFailureListener { error ->
+                    toast(getString(R.string.scan_trip_failed, error.message ?: ""))
+                }
+        }.onFailure { error ->
+            toast(getString(R.string.scan_trip_failed, error.message ?: ""))
+        }
+    }
+
+    /** 把识别结果填进表单；抓不到的字段保持原样，不猜 */
+    private fun applyTrip(rawText: String) {
+        val text = rawText.trim()
+        if (text.isEmpty()) {
+            toast(getString(R.string.scan_trip_empty))
+            return
+        }
+        val guess = TripParser.parse(text)
+        if (binding.inputTitle.text.isNullOrBlank()) binding.inputTitle.setText(guess.title)
+        if (binding.inputRemark.text.isNullOrBlank()) binding.inputRemark.setText(guess.detail)
+
+        val calendar = Calendar.getInstance()
+        val year = guess.year ?: calendar.get(Calendar.YEAR)
+        val month = (guess.month ?: (calendar.get(Calendar.MONTH) + 1)).coerceIn(1, 12)
+        val day = (guess.day ?: calendar.get(Calendar.DAY_OF_MONTH)).coerceIn(1, 31)
+        val hour = guess.hour ?: calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = guess.minute ?: 0
+
+        val picked = runCatching { TimeUtil.epochOf(year, month, day, hour, minute) }.getOrNull()
+            ?: runCatching { TimeUtil.epochOf(year, month, 1, hour, minute) }.getOrNull()
+        if (picked != null && picked > 0L) {
+            dateTs = picked
+            remindAt = picked
+            binding.swTimed.isChecked = true
+        }
+        updateLabels()
+
+        val tail = if (picked != null) getString(R.string.scan_trip_applied) else getString(R.string.scan_trip_time_missing)
+        toast(tail)
     }
 
     private fun save() {

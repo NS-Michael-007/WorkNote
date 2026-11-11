@@ -469,6 +469,54 @@
       "value": "All notes live only in the local SQLite database (worknote.db). There are no network requests, no account, no cloud sync and no analytics. Uninstalling the app removes the database with it, so export a backup from the Me page before switching phones."
     },
     {
+      "name": "note_scan_trip",
+      "value": "Recognise trip from screenshot (flight / train / pickup)"
+    },
+    {
+      "name": "note_scan_trip_hint",
+      "value": "Pick a flight, train or itinerary screenshot from your gallery. Recognition runs on-device and the image is never uploaded; check the result before saving."
+    },
+    {
+      "name": "scan_trip_working",
+      "value": "Reading the screenshot…"
+    },
+    {
+      "name": "scan_trip_empty",
+      "value": "No text found in this image — try a clearer one"
+    },
+    {
+      "name": "scan_trip_applied",
+      "value": "Filled in from the screenshot — please check it"
+    },
+    {
+      "name": "scan_trip_time_missing",
+      "value": "Trip found, but no date or time — pick one yourself"
+    },
+    {
+      "name": "help_13_title",
+      "value": "Bluetooth earbuds and the ringtone"
+    },
+    {
+      "name": "help_13_body",
+      "value": "When a reminder fires and the phone is connected to Bluetooth earbuds or a Bluetooth speaker, the ringtone goes through the earbuds and the phone speaker stays silent. With no Bluetooth connection it plays out loud as before. Vibration happens either way. Earbuds that are plugged in but not connected count as no Bluetooth."
+    },
+    {
+      "name": "help_14_title",
+      "value": "Translating an English note"
+    },
+    {
+      "name": "help_14_body",
+      "value": "Notes written while the app is set to English are in English. To read them in Chinese, long-press the body, copy it, and paste it into the phone’s own translator. The app itself is offline and ships no translation engine, so there is no one-tap translate button."
+    },
+    {
+      "name": "help_15_title",
+      "value": "Creating a note from a trip screenshot"
+    },
+    {
+      "name": "help_15_body",
+      "value": "The new-note page starts with \"Recognise trip from screenshot\". Pick a flight, train, airport pickup or itinerary screenshot and the app reads the text on-device, fills in the title (flight number, train number or route), the date and the time, and puts the original text into the note body. Recognition stays on the device and the image is never uploaded. Handwriting, blurry shots and several trips crammed into one screenshot can be misread, so check it before saving."
+    },
+    {
       "name": "bin_title",
       "value": "Recycle bin"
     },

@@ -55,9 +55,29 @@
             android:paddingBottom="@dimen/space_section">
 
             <TextView
+                android:id="@+id/btnScanTrip"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/field_height"
+                android:background="@drawable/bg_field"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/note_scan_trip"
+                android:textColor="@color/link"
+                android:textSize="@dimen/text_body" />
+
+            <TextView
                 style="@style/Text.HintSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/note_scan_trip_hint" />
+
+            <TextView
+                style="@style/Text.HintSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_item"
                 android:text="@string/note_title_label" />
 
             <EditText

@@ -322,4 +322,17 @@
     <string name="help_11_body">深色模式：跟随系统 / 浅色 / 深色。字体大小 1 到 10 档，越大字越大。背景图从相册选一张，主界面、日程、我三个 Tab 共用同一张底图，图片会做虚化处理，保证白卡片上的字仍然清楚。语言四档：跟随系统 / 简体中文 / 繁體中文 / English。便签文字翻译调用手机里已安装的翻译应用。</string>
     <string name="help_12_title">数据与隐私</string>
     <string name="help_12_body">所有便签只存在本机的 SQLite 数据库（worknote.db），没有网络请求、没有账号、没有云同步、没有统计埋点。卸载 App 会连数据库一起删掉，所以换机前先到「我」页导出备份。</string>
+    <string name="help_13_title">蓝牙耳机与响铃</string>
+    <string name="help_13_body">提醒响的时候，如果手机连着蓝牙耳机或蓝牙音箱，铃声交给耳机播放，手机喇叭不出声；没连蓝牙就照原样外放。震动两种情况都照常。耳机插着但没连上时按没连蓝牙处理。</string>
+    <string name="help_14_title">英文便签怎么翻译</string>
+    <string name="help_14_body">把 App 切成 English 后写的便签是英文。想看中文，长按正文全选复制，粘到手机自带的翻译里就行：Android 用「翻译」或 Google 翻译，iOS 用系统「翻译」App，鸿蒙用系统翻译服务。App 自己不联网、也不内置翻译引擎，所以没有一键翻译按钮。</string>
+    <string name="help_15_title">用行程截图新建便签</string>
+    <string name="help_15_body">新建便签页最上面有「从截图识别行程」。选一张机票、火车票、接机或行程安排截图，App 在本机识别文字，自动填标题（航班号 / 车次 / 路线）、日期与时间，并把截图原文放进去备注。识别全程在本机，图片不上传；手写、模糊、一张图里挤了好几段行程时会认错，保存前请自己核对一遍。</string>
+    <string name="note_scan_trip">从截图识别行程（航班 / 车次 / 接送机）</string>
+    <string name="note_scan_trip_hint">在相册里选一张机票、火车票或行程截图。识别只在本机做，图片不会上传；识别后自己核对一遍再保存。</string>
+    <string name="scan_trip_working">正在识别截图…</string>
+    <string name="scan_trip_failed">识别失败：%1$s</string>
+    <string name="scan_trip_empty">这张图里没识别到文字，换一张更清楚的试试</string>
+    <string name="scan_trip_applied">已填入识别结果，核对后保存</string>
+    <string name="scan_trip_time_missing">已识别到行程，但没找到日期时间，请手动选一下</string>
 </resources>

@@ -1,4 +1,5 @@
 import SwiftUI
+import PhotosUI
 
 /// 便签编辑页。字段与备份契约一一对应：标题 / 备注 / 归属日期 / 提醒时刻 / 循环 / 重弹 / 自定义按钮。
 struct NoteEditorView: View {
@@ -15,6 +16,9 @@ struct NoteEditorView: View {
     @State private var repeatMinutes: Int
     @State private var actions: [NoteAction]
     @State private var errorText: String?
+    /** 选中的行程截图，识别完清空 */
+    @State private var tripPick: PhotosPickerItem?
+    @State private var tripBusy = false
 
     private let original: Note
 
@@ -36,6 +40,22 @@ struct NoteEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section("快速新建") {
+                    // 选一张行程截图，本地识别文字后自动填标题 / 日期 / 时间；图片不上传
+                    PhotosPicker(selection: $tripPick, matching: .images) {
+                        Text(tripBusy ? "正在识别截图…" : "从截图识别行程（航班 / 车次 / 接送机）")
+                            .foregroundStyle(Theme.accent)
+                    }
+                    .disabled(tripBusy)
+                    Text("在相册里选机票、火车票或行程截图。识别只在本机做，结果请自己核对后再保存。")
+                        .font(.system(size: 12))
+                        .foregroundStyle(.secondary)
+                }
+                .onChange(of: tripPick) { item in
+                    guard let item else { return }
+                    Task { await recogniseTrip(item) }
+                }
+
                 Section("内容") {
                     TextField("标题（必填）", text: $title)
                     TextField("备注", text: $remark, axis: .vertical)
@@ -143,6 +163,36 @@ struct NoteEditorView: View {
         target.minute = time.minute
         if let merged = calendar.date(from: target) {
             remindDate = merged
+        }
+    }
+
+    /// 选图 → Vision 离线识别 → 填表单；抓不到的字段留空，不猜
+    private func recogniseTrip(_ item: PhotosPickerItem) async {
+        tripBusy = true
+        defer {
+            tripBusy = false
+            tripPick = nil
+        }
+        guard let data = try? await item.loadTransferable(type: Data.self),
+              let image = UIImage(data: data),
+              let text = TripScanner.recognise(image: image) else {
+            errorText = "这张图里没识别到文字，换一张更清楚的试试"
+            return
+        }
+        let guess = TripScanner.parse(text)
+        if title.trimmingCharacters(in: .whitespaces).isEmpty { title = guess.title }
+        if remark.trimmingCharacters(in: .whitespaces).isEmpty { remark = guess.detail }
+
+        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+        if let year = guess.year { components.year = year }
+        if let month = guess.month { components.month = month }
+        if let day = guess.day { components.day = day }
+        if let hour = guess.hour { components.hour = hour }
+        if let minute = guess.minute { components.minute = minute }
+        if let merged = Calendar.current.date(from: components) {
+            remindDate = merged
+            dateKey = TimeKey.key(for: merged)
+            hasReminder = true
         }
     }
 
