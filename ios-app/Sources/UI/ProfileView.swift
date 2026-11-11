@@ -30,96 +30,133 @@ struct ProfileView: View {
                 TopBar(title: "我") { EmptyView() }
 
                 List {
-                    Section("界面与显示") {
-                        Picker("深色模式", selection: $settings.darkMode) {
-                            ForEach(SettingsStore.DarkMode.allCases) { mode in
-                                Text(mode.titleZh).tag(mode)
+                    Section {
+                        if !isCollapsed("界面与显示") {
+                            Picker("深色模式", selection: $settings.darkMode) {
+                                ForEach(SettingsStore.DarkMode.allCases) { mode in
+                                    Text(mode.titleZh).tag(mode)
+                                }
                             }
-                        }
-                        Stepper("字体大小：第 \(settings.fontLevel) 档", value: $settings.fontLevel, in: 1...10)
-                        Picker("语言", selection: $settings.language) {
-                            ForEach(SettingsStore.Language.allCases) { lang in
-                                Text(lang.titleZh).tag(lang)
+                            Stepper("字体大小：第 \(settings.fontLevel) 档", value: $settings.fontLevel, in: 1...10)
+                            Picker("语言", selection: $settings.language) {
+                                ForEach(SettingsStore.Language.allCases) { lang in
+                                    Text(lang.titleZh).tag(lang)
+                                }
                             }
-                        }
-                        .onChange(of: settings.language) { _ in
-                            // 落盘到 AppleLanguages；iOS 不允许运行期换主语言，需重新打开 App 才生效
-                            settings.applyLanguageToSystem()
-                        }
-                        Text("切换语言后需要重新打开 App 才会生效")
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                        HStack {
-                            Text("背景图")
-                            Spacer()
-                            Text(settings.backgroundPath.isEmpty ? "默认纯色" : "已设置")
+                            .onChange(of: settings.language) { _ in
+                                // 落盘到 AppleLanguages；iOS 不允许运行期换主语言，需重新打开 App 才生效
+                                settings.applyLanguageToSystem()
+                            }
+                            Text("切换语言后需要重新打开 App 才会生效")
+                                .font(.footnote)
                                 .foregroundStyle(.secondary)
-                        }
-                    }
-
-                    Section("存储空间") {
-                        HStack {
-                            Text("便签数据")
-                            Spacer()
-                            Text(storageText).foregroundStyle(.secondary)
-                        }
-                        HStack {
-                            Text("便签条数")
-                            Spacer()
-                            Text("\(model.notes.count)").foregroundStyle(.secondary)
-                        }
-                    }
-
-                    Section("通知与提醒") {
-                        Toggle("提示音", isOn: $settings.notifySound)
-                        Toggle("角标", isOn: $settings.notifyBadge)
-                        Button {
-                            showRingtonePicker = true
-                        } label: {
                             HStack {
-                                Text("提醒铃声")
+                                Text("背景图")
                                 Spacer()
-                                Text(ringtoneText).foregroundStyle(.secondary)
+                                Text(settings.backgroundPath.isEmpty ? "默认纯色" : "已设置")
+                                    .foregroundStyle(.secondary)
                             }
                         }
-                        if RingtoneStore.shared.fileName != nil {
-                            Button("恢复系统默认铃声") {
-                                RingtoneStore.shared.reset()
-                                ringtoneRefresh.toggle()
+                    } header: {
+                        sectionHeader("界面与显示")
+                    }
+
+                    Section {
+                        if !isCollapsed("存储空间") {
+                            HStack {
+                                Text("便签数据")
+                                Spacer()
+                                Text(storageText).foregroundStyle(.secondary)
+                            }
+                            HStack {
+                                Text("便签条数")
+                                Spacer()
+                                Text("\(model.notes.count)").foregroundStyle(.secondary)
                             }
                         }
-                        Stepper("默认延后 \(settings.delayMinutes) 分钟", value: $settings.delayMinutes, in: 5...240, step: 5)
-                        Stepper("重弹间隔 \(settings.repeatMinutes) 分钟", value: $settings.repeatMinutes, in: 5...240, step: 5)
-                        HStack {
-                            Text("已排提醒")
-                            Spacer()
-                            Text("\(pendingCount) 条").foregroundStyle(.secondary)
+                    } header: {
+                        sectionHeader("存储空间")
+                    }
+
+                    Section {
+                        if !isCollapsed("通知与提醒") {
+                            Toggle("提示音", isOn: $settings.notifySound)
+                            Toggle("角标", isOn: $settings.notifyBadge)
+                            Button {
+                                showRingtonePicker = true
+                            } label: {
+                                HStack {
+                                    Text("提醒铃声")
+                                    Spacer()
+                                    Text(ringtoneText).foregroundStyle(.secondary)
+                                }
+                            }
+                            if RingtoneStore.shared.fileName != nil {
+                                Button("恢复系统默认铃声") {
+                                    RingtoneStore.shared.reset()
+                                    ringtoneRefresh.toggle()
+                                }
+                            }
+                            Stepper("默认延后 \(settings.delayMinutes) 分钟", value: $settings.delayMinutes, in: 5...240, step: 5)
+                            Stepper("重弹间隔 \(settings.repeatMinutes) 分钟", value: $settings.repeatMinutes, in: 5...240, step: 5)
+                            HStack {
+                                Text("已排提醒")
+                                Spacer()
+                                Text("\(pendingCount) 条").foregroundStyle(.secondary)
+                            }
                         }
+                    } header: {
+                        sectionHeader("通知与提醒")
                     } footer: {
                         Text("iOS 不允许 App 阻止用户划掉通知，也没有浮窗。这里的强提醒是「时效性通知 + 没处理就按间隔补发」，强度弱于 Android 版。")
                     }
 
-                    Section("备份") {
-                        Button("导出 .taskbak") {
-                            exportDoc = TaskBakDocument(data: model.exportData())
-                            showExport = true
+                    Section {
+                        if !isCollapsed("功能说明") {
+                            NavigationLink {
+                                HelpView()
+                            } label: {
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text("功能说明（全部功能讲解）")
+                                    Text("逐页讲清每个功能怎么用，可开启内容播报")
+                                        .font(.footnote)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
                         }
-                        Button("从 .taskbak 恢复") { showImport = true }
+                    } header: {
+                        sectionHeader("功能说明")
+                    }
+
+                    Section {
+                        if !isCollapsed("备份") {
+                            Button("导出 .taskbak") {
+                                exportDoc = TaskBakDocument(data: model.exportData())
+                                showExport = true
+                            }
+                            Button("从 .taskbak 恢复") { showImport = true }
+                        }
+                    } header: {
+                        sectionHeader("备份")
                     } footer: {
                         Text("导出会写一条替换式备份：恢复时本机现有便签会被整体覆盖。换手机只认这一份文件。")
                     }
 
-                    Section("关于") {
-                        HStack {
-                            Text("版本")
-                            Spacer()
-                            Text("1.0.0").foregroundStyle(.secondary)
+                    Section {
+                        if !isCollapsed("关于") {
+                            HStack {
+                                Text("版本")
+                                Spacer()
+                                Text("2.1.0").foregroundStyle(.secondary)
+                            }
+                            HStack {
+                                Text("包名")
+                                Spacer()
+                                Text("com.workspace.worknote").foregroundStyle(.secondary)
+                            }
                         }
-                        HStack {
-                            Text("包名")
-                            Spacer()
-                            Text("com.workspace.worknote").foregroundStyle(.secondary)
-                        }
+                    } header: {
+                        sectionHeader("关于")
                     }
                 }
                 .listStyle(.insetGrouped)
@@ -150,6 +187,34 @@ struct ProfileView: View {
                 refreshStats()
             }
         }
+    }
+
+    private func isCollapsed(_ key: String) -> Bool {
+        settings.collapsedSections.contains(key)
+    }
+
+    /// 分组标题行：点一下收起 / 展开整组，组内每一行内容与行为都不动
+    private func sectionHeader(_ title: String) -> some View {
+        Button {
+            if settings.collapsedSections.contains(title) {
+                settings.collapsedSections.remove(title)
+            } else {
+                settings.collapsedSections.insert(title)
+            }
+        } label: {
+            HStack {
+                Text(title)
+                    .font(.footnote)
+                    .foregroundStyle(Theme.secondaryText(scheme))
+                    .textCase(nil)
+                Spacer()
+                Image(systemName: isCollapsed(title) ? "chevron.down" : "chevron.up")
+                    .font(.system(size: 11))
+                    .foregroundStyle(Theme.secondaryText(scheme))
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 
     private func handleRingtonePick(_ result: Result<URL, Error>) {

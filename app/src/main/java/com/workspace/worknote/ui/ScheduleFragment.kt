@@ -6,30 +6,49 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.workspace.worknote.R
 import com.workspace.worknote.data.Note
 import com.workspace.worknote.data.Store
 import com.workspace.worknote.databinding.FragmentScheduleBinding
+import com.workspace.worknote.databinding.ItemNoteBinding
 import com.workspace.worknote.logic.UiBus
+import com.workspace.worknote.settings.AppSettings
 import com.workspace.worknote.settings.ThemeHelper
 import com.workspace.worknote.util.TimeUtil
+import java.util.Calendar
 
-/** 日程：纵向罗列当月 1 号到月末，点日期展开当天便签 */
+/**
+ * 日程：两种显示模式，看的是同一份数据。
+ * 下拉模式——当月 1 号到月末纵向罗列，点某天展开当天便签（原来的做法）；
+ * 日历模式——整月七列网格，点某天在网格下方列出当天便签。
+ */
 class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
 
     private var binding: FragmentScheduleBinding? = null
     private var year = TimeUtil.todayYear()
     private var month = TimeUtil.todayMonth()
+    private var mode = AppSettings.SCHEDULE_LIST
+    private var selectedDay = TimeUtil.todayDay()
     private val expandedKeys = mutableSetOf<String>()
     private var rows: List<DayRow> = emptyList()
+    private var calCells: List<CalCell> = emptyList()
 
     private val adapter = DateRowAdapter(
         onToggle = { index -> toggle(index) },
         onNoteClick = { note -> openDetail(note) }
     )
+
+    private val calendarAdapter = CalendarAdapter { cell ->
+        selectedDay = cell.day
+        submitCalendar()
+    }
 
     private val refreshReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -50,17 +69,27 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
             else R.color.page_bg
         )
 
+        viewBinding.calendarGrid.layoutManager = GridLayoutManager(requireContext(), 7)
+        viewBinding.calendarGrid.adapter = calendarAdapter
+        viewBinding.calendarGrid.isNestedScrollingEnabled = false
+
         // 年月一次性选好（滚轮选年 + 十二宫格选月），不再点箭头一月一月翻
         viewBinding.btnPickMonth.setOnClickListener {
             MonthPicker.show(requireContext(), year, month) { pickedYear, pickedMonth ->
                 year = pickedYear
                 month = pickedMonth
                 expandedKeys.clear()
+                selectedDay = if (pickedYear == TimeUtil.todayYear() && pickedMonth == TimeUtil.todayMonth())
+                    TimeUtil.todayDay() else 1
                 renderMonthLabel()
                 load()
             }
         }
+        viewBinding.btnDisplayMode.setOnClickListener { showModeDialog() }
 
+        mode = AppSettings.scheduleMode(requireContext())
+        if (mode != AppSettings.SCHEDULE_CALENDAR) mode = AppSettings.SCHEDULE_LIST
+        applyMode()
         renderMonthLabel()
         load()
     }
@@ -90,10 +119,45 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
         binding = null
     }
 
+    // ---------------- 显示模式 ----------------
+
+    private fun showModeDialog() {
+        val labels = arrayOf(
+            getString(R.string.sched_mode_list),
+            getString(R.string.sched_mode_calendar)
+        )
+        val values = arrayOf(AppSettings.SCHEDULE_LIST, AppSettings.SCHEDULE_CALENDAR)
+        val current = values.indexOf(mode).coerceAtLeast(0)
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.sched_mode_title)
+            .setSingleChoiceItems(labels, current) { dialog, which ->
+                mode = values[which]
+                AppSettings.setScheduleMode(requireContext(), mode)
+                dialog.dismiss()
+                applyMode()
+                load()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun applyMode() {
+        val viewBinding = binding ?: return
+        val listMode = mode == AppSettings.SCHEDULE_LIST
+        viewBinding.dayList.visibility = if (listMode) View.VISIBLE else View.GONE
+        viewBinding.calendarScroll.visibility = if (listMode) View.GONE else View.VISIBLE
+        viewBinding.btnDisplayMode.text =
+            getString(
+                if (listMode) R.string.sched_mode_list_short else R.string.sched_mode_calendar_short
+            ) + " ▾"
+    }
+
     private fun renderMonthLabel() {
         binding?.btnPickMonth?.text =
             getString(R.string.month_fmt, year, month) + " ▾"
     }
+
+    // ---------------- 数据 ----------------
 
     private fun load() {
         val counts = Store.activeCounts()
@@ -105,7 +169,73 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
             DayRow(day, key, counts[key] ?: 0, expanded, notes)
         }
         adapter.submit(rows)
+
+        val offset = firstWeekdayOffset()
+        val cells = ArrayList<CalCell>()
+        repeat(offset) { cells.add(CalCell(0, "", 0)) }
+        (1..days).forEach { day ->
+            val key = TimeUtil.keyOf(year, month, day)
+            cells.add(CalCell(day, key, counts[key] ?: 0))
+        }
+        calCells = cells
+        calendarAdapter.submit(calCells, selectedDay, TimeUtil.todayKey())
+        renderCalendar()
     }
+
+    private fun submitCalendar() {
+        calendarAdapter.submit(calCells, selectedDay, TimeUtil.todayKey())
+        renderCalendar()
+    }
+
+    /** 1 号是周几 → 前面要空几格（周日=0，周一=1 … 周六=6） */
+    private fun firstWeekdayOffset(): Int {
+        val cal = Calendar.getInstance().apply {
+            set(year, month - 1, 1, 0, 0, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        return cal.get(Calendar.DAY_OF_WEEK) - 1
+    }
+
+    /** 日历模式下，网格下方列出选中那天（没选就是 1 号 / 今天）的便签 */
+    private fun renderCalendar() {
+        val viewBinding = binding ?: return
+        if (mode != AppSettings.SCHEDULE_CALENDAR) return
+
+        if (selectedDay !in 1..TimeUtil.daysInMonth(year, month)) selectedDay = 1
+        val key = TimeUtil.keyOf(year, month, selectedDay)
+        viewBinding.calendarDayLabel.text = TimeUtil.fullDateLabel(key)
+
+        val notes = Store.forDate(key)
+        viewBinding.calendarNotes.removeAllViews()
+        if (notes.isEmpty()) {
+            val empty = TextView(requireContext()).apply {
+                text = getString(R.string.date_empty_hint)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
+                textSize = 12f
+                setPadding(dp(8), dp(10), dp(8), dp(10))
+            }
+            viewBinding.calendarNotes.addView(empty)
+            return
+        }
+        val inflater = layoutInflater
+        notes.forEach { note ->
+            val item = ItemNoteBinding.inflate(inflater, viewBinding.calendarNotes, false)
+            item.noteTitle.text = note.title
+            item.noteSub.text = NoteAdapter.subText(note)
+            item.noteTime.text = NoteAdapter.timeText(note)
+            val badge = NoteAdapter.badgeText(note)
+            if (badge.isNullOrEmpty()) {
+                item.noteBadge.visibility = View.GONE
+            } else {
+                item.noteBadge.visibility = View.VISIBLE
+                item.noteBadge.text = badge
+            }
+            item.root.setOnClickListener { openDetail(note) }
+            viewBinding.calendarNotes.addView(item.root)
+        }
+    }
+
+    // ---------------- 下拉模式 ----------------
 
     private fun toggle(index: Int) {
         if (index !in rows.indices) return
@@ -128,4 +258,6 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
                 .putExtra(NoteDetailActivity.EXTRA_NOTE_ID, note.id)
         )
     }
+
+    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 }

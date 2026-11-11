@@ -1,13 +1,18 @@
 import SwiftUI
 
-/// 日程页：**纵列 1 号到月末**，不点前后箭头翻月，右上角一次性选年月（与 Android 版一致）。
+/// 日程页：两种显示模式，看的是同一份数据。
+/// 下拉模式——纵列 1 号到月末（原来的做法）；日历模式——整月七列网格，点某天在下方列出当天便签。
+/// 右上角一次性选年月（与 Android 版一致）。
 struct ScheduleView: View {
     @EnvironmentObject private var model: AppModel
+    @EnvironmentObject private var settings: SettingsStore
     @Environment(\.colorScheme) private var scheme
 
     @State private var year: Int = TimeKey.calendar.component(.year, from: Date())
     @State private var month: Int = TimeKey.calendar.component(.month, from: Date())
     @State private var showPicker = false
+    @State private var showModeDialog = false
+    @State private var selectedDay: Int = TimeKey.calendar.component(.day, from: Date())
 
     private var days: [Int] { Array(1...TimeKey.daysInMonth(year: year, month: month)) }
 
@@ -15,29 +20,162 @@ struct ScheduleView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 TopBar(title: "日程") {
-                    Button { showPicker = true } label: {
-                        HStack(spacing: 4) {
-                            Text("\(year)年\(month)月")
-                                .font(.system(size: 15, weight: .medium))
-                            Image(systemName: "chevron.down").font(.system(size: 11))
+                    HStack(spacing: 8) {
+                        Button { showModeDialog = true } label: {
+                            chip(settings.scheduleMode.shortZh + " ▾")
                         }
-                        .foregroundStyle(.primary)
+                        Button { showPicker = true } label: {
+                            chip("\(year)年\(month)月 ▾")
+                        }
                     }
                 }
 
-                List {
-                    ForEach(days, id: \.self) { day in
-                        DayRow(year: year, month: month, day: day, notes: notesFor(day: day))
-                    }
+                if settings.scheduleMode == .list {
+                    listMode
+                } else {
+                    calendarMode
                 }
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
             }
             .background(Theme.pageBackground(scheme))
             .sheet(isPresented: $showPicker) {
                 MonthPickerSheet(year: $year, month: $month)
             }
+            .confirmationDialog("日程显示模式", isPresented: $showModeDialog, titleVisibility: .visible) {
+                ForEach(SettingsStore.ScheduleMode.allCases) { mode in
+                    Button(mode.titleZh) { settings.scheduleMode = mode }
+                }
+                Button("取消", role: .cancel) {}
+            }
         }
+    }
+
+    // MARK: - 下拉模式
+
+    private var listMode: some View {
+        List {
+            ForEach(days, id: \.self) { day in
+                DayRow(year: year, month: month, day: day, notes: notesFor(day: day))
+            }
+        }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+    }
+
+    // MARK: - 日历模式
+
+    private var calendarMode: some View {
+        ScrollView {
+            VStack(spacing: 10) {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 7), spacing: 6) {
+                    ForEach(["周日", "周一", "周二", "周三", "周四", "周五", "周六"], id: \.self) { name in
+                        Text(name)
+                            .font(.system(size: 11))
+                            .foregroundStyle(Theme.secondaryText(scheme))
+                    }
+                    ForEach(0..<leadingBlanks, id: \.self) { _ in
+                        Color.clear.frame(height: 46)
+                    }
+                    ForEach(days, id: \.self) { day in
+                        dayCell(day)
+                    }
+                }
+                .padding(.horizontal, 10)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(dayLabel)
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(Theme.primaryText(scheme))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    selectedDayNotes
+                }
+                .padding(.horizontal, Theme.pageMargin)
+                .padding(.bottom, 16)
+            }
+            .padding(.top, 8)
+        }
+    }
+
+    @ViewBuilder
+    private var selectedDayNotes: some View {
+        let notes = notesFor(day: selectedDay)
+        if notes.isEmpty {
+            Text("这天还没有便签")
+                .font(.system(size: 12))
+                .foregroundStyle(Theme.secondaryText(scheme))
+        } else {
+            ForEach(notes) { note in
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(note.title)
+                        .font(.system(size: 14))
+                        .foregroundStyle(Theme.primaryText(scheme))
+                        .lineLimit(1)
+                    HStack(spacing: 6) {
+                        Text(note.status.titleZh)
+                            .font(.system(size: 11))
+                            .foregroundStyle(Theme.accent)
+                        if let fire = TimeKey.date(fromMillis: note.remindAt) {
+                            Text("\(TimeKey.friendlyDay(fire)) \(TimeKey.hhmm(fire))")
+                                .font(.system(size: 11))
+                                .foregroundStyle(Theme.secondaryText(scheme))
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(10)
+                .background(Theme.cardBackground(scheme))
+                .clipShape(RoundedRectangle(cornerRadius: Theme.cornerRadius))
+            }
+        }
+    }
+
+    /// 1 号之前要空几格：周日打头，所以用 weekday - 1
+    private var leadingBlanks: Int {
+        guard let first = TimeKey.dayDate(year: year, month: month, day: 1) else { return 0 }
+        return TimeKey.calendar.component(.weekday, from: first) - 1
+    }
+
+    private var dayLabel: String {
+        guard let date = TimeKey.dayDate(year: year, month: month, day: selectedDay) else { return "" }
+        let isToday = TimeKey.key(for: date) == TimeKey.key(for: Date())
+        return "\(year)年\(month)月\(selectedDay)日 \(TimeKey.weekdayName(of: date))" + (isToday ? "（今天）" : "")
+    }
+
+    private func dayCell(_ day: Int) -> some View {
+        let key = keyFor(day: day)
+        let count = model.notes(onDateKey: key).count
+        let selected = day == selectedDay
+        let isToday = key == TimeKey.key(for: Date())
+        return Button {
+            selectedDay = day
+        } label: {
+            VStack(spacing: 1) {
+                Text("\(day)")
+                    .font(.system(size: 14, weight: selected ? .semibold : .regular))
+                    .frame(maxWidth: .infinity, minHeight: 34)
+                    .background(selected ? Theme.accent : Theme.cardBackground(scheme))
+                    .foregroundStyle(selected ? Color.white : (isToday ? Theme.accent : Theme.primaryText(scheme)))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                Text(count > 0 ? "\(count)" : " ")
+                    .font(.system(size: 10))
+                    .foregroundStyle(Theme.badge)
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func chip(_ text: String) -> some View {
+        Text(text)
+            .font(.system(size: 14, weight: .medium))
+            .foregroundStyle(.primary)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(Theme.cardBackground(scheme))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    private func keyFor(day: Int) -> String {
+        guard let date = TimeKey.dayDate(year: year, month: month, day: day) else { return "" }
+        return TimeKey.key(for: date)
     }
 
     private func notesFor(day: Int) -> [Note] {

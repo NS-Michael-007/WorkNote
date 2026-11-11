@@ -99,4 +99,28 @@ object AppSettings {
 
     fun useExactAlarm(context: Context): Boolean = getBool(context, "exact_alarm", true)
     fun setUseExactAlarm(context: Context, on: Boolean) = setBool(context, "exact_alarm", on)
+
+    // ---------------- 设置页分组折叠 ----------------
+    /** 记哪些分组是收起来的；不在集合里就是展开（默认全部展开） */
+    fun collapsedSections(context: Context): Set<String> =
+        p(context).getStringSet("collapsed_sections", emptySet()) ?: emptySet()
+
+    fun setCollapsedSections(context: Context, ids: Set<String>) {
+        p(context).edit().putStringSet("collapsed_sections", ids).apply()
+    }
+
+    // ---------------- 日程显示模式 ----------------
+    const val SCHEDULE_LIST = "list"
+    const val SCHEDULE_CALENDAR = "calendar"
+
+    fun scheduleMode(context: Context): String =
+        p(context).getString("schedule_mode", SCHEDULE_LIST) ?: SCHEDULE_LIST
+
+    fun setScheduleMode(context: Context, mode: String) {
+        p(context).edit().putString("schedule_mode", mode).apply()
+    }
+
+    // ---------------- 功能说明页的内容播报 ----------------
+    fun helpTts(context: Context): Boolean = getBool(context, "help_tts", false)
+    fun setHelpTts(context: Context, on: Boolean) = setBool(context, "help_tts", on)
 }

@@ -47,6 +47,10 @@ object Store {
 
     fun hardDelete(id: Long) = d().hardDelete(id)
 
+    fun hardDeleteMany(ids: Collection<Long>) = d().hardDeleteMany(ids)
+
+    fun hardDeleteAllDeleted(): Int = d().hardDeleteAllDeleted()
+
     fun replaceAll(notes: List<Note>) {
         d().clearAll()
         val now = System.currentTimeMillis()

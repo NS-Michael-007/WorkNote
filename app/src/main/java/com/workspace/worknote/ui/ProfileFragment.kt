@@ -20,6 +20,7 @@ import com.workspace.worknote.R
 import com.workspace.worknote.data.BackupManager
 import com.workspace.worknote.data.Store
 import com.workspace.worknote.databinding.FragmentProfileBinding
+import com.workspace.worknote.databinding.ItemSectionHeaderBinding
 import com.workspace.worknote.databinding.ItemSettingRowBinding
 import com.workspace.worknote.logic.Perms
 import com.workspace.worknote.logic.ReminderScheduler
@@ -87,7 +88,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private fun buildSettings() {
         val context = requireContext()
 
-        section(getString(R.string.perm_section_title), getString(R.string.perm_section_hint))
+        section("权限", getString(R.string.perm_section_title), getString(R.string.perm_section_hint))
 
         statusOverlay = addRow(getString(R.string.perm_overlay), null, getString(R.string.status_go)) {
             openOverlaySettings()
@@ -103,7 +104,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }.rowValue
 
         // ---- 界面与显示 ----
-        section(getString(R.string.appearance_section), getString(R.string.appearance_hint))
+        section("界面与显示", getString(R.string.appearance_section), getString(R.string.appearance_hint))
 
         addRow(
             getString(R.string.bg_title),
@@ -128,11 +129,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         ) { showTranslateInfo() }
 
         // ---- 存储空间 ----
-        section(getString(R.string.storage_section), null)
+        section("存储空间", getString(R.string.storage_section), null)
         addRow(getString(R.string.storage_title), null, storageSummary()) { showStorageDialog() }
 
         // ---- 通知 ----
-        section(getString(R.string.notify_section), null)
+        section("通知", getString(R.string.notify_section), null)
 
         switchRow(getString(R.string.notify_sound), AppSettings.notifySound(context)) { on ->
             AppSettings.setNotifySound(context, on)
@@ -151,7 +152,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         ) { showRingtoneDialog() }.rowValue
 
         // ---- 闹钟与提醒 ----
-        section(getString(R.string.alarm_section), null)
+        section("闹钟与提醒", getString(R.string.alarm_section), null)
 
         addRow(
             getString(R.string.alarm_delay_title),
@@ -175,52 +176,73 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             toast(getString(R.string.alarm_rescheduled))
         }
 
+        // ---- 功能说明 ----
+        section("功能说明", getString(R.string.help_section), null)
+        addRow(
+            getString(R.string.help_entry_title),
+            getString(R.string.help_entry_sub),
+            null
+        ) { startActivity(Intent(requireContext(), HelpActivity::class.java)) }
+
         // ---- 数据备份 ----
-        section(getString(R.string.backup_section), getString(R.string.backup_hint))
+        section("数据备份", getString(R.string.backup_section), getString(R.string.backup_hint))
         primaryButton(getString(R.string.backup_export)) { exportBackup() }
         primaryButton(getString(R.string.backup_import)) {
             importLauncher.launch(arrayOf("application/json", "text/plain", "*/*"))
         }
 
         // ---- 关于 ----
-        section(getString(R.string.about_section), getString(R.string.about_text))
+        section("关于", getString(R.string.about_section), getString(R.string.about_text))
         addRow(getString(R.string.about_version_fmt, versionName()), null, null, null)
     }
 
-    private fun section(title: String, hint: String?) {
+    /** 当前正在拼的分组容器：addRow / primaryButton 都往这里加，组内行保持原样 */
+    private var currentGroup: LinearLayout? = null
+
+    private fun section(key: String, title: String, hint: String?) {
         val container = binding?.profileContent ?: return
-        val titleView = TextView(requireContext()).apply {
-            text = title
-            setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
-            textSize = 14f
-            setTypeface(typeface, android.graphics.Typeface.BOLD)
+
+        val header = ItemSectionHeaderBinding.inflate(layoutInflater, container, false)
+        header.sectionTitle.text = title
+        header.sectionHint.text = hint ?: ""
+        header.sectionHint.visibility = if (hint.isNullOrEmpty()) View.GONE else View.VISIBLE
+        header.root.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply { topMargin = dp(24) }
+        container.addView(header.root)
+
+        val group = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.VERTICAL
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                topMargin = dp(24)
-                marginStart = dp(16)
-                marginEnd = dp(16)
-            }
+            )
         }
-        container.addView(titleView)
+        container.addView(group)
+        currentGroup = group
 
-        if (hint != null) {
-            val hintView = TextView(requireContext()).apply {
-                text = hint
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
-                textSize = 12f
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    topMargin = dp(4)
-                    marginStart = dp(16)
-                    marginEnd = dp(16)
-                }
-            }
-            container.addView(hintView)
+        val collapsed = AppSettings.collapsedSections(requireContext()).contains(key)
+        applyCollapsed(header, group, collapsed)
+        header.root.setOnClickListener {
+            // 现在看得见就收起来，看不见就展开
+            val collapseNow = group.visibility == View.VISIBLE
+            applyCollapsed(header, group, collapseNow)
+            val ids = AppSettings.collapsedSections(requireContext()).toMutableSet()
+            if (collapseNow) ids.add(key) else ids.remove(key)
+            AppSettings.setCollapsedSections(requireContext(), ids)
         }
+    }
+
+    private fun applyCollapsed(
+        header: ItemSectionHeaderBinding,
+        group: LinearLayout,
+        collapsed: Boolean
+    ) {
+        group.visibility = if (collapsed) View.GONE else View.VISIBLE
+        header.sectionChevron.rotation = if (collapsed) 0f else 90f
+        header.sectionChevron.contentDescription =
+            getString(if (collapsed) R.string.section_expand else R.string.section_collapse)
     }
 
     private fun addRow(
@@ -229,7 +251,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         value: String?,
         onClick: (() -> Unit)?
     ): ItemSettingRowBinding {
-        val container = binding?.profileContent ?: error("页面还没准备好")
+        val container = currentGroup ?: binding?.profileContent ?: error("页面还没准备好")
         val row = ItemSettingRowBinding.inflate(layoutInflater, container, false)
         row.rowTitle.text = title
         row.rowSubtitle.text = subtitle ?: ""
@@ -274,7 +296,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun primaryButton(text: String, onClick: () -> Unit) {
-        val container = binding?.profileContent ?: return
+        val container = currentGroup ?: binding?.profileContent ?: return
         val button = TextView(requireContext()).apply {
             this.text = text
             gravity = android.view.Gravity.CENTER

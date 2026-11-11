@@ -259,6 +259,274 @@
     {
       "name": "mark_done",
       "value": "Mark as done"
+    },
+    {
+      "name": "bin_restore",
+      "value": "Restore to home"
+    },
+    {
+      "name": "bin_purge",
+      "value": "Delete permanently (no undo)"
+    },
+    {
+      "name": "bin_multi_select",
+      "value": "Select"
+    },
+    {
+      "name": "bin_multi_exit",
+      "value": "Done"
+    },
+    {
+      "name": "bin_select_all",
+      "value": "Select all"
+    },
+    {
+      "name": "bin_select_none",
+      "value": "Select none"
+    },
+    {
+      "name": "bin_delete_all",
+      "value": "Delete all"
+    },
+    {
+      "name": "bin_delete_selected_title",
+      "value": "Delete selected"
+    },
+    {
+      "name": "bin_nothing_selected",
+      "value": "Select at least one note first"
+    },
+    {
+      "name": "section_expand",
+      "value": "Expand this group"
+    },
+    {
+      "name": "section_collapse",
+      "value": "Collapse this group"
+    },
+    {
+      "name": "help_section",
+      "value": "Feature guide"
+    },
+    {
+      "name": "help_entry_title",
+      "value": "Feature guide (every feature explained)"
+    },
+    {
+      "name": "help_entry_sub",
+      "value": "Page by page, how each feature works; narration can be turned on"
+    },
+    {
+      "name": "help_title",
+      "value": "Feature guide"
+    },
+    {
+      "name": "help_intro",
+      "value": "Every feature of this app is explained below, one by one. Each group on the settings page already carries its own notes, so it is not repeated here."
+    },
+    {
+      "name": "help_tts_title",
+      "value": "Read aloud"
+    },
+    {
+      "name": "help_tts_sub",
+      "value": "When on, the guide is read aloud; when off, it is text only"
+    },
+    {
+      "name": "help_tts_speak_all",
+      "value": "Read the whole page"
+    },
+    {
+      "name": "help_tts_on_hint",
+      "value": "Reading is on: tap a section title to hear just that section"
+    },
+    {
+      "name": "help_tts_off_hint",
+      "value": "Reading is off: text only"
+    },
+    {
+      "name": "help_tts_no_engine",
+      "value": "No speech engine is available on this phone; install a system speech engine to hear the guide"
+    },
+    {
+      "name": "help_tts_unavailable",
+      "value": "No speech engine is available on this phone"
+    },
+    {
+      "name": "sched_mode_title",
+      "value": "Schedule display mode"
+    },
+    {
+      "name": "sched_mode_list",
+      "value": "Dropdown (vertical list, day by day)"
+    },
+    {
+      "name": "sched_mode_calendar",
+      "value": "Calendar (month grid)"
+    },
+    {
+      "name": "sched_mode_list_short",
+      "value": "Dropdown"
+    },
+    {
+      "name": "sched_mode_calendar_short",
+      "value": "Calendar"
+    },
+    {
+      "name": "help_1_title",
+      "value": "Home: the note list"
+    },
+    {
+      "name": "help_1_body",
+      "value": "One note per row: title and remark on the left, reminder time and a status badge on the right. The plus button at the top right creates a note, and its menu holds Show all notes / Only unhandled, Search notes and Recycle bin. Badge: a pending note shows the word for pending, a note that has already alerted but is not handled shows how many times it has alerted, a handled note shows no badge. Rows are ordered waiting-for-you, then pending, then postponed, then done. Tap any row to open the detail page."
+    },
+    {
+      "name": "help_2_title",
+      "value": "Schedule: dropdown mode and calendar mode"
+    },
+    {
+      "name": "help_2_body",
+      "value": "Two buttons at the top right: the left one switches the display mode, the right one picks the year and month. Dropdown mode lists day 1 to the end of the month vertically, and tapping a day expands that day of notes; the badge is the number of notes still unhandled on that day. Calendar mode shows the whole month as a seven-column grid, and tapping a day lists that day of notes under the grid. Both modes read the same data, so switching changes nothing about your notes."
+    },
+    {
+      "name": "help_3_title",
+      "value": "Creating and editing a note"
+    },
+    {
+      "name": "help_3_body",
+      "value": "Fields: title (required), remark, linked date, reminder modes (timed alert, repeat loop and re-alert while unhandled, any combination of the three), and your own action buttons. Saving schedules the system alarm immediately. Editing a note cancels the old alarm first and then schedules the new time, so no stale alarm is left behind."
+    },
+    {
+      "name": "help_4_title",
+      "value": "How linked date, timed reminder and loop work together"
+    },
+    {
+      "name": "help_4_body",
+      "value": "Each of the three does one job. The linked date decides which day of the schedule the note belongs to, and only affects grouping on the schedule page. The timed reminder is one absolute moment (year, month, day, hour, minute) and decides when the card pops up. The loop decides when the next round comes after you handle this one (daily, weekly, monthly).\nIn the editor they move together: picking the linked date also moves the reminder time to 09:00 of that day; picking the reminder time also moves the linked date to the same day. By default, the schedule grouping and the alert moment land on the same day.\nAfter the alert, your button decides: Mark done with a loop moves the note to the next cycle, back to pending, with the linked date set to that next day, and it alerts again; without a loop the note simply ends as done and the reminder time is cleared. Delay N minutes moves the reminder to now plus N minutes, keeps the linked date, and alerts again. Close only dismisses this card, the task stays unhandled but will not alert again this time.\nRe-alert while unhandled is separate: if the card pops up and you tap nothing, it keeps coming back at the set interval (15 minutes by default) until you tap a button. It does not conflict with the loop: one chases this round, the other decides when the next round arrives."
+    },
+    {
+      "name": "help_5_title",
+      "value": "Your own action buttons"
+    },
+    {
+      "name": "help_5_body",
+      "value": "Each note carries its own button labels (for example I have submitted it), and the action is one of three: mark done, delay N minutes, close only. The alert card shows only the buttons you configured, never a system close button."
+    },
+    {
+      "name": "help_6_title",
+      "value": "The strong alert card"
+    },
+    {
+      "name": "help_6_body",
+      "value": "A system alarm wakes the app, and an overlay puts the card above everything with the background dimmed: no cross, no snooze, and neither tapping the backdrop nor pressing back dismisses it. Only the buttons you configured dismiss it. Without overlay permission the app falls back to a full-screen reminder page with exactly the same rules. The persistent notification is a hard requirement of Android foreground services, not a task reminder; it cannot be removed and does not affect anything."
+    },
+    {
+      "name": "help_7_title",
+      "value": "Note detail page"
+    },
+    {
+      "name": "help_7_body",
+      "value": "The detail page shows the full title, remark, linked date, reminder time, loop, re-alert interval, current status and every button of this note. Tapping a button there is the same as tapping it on the alert card. At the bottom there are Translate the note (handed to a translation app on the phone, copied to the clipboard if none is installed) and Delete (moves the note to the recycle bin, where it can be restored)."
+    },
+    {
+      "name": "help_8_title",
+      "value": "Recycle bin"
+    },
+    {
+      "name": "help_8_body",
+      "value": "By default you handle notes one at a time: tap one to restore it to the home list or to delete it permanently. Select at the top right enters multi-select: tick the notes and use Delete selected at the bottom; Select all and Select none tick or untick everything; Delete all empties the whole bin. Anything deleted permanently can only come back from an older backup file."
+    },
+    {
+      "name": "help_9_title",
+      "value": "The four permissions"
+    },
+    {
+      "name": "help_9_body",
+      "value": "Overlay, ignore battery optimisation, notifications and exact alarms must all be on. With one missing the top card may never appear, which is an Android system limit. On Chinese ROMs also enable Auto start and Background running in the system app manager, otherwise the alarm is cleared before it fires."
+    },
+    {
+      "name": "help_10_title",
+      "value": "Backup and restore"
+    },
+    {
+      "name": "help_10_body",
+      "value": "Export writes WorkNote_date_time.taskbak into the system Download/WorkNote folder. It is plain JSON and you can open it yourself, and uninstalling the app does not remove it. Import is a replace: the existing notes are cleared, the backup is written in, and every reminder is rescheduled. Export before changing phones or signing keys."
+    },
+    {
+      "name": "help_11_title",
+      "value": "Look and feel"
+    },
+    {
+      "name": "help_11_body",
+      "value": "Dark mode: follow system, light or dark. Font size from 1 to 10. A background picture picked from the gallery is shared by Home, Schedule and Me, blurred so that text on the white cards stays readable. Four language options: follow system, Simplified Chinese, Traditional Chinese, English. Note translation uses a translation app installed on the phone."
+    },
+    {
+      "name": "help_12_title",
+      "value": "Data and privacy"
+    },
+    {
+      "name": "help_12_body",
+      "value": "All notes live only in the local SQLite database (worknote.db). There are no network requests, no account, no cloud sync and no analytics. Uninstalling the app removes the database with it, so export a backup from the Me page before switching phones."
+    },
+    {
+      "name": "bin_title",
+      "value": "Recycle bin"
+    },
+    {
+      "name": "bin_empty_hint",
+      "value": "The recycle bin is empty"
+    },
+    {
+      "name": "bin_delete_confirm",
+      "value": "Once deleted, only an old backup can bring it back. Continue?"
+    },
+    {
+      "name": "note_delete_into_bin",
+      "value": "Delete (to recycle bin)"
+    },
+    {
+      "name": "weekday_0",
+      "value": "Sunday"
+    },
+    {
+      "name": "weekday_1",
+      "value": "Monday"
+    },
+    {
+      "name": "weekday_2",
+      "value": "Tuesday"
+    },
+    {
+      "name": "weekday_3",
+      "value": "Wednesday"
+    },
+    {
+      "name": "weekday_4",
+      "value": "Thursday"
+    },
+    {
+      "name": "weekday_5",
+      "value": "Friday"
+    },
+    {
+      "name": "weekday_6",
+      "value": "Saturday"
+    },
+    {
+      "name": "bin_purge_title",
+      "value": "Delete permanently"
+    },
+    {
+      "name": "bin_purge_msg",
+      "value": "This note is removed from the local database and only an old backup can bring it back. Continue?"
+    },
+    {
+      "name": "bin_restored",
+      "value": "Restored"
+    },
+    {
+      "name": "bin_purged",
+      "value": "Deleted permanently"
     }
   ]
 }

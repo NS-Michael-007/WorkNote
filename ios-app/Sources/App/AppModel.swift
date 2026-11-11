@@ -68,6 +68,23 @@ final class AppModel: ObservableObject {
         reschedule()
     }
 
+    /// 回收站多选删除：一次删掉勾中的这几条，只重排一次通知
+    func purge(ids: Set<UUID>) {
+        for id in ids { store.purge(id: id) }
+        reload()
+        reschedule()
+    }
+
+    /// 清空回收站：只动静止在回收站里的记录，主界面便签不受影响
+    @discardableResult
+    func purgeAllDeleted() -> Int {
+        let trash = store.trashed()
+        for note in trash { store.purge(id: note.id) }
+        reload()
+        reschedule()
+        return trash.count
+    }
+
     /// 通知按钮与卡片按钮的统一入口。语义与 Android 的 `NoteActions` 完全一致：
     /// - 完成 + 有循环 → 排下一次，状态回 PENDING，remindCount 清零，dateKey 跟着新时间走
     /// - 完成 + 无循环 → DONE，remindAt 归零

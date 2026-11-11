@@ -254,4 +254,72 @@
     <string name="bin_purge_msg">这条便签会从本地数据库删掉，只能靠以前的备份文件找回，确定吗？</string>
     <string name="bin_purged">已彻底删除</string>
     <string name="channel_alert_desc">便签到点时的强提醒</string>
-    <string name="splash_slogan">不处理就关不掉的强提醒</string></resources>
+    <string name="splash_slogan">不处理就关不掉的强提醒</string>
+
+    <!-- 日程显示模式 -->
+    <string name="sched_mode_title">日程显示模式</string>
+    <string name="sched_mode_list">下拉模式（垂直列表，逐日展开）</string>
+    <string name="sched_mode_calendar">日历模式（整月网格）</string>
+    <string name="sched_mode_list_short">下拉</string>
+    <string name="sched_mode_calendar_short">日历</string>
+
+    <!-- 回收站：多选与全部删除 -->
+    <string name="bin_multi_select">多选</string>
+    <string name="bin_multi_exit">退出多选</string>
+    <string name="bin_delete_all">全部删除</string>
+    <string name="bin_select_all">全选</string>
+    <string name="bin_select_none">取消全选</string>
+    <string name="bin_selected_fmt">已选 %1$d 条</string>
+    <string name="bin_delete_selected_fmt">删除所选（%1$d）</string>
+    <string name="bin_delete_selected_title">删除所选</string>
+    <string name="bin_delete_selected_msg">勾选的 %1$d 条便签会从本地数据库删掉，只能靠以前的备份文件找回，确定吗？</string>
+    <string name="bin_purged_selected_fmt">已彻底删除 %1$d 条</string>
+    <string name="bin_delete_all_title">全部删除</string>
+    <string name="bin_delete_all_msg">回收站里的 %1$d 条便签会全部从本地数据库删掉，只能靠以前的备份文件找回，确定吗？</string>
+    <string name="bin_purged_all_fmt">已全部彻底删除（%1$d 条）</string>
+    <string name="bin_nothing_selected">先勾选要删的便签</string>
+
+    <!-- 设置页分组折叠 -->
+    <string name="section_expand">展开这一组</string>
+    <string name="section_collapse">收起这一组</string>
+
+    <!-- 功能说明页 -->
+    <string name="help_section">功能说明</string>
+    <string name="help_entry_title">功能说明（全部功能讲解）</string>
+    <string name="help_entry_sub">逐页讲清每个功能怎么用，可开启内容播报</string>
+    <string name="help_title">功能说明</string>
+    <string name="help_intro">下面按功能逐项讲清这个 App 怎么用。设置页各分组在自己页面里已有说明，这里不再重复。</string>
+    <string name="help_tts_title">内容播报</string>
+    <string name="help_tts_sub">打开后朗读说明内容，关掉只显示文字</string>
+    <string name="help_tts_speak_all">播报整页说明</string>
+    <string name="help_tts_stop">停止播报</string>
+    <string name="help_tts_no_engine">这台手机没有可用的语音播报引擎，装上系统语音引擎后即可朗读</string>
+    <string name="help_tts_unavailable">这台手机没有可用的语音播报引擎</string>
+    <string name="help_tts_on_hint">播报已开启：点小节标题只读这一节</string>
+    <string name="help_tts_off_hint">播报已关闭：只显示文字</string>
+
+    <string name="help_1_title">主界面：便签列表</string>
+    <string name="help_1_body">一条便签一行：左边是标题与备注，右边是提醒时间与状态角标。右上角 ＋ 新建便签，旁边的菜单里有「显示全部便签 / 只看未处理」「搜索便签」「回收站」。角标含义：待提醒显示「待」，已经弹过卡片但没处理显示已弹次数，已处理不再显示角标。列表按「等你处理 → 待提醒 → 已延后 → 已处理」的先后排，点任意一行进入详情页。</string>
+    <string name="help_2_title">日程：下拉模式与日历模式</string>
+    <string name="help_2_body">顶部右边两个按钮：左边是显示模式，右边是选年月。下拉模式把当月 1 号到月末纵向罗列，点某一天展开当天便签，角标是这天还没处理完的条数。日历模式是整月七列网格，点某一天在网格下方列出当天便签。两种模式看的是同一份数据，只是呈现方式不同，切换不影响任何便签内容。</string>
+    <string name="help_3_title">新建与编辑便签</string>
+    <string name="help_3_body">要填的项：便签标题（必填）、备注说明、关联日期、提醒方式（定时提醒 / 循环重复 / 未处理就再弹，三种可以任意组合）、自定义操作按钮。点保存后立刻按当前设置排好系统闹钟；修改一条便签会先取消旧闹钟，再按新时间重排，不会留下旧的提醒。</string>
+    <string name="help_4_title">关联日期、定时提醒、循环怎么配合</string>
+    <string name="help_4_body">三者各管一件事：关联日期决定这条便签归到日程的哪一天，只影响日程页的归类；定时提醒是一个绝对的时刻（年月日时分），决定什么时候弹卡片；循环决定每次处理完之后下一次什么时候再来（每天 / 每周 / 每月）。\n编辑页里它们是联动的：选关联日期时，提醒时间会一起落到那一天的 09:00；反过来选提醒时间时，关联日期也会跟着变成同一天。所以默认状态下，日程归类和提醒时刻都落在同一天。\n到点之后按你点的按钮走：点「标记完成」，开了循环就顺延到下一个周期（每天 / 每周 / 每月），状态回到待提醒，关联日期改成下一次那天，到点继续弹；没开循环就直接结束，状态变已处理，提醒时间清零。点「延后 N 分钟」，提醒时间改成现在加 N 分钟，关联日期不动，到点再弹。点「仅关闭」，只关掉这张卡片，任务仍是待处理，但这一次不会再弹。\n另外，「未处理就再弹」是独立的：卡片弹出后没点任何按钮，就按设定的间隔（默认 15 分钟）继续弹，直到你点按钮为止；它和循环不冲突，一个是「这一次催到底」，一个是「下一次什么时候来」。</string>
+    <string name="help_5_title">自定义操作按钮</string>
+    <string name="help_5_body">每条便签可以配自己的按钮文字（例如「我已提交」「十分钟后再说」），动作只有三种：标记完成、延后 N 分钟、仅关闭。强提醒卡片上只会出现你配的这些按钮，没有系统自带的关闭按钮。</string>
+    <string name="help_6_title">强提醒卡片</string>
+    <string name="help_6_body">到点由系统闹钟唤醒，用悬浮窗把卡片盖在屏幕最上层并把背景压暗：没有 ×，没有「稍后再说」，点背景和按返回键都关不掉，只有点你自己配的按钮才会消失。没给悬浮窗权限时会退回全屏提醒页，规则完全一样。通知栏那条常驻通知是安卓对前台服务的硬性要求，不是任务提醒，删不掉也不影响使用。</string>
+    <string name="help_7_title">便签详情页</string>
+    <string name="help_7_body">详情页显示完整标题、备注、关联日期、提醒时间、循环方式、未处理重弹间隔、当前状态，以及这条便签的全部按钮。点这里的按钮等于在强提醒卡片上点同一个按钮。底部还有「翻译便签文字」（交给手机里的翻译应用，没装就复制到剪贴板）和删除（移到回收站，可再恢复）。</string>
+    <string name="help_8_title">回收站</string>
+    <string name="help_8_body">默认是逐条处理：点开一条便签，可以恢复到主界面，或彻底删除。右上角「多选」进入多选模式：逐条勾选后用底部「删除所选」一次删掉；「全选 / 取消全选」一次勾选全部或全部取消；「全部删除」直接清空整个回收站。彻底删除的记录只能靠以前的备份文件找回，恢复不回来。</string>
+    <string name="help_9_title">四项权限</string>
+    <string name="help_9_body">悬浮窗、忽略电池优化、通知、精确闹钟四项都要打开，少一项置顶卡片就可能弹不出来，这是安卓系统的限制。国产 ROM 还要在系统的应用管理里单独打开「自启动」和「后台运行」，否则到点前闹钟会被系统清掉。</string>
+    <string name="help_10_title">备份与恢复</string>
+    <string name="help_10_body">导出会生成 WorkNote_年月日_时分.taskbak，写在系统「下载/工作便签提醒」目录，内容是纯 JSON，自己也能打开看；卸载 App 不会删掉它。导入是覆盖式的：先清空本机现有便签，再写入备份里的内容，并把全部提醒重新排一遍。换手机、换签名之前先导出。</string>
+    <string name="help_11_title">界面与显示</string>
+    <string name="help_11_body">深色模式：跟随系统 / 浅色 / 深色。字体大小 1 到 10 档，越大字越大。背景图从相册选一张，主界面、日程、我三个 Tab 共用同一张底图，图片会做虚化处理，保证白卡片上的字仍然清楚。语言四档：跟随系统 / 简体中文 / 繁體中文 / English。便签文字翻译调用手机里已安装的翻译应用。</string>
+    <string name="help_12_title">数据与隐私</string>
+    <string name="help_12_body">所有便签只存在本机的 SQLite 数据库（worknote.db），没有网络请求、没有账号、没有云同步、没有统计埋点。卸载 App 会连数据库一起删掉，所以换机前先到「我」页导出备份。</string>
+</resources>

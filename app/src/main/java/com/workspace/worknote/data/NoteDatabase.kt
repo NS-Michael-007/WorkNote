@@ -109,6 +109,25 @@ class NoteDao(context: Context) {
         helper.writableDatabase.delete(NoteDb.TABLE, "_id=?", arrayOf(id.toString()))
     }
 
+    /** 一次删掉多条（回收站多选删除用），走一个事务 */
+    fun hardDeleteMany(ids: Collection<Long>) {
+        if (ids.isEmpty()) return
+        val db = helper.writableDatabase
+        db.beginTransaction()
+        try {
+            ids.forEach { id ->
+                db.delete(NoteDb.TABLE, "_id=?", arrayOf(id.toString()))
+            }
+            db.setTransactionSuccessful()
+        } finally {
+            db.endTransaction()
+        }
+    }
+
+    /** 清空回收站：只删状态为已删除的记录，主界面的便签一条不动 */
+    fun hardDeleteAllDeleted(): Int =
+        helper.writableDatabase.delete(NoteDb.TABLE, "status=?", arrayOf(Status.DELETED))
+
     fun clearAll() {
         helper.writableDatabase.delete(NoteDb.TABLE, null, null)
     }

@@ -139,33 +139,135 @@ struct NoteRow: View {
     }
 }
 
-/// 回收站
+/// 回收站。原来「点开一条自己恢复 / 彻底删除」的做法保持不变，
+/// 另加右上角「多选」（逐条勾选后批量删）与「全部删除」（一次清空）。
 struct RecycleBinView: View {
     @EnvironmentObject private var model: AppModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var scheme
+
+    @State private var selecting = false
+    @State private var selected = Set<UUID>()
+    @State private var confirmSelected = false
+    @State private var confirmAll = false
+    @State private var hintText: String?
+
+    private var trash: [Note] { model.notes.filter { $0.status == .deleted } }
+    private var allSelected: Bool { !trash.isEmpty && selected.count == trash.count }
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(model.notes.filter { $0.status == .deleted }) { note in
-                    HStack {
-                        Text(note.title).foregroundStyle(.primary)
-                        Spacer()
-                        Button("恢复") { model.restore(id: note.id) }
-                            .buttonStyle(.borderless)
-                            .tint(Theme.accent)
-                        Button("彻底删除") { model.purge(id: note.id) }
-                            .buttonStyle(.borderless)
-                            .tint(Theme.badge)
+            Group {
+                if trash.isEmpty {
+                    EmptyHint(text: "回收站是空的")
+                } else {
+                    List {
+                        ForEach(trash) { note in
+                            HStack(spacing: 10) {
+                                if selecting {
+                                    Image(systemName: selected.contains(note.id) ? "checkmark.circle.fill" : "circle")
+                                        .font(.system(size: 20))
+                                        .foregroundStyle(selected.contains(note.id) ? Theme.accent : Theme.secondaryText(scheme))
+                                }
+                                Text(note.title)
+                                    .foregroundStyle(Theme.primaryText(scheme))
+                                Spacer()
+                                if !selecting {
+                                    Button("恢复") { model.restore(id: note.id) }
+                                        .buttonStyle(.borderless)
+                                        .tint(Theme.accent)
+                                    Button("彻底删除") { model.purge(id: note.id) }
+                                        .buttonStyle(.borderless)
+                                        .tint(Theme.badge)
+                                }
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                if selecting { toggle(note.id) }
+                            }
+                            .listRowBackground(Theme.cardBackground(scheme))
+                        }
                     }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
                 }
             }
+            .background(Theme.pageBackground(scheme))
             .navigationTitle("回收站")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItem(placement: .topBarLeading) {
+                    if !trash.isEmpty {
+                        Button(selecting ? "退出多选" : "多选") {
+                            selecting.toggle()
+                            if !selecting { selected.removeAll() }
+                        }
+                    }
+                }
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    if !trash.isEmpty && !selecting {
+                        Button("全部删除") { confirmAll = true }
+                            .tint(Theme.badge)
+                    }
                     Button("关闭") { dismiss() }
                 }
             }
+            .safeAreaInset(edge: .bottom) {
+                if selecting && !trash.isEmpty {
+                    HStack(spacing: 12) {
+                        Button(allSelected ? "取消全选" : "全选") {
+                            if allSelected { selected.removeAll() } else { selected = Set(trash.map { $0.id }) }
+                        }
+                        .buttonStyle(.borderless)
+                        .tint(Theme.accent)
+                        Text("已选 \(selected.count) 条")
+                            .font(.system(size: 13))
+                            .foregroundStyle(Theme.secondaryText(scheme))
+                        Spacer()
+                        Button("删除所选（\(selected.count)）") {
+                            if selected.isEmpty { hintText = "先勾选要删除的便签" } else { confirmSelected = true }
+                        }
+                        .buttonStyle(.borderless)
+                        .tint(Theme.badge)
+                    }
+                    .padding(.horizontal, Theme.pageMargin)
+                    .padding(.vertical, 8)
+                    .background(.thinMaterial)
+                }
+            }
+            .confirmationDialog("删除所选", isPresented: $confirmSelected, titleVisibility: .visible) {
+                Button("删除所选（\(selected.count)）", role: .destructive) {
+                    let ids = selected
+                    selected.removeAll()
+                    selecting = false
+                    model.purge(ids: ids)
+                }
+                Button("取消", role: .cancel) {}
+            } message: {
+                Text("勾选的 \(selected.count) 条便签会被彻底删掉，只能靠以前的备份文件找回。")
+            }
+            .confirmationDialog("全部删除", isPresented: $confirmAll, titleVisibility: .visible) {
+                Button("全部删除（\(trash.count)）", role: .destructive) {
+                    model.purgeAllDeleted()
+                    selected.removeAll()
+                    selecting = false
+                }
+                Button("取消", role: .cancel) {}
+            } message: {
+                Text("回收站里的 \(trash.count) 条便签会全部彻底删掉，只能靠以前的备份文件找回。")
+            }
+            .alert("提示", isPresented: Binding(
+                get: { hintText != nil },
+                set: { if !$0 { hintText = nil } }
+            )) {
+                Button("好", role: .cancel) { hintText = nil }
+            } message: {
+                Text(hintText ?? "")
+            }
         }
+    }
+
+    private func toggle(_ id: UUID) {
+        if selected.contains(id) { selected.remove(id) } else { selected.insert(id) }
     }
 }

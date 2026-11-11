@@ -47,6 +47,27 @@ public final class SettingsStore: ObservableObject {
         public static let delayMinutes = "delay_minutes"
         public static let repeatMinutes = "repeat_minutes"
         public static let backgroundPath = "background_path"
+        public static let collapsedSections = "collapsed_sections"
+        public static let scheduleMode = "schedule_mode"
+        public static let helpTts = "help_tts"
+    }
+
+    /// 日程显示模式。与 Android 端取值一致：list = 下拉（逐日展开），calendar = 整月网格
+    public enum ScheduleMode: String, CaseIterable, Identifiable {
+        case list, calendar
+        public var id: String { rawValue }
+        public var titleZh: String {
+            switch self {
+            case .list: return "下拉模式（垂直列表，逐日展开）"
+            case .calendar: return "日历模式（整月网格）"
+            }
+        }
+        public var shortZh: String {
+            switch self {
+            case .list: return "下拉"
+            case .calendar: return "日历"
+            }
+        }
     }
 
     private let defaults: UserDefaults
@@ -79,6 +100,18 @@ public final class SettingsStore: ObservableObject {
     @Published public var backgroundPath: String {
         didSet { defaults.set(backgroundPath, forKey: Keys.backgroundPath) }
     }
+    /// 设置页里被收起的分组名（分组名本身就是键，与 Android 的 collapsed_sections 对齐）
+    @Published public var collapsedSections: Set<String> {
+        didSet { defaults.set(Array(collapsedSections), forKey: Keys.collapsedSections) }
+    }
+    /// 日程显示模式：默认下拉
+    @Published public var scheduleMode: ScheduleMode {
+        didSet { defaults.set(scheduleMode.rawValue, forKey: Keys.scheduleMode) }
+    }
+    /// 功能说明页的「内容播报」开关，默认关闭
+    @Published public var helpTts: Bool {
+        didSet { defaults.set(helpTts, forKey: Keys.helpTts) }
+    }
 
     public init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
@@ -92,6 +125,9 @@ public final class SettingsStore: ObservableObject {
         delayMinutes = defaults.object(forKey: Keys.delayMinutes) as? Int ?? 30
         repeatMinutes = defaults.object(forKey: Keys.repeatMinutes) as? Int ?? 15
         backgroundPath = defaults.string(forKey: Keys.backgroundPath) ?? ""
+        collapsedSections = Set(defaults.stringArray(forKey: Keys.collapsedSections) ?? [])
+        scheduleMode = ScheduleMode(rawValue: defaults.string(forKey: Keys.scheduleMode) ?? "list") ?? .list
+        helpTts = defaults.object(forKey: Keys.helpTts) as? Bool ?? false
     }
 
     /// 字号倍数：与 Android 的 fontScale = 0.80 + level * 0.05 完全一致

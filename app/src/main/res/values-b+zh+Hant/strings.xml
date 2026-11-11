@@ -256,4 +256,71 @@
     <string name="bin_purged">已徹底刪除</string>
     <string name="channel_alert_desc">便籤到點時的強提醒</string>
     <string name="splash_slogan">不處理就關不掉的強提醒</string>
+
+    <!-- 日程顯示模式 -->
+    <string name="sched_mode_title">日程顯示模式</string>
+    <string name="sched_mode_list">下拉模式（垂直清單，逐日展開）</string>
+    <string name="sched_mode_calendar">日曆模式（整月格線）</string>
+    <string name="sched_mode_list_short">下拉</string>
+    <string name="sched_mode_calendar_short">日曆</string>
+
+    <!-- 回收站：多選與全部刪除 -->
+    <string name="bin_multi_select">多選</string>
+    <string name="bin_multi_exit">退出多選</string>
+    <string name="bin_delete_all">全部刪除</string>
+    <string name="bin_select_all">全選</string>
+    <string name="bin_select_none">取消全選</string>
+    <string name="bin_selected_fmt">已選 %1$d 條</string>
+    <string name="bin_delete_selected_fmt">刪除所選（%1$d）</string>
+    <string name="bin_delete_selected_title">刪除所選</string>
+    <string name="bin_delete_selected_msg">勾選的 %1$d 條便籤會從本機資料庫刪掉，只能靠之前的備份檔找回，確定嗎？</string>
+    <string name="bin_purged_selected_fmt">已徹底刪除 %1$d 條</string>
+    <string name="bin_delete_all_title">全部刪除</string>
+    <string name="bin_delete_all_msg">回收筒裡的 %1$d 條便籤會全部從本機資料庫刪掉，只能靠之前的備份檔找回，確定嗎？</string>
+    <string name="bin_purged_all_fmt">已全部徹底刪除（%1$d 條）</string>
+    <string name="bin_nothing_selected">先勾選要刪的便籤</string>
+
+    <!-- 設定頁分組摺疊 -->
+    <string name="section_expand">展開這一組</string>
+    <string name="section_collapse">收起這一組</string>
+
+    <!-- 功能說明頁 -->
+    <string name="help_section">功能說明</string>
+    <string name="help_entry_title">功能說明（全部功能講解）</string>
+    <string name="help_entry_sub">逐頁講清每個功能怎麼用，可開啟內容播報</string>
+    <string name="help_title">功能說明</string>
+    <string name="help_intro">下面按功能逐項講清這個 App 怎麼用。設定頁各分組在自己頁面裡已有說明，這裡不再重複。</string>
+    <string name="help_tts_title">內容播報</string>
+    <string name="help_tts_sub">打開後朗讀說明內容，關掉只顯示文字</string>
+    <string name="help_tts_speak_all">播報整頁說明</string>
+    <string name="help_tts_stop">停止播報</string>
+    <string name="help_tts_unavailable">這台手機沒有可用的語音播報引擎</string>
+    <string name="help_tts_no_engine">這台手機沒有可用的語音播報引擎，裝上系統語音引擎後即可朗讀</string>
+    <string name="help_tts_on_hint">播報已開啟：點小節標題只讀這一節</string>
+    <string name="help_tts_off_hint">播報已關閉：只顯示文字</string>
+
+    <string name="help_1_title">主介面：便籤清單</string>
+    <string name="help_1_body">一則便籤一行：左邊是標題與備註，右邊是提醒時間與狀態角標。右上角 ＋ 新增便籤，旁邊的選單裡有「顯示全部便籤 / 只看未處理」「搜尋便籤」「回收筒」。角標含義：待提醒顯示「待」，已經彈過卡片但沒處理顯示已彈次數，已處理不再顯示角標。清單按「等你處理 → 待提醒 → 已延後 → 已處理」的先後排，點任意一行進入詳情頁。</string>
+    <string name="help_2_title">日程：下拉模式與日曆模式</string>
+    <string name="help_2_body">頂部右邊兩個按鈕：左邊是顯示模式，右邊是選年月。下拉模式把當月 1 號到月底縱向羅列，點某一天展開當天便籤，角標是這天還沒處理完的條數。日曆模式是整月七欄格線，點某一天在格線下方列出當天便籤。兩種模式看的是同一份資料，只是呈現方式不同，切換不影響任何便籤內容。</string>
+    <string name="help_3_title">新增與編輯便籤</string>
+    <string name="help_3_body">要填的項目：便籤標題（必填）、備註說明、關聯日期、提醒方式（定時提醒 / 循環重複 / 未處理就再彈，三種可以任意組合）、自訂操作按鈕。點儲存後立刻按目前設定排好系統鬧鐘；修改一則便籤會先取消舊鬧鐘，再按新時間重排，不會留下舊的提醒。</string>
+    <string name="help_4_title">關聯日期、定時提醒、循環怎麼配合</string>
+    <string name="help_4_body">三者各管一件事：關聯日期決定這則便籤歸到日程的哪一天，只影響日程頁的分類；定時提醒是一個絕對的時刻（年月日時分），決定什麼時候彈卡片；循環決定每次處理完之後下一次什麼時候再來（每天 / 每週 / 每月）。\n編輯頁裡它們是連動的：選關聯日期時，提醒時間會一起落到那一天的 09:00；反過來選提醒時間時，關聯日期也會跟著變成同一天。所以預設狀態下，日程分類和提醒時刻都落在同一天。\n到點之後按你點的按鈕走：點「標記完成」，開了循環就順延到下一個週期（每天 / 每週 / 每月），狀態回到待提醒，關聯日期改成下一次那天，到點繼續彈；沒開循環就直接結束，狀態變已處理，提醒時間歸零。點「延後 N 分鐘」，提醒時間改成現在加 N 分鐘，關聯日期不動，到點再彈。點「僅關閉」，只關掉這張卡片，任務仍是待處理，但這一次不會再彈。\n另外，「未處理就再彈」是獨立的：卡片彈出後沒點任何按鈕，就按設定的間隔（預設 15 分鐘）繼續彈，直到你點按鈕為止；它和循環不衝突，一個是「這一次催到底」，一個是「下一次什麼時候來」。</string>
+    <string name="help_5_title">自訂操作按鈕</string>
+    <string name="help_5_body">每則便籤可以配自己的按鈕文字（例如「我已提交」「十分鐘後再說」），動作只有三種：標記完成、延後 N 分鐘、僅關閉。強提醒卡片上只會出現你配的這些按鈕，沒有系統自帶的關閉按鈕。</string>
+    <string name="help_6_title">強提醒卡片</string>
+    <string name="help_6_body">到點由系統鬧鐘喚醒，用懸浮視窗把卡片蓋在螢幕最上層並把背景壓暗：沒有 ×，沒有「稍後再說」，點背景和按返回鍵都關不掉，只有點你自己配的按鈕才會消失。沒給懸浮視窗權限時會退回全螢幕提醒頁，規則完全一樣。通知列那條常駐通知是安卓對前景服務的硬性要求，不是任務提醒，刪不掉也不影響使用。</string>
+    <string name="help_7_title">便籤詳情頁</string>
+    <string name="help_7_body">詳情頁顯示完整標題、備註、關聯日期、提醒時間、循環方式、未處理重彈間隔、目前狀態，以及這則便籤的全部按鈕。點這裡的按鈕等於在強提醒卡片上點同一個按鈕。底部還有「翻譯便籤文字」（交給手機裡的翻譯應用，沒裝就複製到剪貼簿）和刪除（移到回收筒，可再還原）。</string>
+    <string name="help_8_title">回收筒</string>
+    <string name="help_8_body">預設是逐則處理：點開一則便籤，可以還原到主介面，或徹底刪除。右上角「多選」進入多選模式：逐則勾選後用底部「刪除所選」一次刪掉；「全選 / 取消全選」一次勾選全部或全部取消；「全部刪除」直接清空整個回收筒。徹底刪除的記錄只能靠之前的備份檔找回，還原不回來。</string>
+    <string name="help_9_title">四項權限</string>
+    <string name="help_9_body">懸浮視窗、忽略電池最佳化、通知、精確鬧鐘四項都要打開，少一項置頂卡片就可能彈不出來，這是安卓系統的限制。國產 ROM 還要在系統的應用程式管理裡單獨打開「自啟動」和「背景執行」，否則到點前鬧鐘會被系統清掉。</string>
+    <string name="help_10_title">備份與還原</string>
+    <string name="help_10_body">匯出會產生 WorkNote_年月日_時分.taskbak，寫在系統「下載/工作便籤提醒」目錄，內容是純 JSON，自己也能打開看；解除安裝 App 不會刪掉它。匯入是覆蓋式的：先清空本機現有便籤，再寫入備份裡的內容，並把全部提醒重新排一遍。換手機、換簽章之前先匯出。</string>
+    <string name="help_11_title">介面與顯示</string>
+    <string name="help_11_body">深色模式：跟隨系統 / 淺色 / 深色。字型大小 1 到 10 檔，越大字越大。背景圖從相簿選一張，主介面、日程、我三個分頁共用同一張底圖，圖片會做虛化處理，保證白卡片上的字仍然清楚。語言四檔：跟隨系統 / 简体中文 / 繁體中文 / English。便籤文字翻譯呼叫手機裡已安裝的翻譯應用。</string>
+    <string name="help_12_title">資料與隱私</string>
+    <string name="help_12_body">所有便籤只存在本機的 SQLite 資料庫（worknote.db），沒有網路請求、沒有帳號、沒有雲端同步、沒有統計埋點。解除安裝 App 會連資料庫一起刪掉，所以換機前先到「我」頁匯出備份。</string>
 </resources>

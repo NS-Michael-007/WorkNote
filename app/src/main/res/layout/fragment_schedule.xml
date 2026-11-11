@@ -4,27 +4,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/top_bar_height">
+        android:layout_height="@dimen/top_bar_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/page_margin"
+        android:paddingEnd="@dimen/page_margin">
 
         <TextView
             android:id="@+id/scheduleTitle"
             style="@style/Text.Title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/page_margin"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/tab_schedule" />
+
+        <TextView
+            android:id="@+id/btnDisplayMode"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_field"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_body" />
 
         <TextView
             android:id="@+id/btnPickMonth"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/page_margin"
+            android:layout_marginStart="8dp"
             android:background="@drawable/bg_field"
             android:clickable="true"
             android:drawablePadding="2dp"
@@ -34,8 +48,9 @@
             android:paddingEnd="8dp"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_body" />
-    </RelativeLayout>
+    </LinearLayout>
 
+    <!-- 下拉模式：当月 1 号到月末纵向罗列，点某天展开当天便签 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dayList"
         android:layout_width="match_parent"
@@ -45,4 +60,125 @@
         android:clipToPadding="false"
         android:paddingBottom="@dimen/space_bar_to_section"
         android:scrollbars="vertical" />
+
+    <!-- 日历模式：整月七列网格，点某天在下方列出当天便签 -->
+    <ScrollView
+        android:id="@+id/calendarScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space_bar_to_section"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space_section">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp">
+
+                <TextView
+                    style="@style/Text.HintSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/weekday_0" />
+
+                <TextView
+                    style="@style/Text.HintSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/weekday_1" />
+
+                <TextView
+                    style="@style/Text.HintSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/weekday_2" />
+
+                <TextView
+                    style="@style/Text.HintSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/weekday_3" />
+
+                <TextView
+                    style="@style/Text.HintSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/weekday_4" />
+
+                <TextView
+                    style="@style/Text.HintSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/weekday_5" />
+
+                <TextView
+                    style="@style/Text.HintSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="@string/weekday_6" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendarGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/calendarDayLabel"
+                style="@style/Text.ItemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/page_margin"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="@dimen/page_margin" />
+
+            <LinearLayout
+                android:id="@+id/calendarNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

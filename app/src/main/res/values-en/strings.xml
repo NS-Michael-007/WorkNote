@@ -254,4 +254,72 @@
     <string name="bin_purge_msg">This note is removed from the local database and only an old backup can bring it back. Continue?</string>
     <string name="bin_purged">Deleted permanently</string>
     <string name="channel_alert_desc">Strong alert when a note is due</string>
-    <string name="splash_slogan">Stays on screen until it is handled</string></resources>
+    <string name="splash_slogan">Stays on screen until it is handled</string>
+
+    <!-- Schedule display modes -->
+    <string name="sched_mode_title">Schedule display mode</string>
+    <string name="sched_mode_list">Dropdown (vertical list, day by day)</string>
+    <string name="sched_mode_calendar">Calendar (month grid)</string>
+    <string name="sched_mode_list_short">Dropdown</string>
+    <string name="sched_mode_calendar_short">Calendar</string>
+
+    <!-- Recycle bin: multi-select and delete all -->
+    <string name="bin_multi_select">Select</string>
+    <string name="bin_multi_exit">Done</string>
+    <string name="bin_delete_all">Delete all</string>
+    <string name="bin_select_all">Select all</string>
+    <string name="bin_select_none">Select none</string>
+    <string name="bin_selected_fmt">%1$d selected</string>
+    <string name="bin_delete_selected_fmt">Delete selected (%1$d)</string>
+    <string name="bin_delete_selected_title">Delete selected</string>
+    <string name="bin_delete_selected_msg">The %1$d selected notes are removed from the local database and only an old backup can bring them back. Continue?</string>
+    <string name="bin_purged_selected_fmt">Deleted %1$d notes permanently</string>
+    <string name="bin_delete_all_title">Delete all</string>
+    <string name="bin_delete_all_msg">All %1$d notes in the recycle bin are removed from the local database and only an old backup can bring them back. Continue?</string>
+    <string name="bin_purged_all_fmt">All deleted permanently (%1$d notes)</string>
+    <string name="bin_nothing_selected">Select at least one note first</string>
+
+    <!-- Collapsible settings sections -->
+    <string name="section_expand">Expand this group</string>
+    <string name="section_collapse">Collapse this group</string>
+
+    <!-- Feature guide -->
+    <string name="help_section">Feature guide</string>
+    <string name="help_entry_title">Feature guide (every feature explained)</string>
+    <string name="help_entry_sub">Page by page, how each feature works; narration can be turned on</string>
+    <string name="help_title">Feature guide</string>
+    <string name="help_intro">Every feature of this app is explained below, one by one. Each group on the settings page already carries its own notes, so it is not repeated here.</string>
+    <string name="help_tts_title">Read aloud</string>
+    <string name="help_tts_sub">When on, the guide is read aloud; when off, it is text only</string>
+    <string name="help_tts_speak_all">Read the whole page</string>
+    <string name="help_tts_stop">Stop reading</string>
+    <string name="help_tts_unavailable">No speech engine is available on this phone</string>
+    <string name="help_tts_no_engine">No speech engine is available on this phone; install a system speech engine to hear the guide</string>
+    <string name="help_tts_on_hint">Reading is on: tap a section title to hear just that section</string>
+    <string name="help_tts_off_hint">Reading is off: text only</string>
+
+    <string name="help_1_title">Home: the note list</string>
+    <string name="help_1_body">One note per row: title and remark on the left, reminder time and a status badge on the right. The plus button at the top right creates a note, and its menu holds Show all notes / Only unhandled, Search notes and Recycle bin. Badge: a pending note shows the word for pending, a note that has already alerted but is not handled shows how many times it has alerted, a handled note shows no badge. Rows are ordered waiting-for-you, then pending, then postponed, then done. Tap any row to open the detail page.</string>
+    <string name="help_2_title">Schedule: dropdown mode and calendar mode</string>
+    <string name="help_2_body">Two buttons at the top right: the left one switches the display mode, the right one picks the year and month. Dropdown mode lists day 1 to the end of the month vertically, and tapping a day expands that day of notes; the badge is the number of notes still unhandled on that day. Calendar mode shows the whole month as a seven-column grid, and tapping a day lists that day of notes under the grid. Both modes read the same data, so switching changes nothing about your notes.</string>
+    <string name="help_3_title">Creating and editing a note</string>
+    <string name="help_3_body">Fields: title (required), remark, linked date, reminder modes (timed alert, repeat loop and re-alert while unhandled, any combination of the three), and your own action buttons. Saving schedules the system alarm immediately. Editing a note cancels the old alarm first and then schedules the new time, so no stale alarm is left behind.</string>
+    <string name="help_4_title">How linked date, timed reminder and loop work together</string>
+    <string name="help_4_body">Each of the three does one job. The linked date decides which day of the schedule the note belongs to, and only affects grouping on the schedule page. The timed reminder is one absolute moment (year, month, day, hour, minute) and decides when the card pops up. The loop decides when the next round comes after you handle this one (daily, weekly, monthly).\nIn the editor they move together: picking the linked date also moves the reminder time to 09:00 of that day; picking the reminder time also moves the linked date to the same day. By default, the schedule grouping and the alert moment land on the same day.\nAfter the alert, your button decides: Mark done with a loop moves the note to the next cycle, back to pending, with the linked date set to that next day, and it alerts again; without a loop the note simply ends as done and the reminder time is cleared. Delay N minutes moves the reminder to now plus N minutes, keeps the linked date, and alerts again. Close only dismisses this card, the task stays unhandled but will not alert again this time.\nRe-alert while unhandled is separate: if the card pops up and you tap nothing, it keeps coming back at the set interval (15 minutes by default) until you tap a button. It does not conflict with the loop: one chases this round, the other decides when the next round arrives.</string>
+    <string name="help_5_title">Your own action buttons</string>
+    <string name="help_5_body">Each note carries its own button labels (for example I have submitted it), and the action is one of three: mark done, delay N minutes, close only. The alert card shows only the buttons you configured, never a system close button.</string>
+    <string name="help_6_title">The strong alert card</string>
+    <string name="help_6_body">A system alarm wakes the app, and an overlay puts the card above everything with the background dimmed: no cross, no snooze, and neither tapping the backdrop nor pressing back dismisses it. Only the buttons you configured dismiss it. Without overlay permission the app falls back to a full-screen reminder page with exactly the same rules. The persistent notification is a hard requirement of Android foreground services, not a task reminder; it cannot be removed and does not affect anything.</string>
+    <string name="help_7_title">Note detail page</string>
+    <string name="help_7_body">The detail page shows the full title, remark, linked date, reminder time, loop, re-alert interval, current status and every button of this note. Tapping a button there is the same as tapping it on the alert card. At the bottom there are Translate the note (handed to a translation app on the phone, copied to the clipboard if none is installed) and Delete (moves the note to the recycle bin, where it can be restored).</string>
+    <string name="help_8_title">Recycle bin</string>
+    <string name="help_8_body">By default you handle notes one at a time: tap one to restore it to the home list or to delete it permanently. Select at the top right enters multi-select: tick the notes and use Delete selected at the bottom; Select all and Select none tick or untick everything; Delete all empties the whole bin. Anything deleted permanently can only come back from an older backup file.</string>
+    <string name="help_9_title">The four permissions</string>
+    <string name="help_9_body">Overlay, ignore battery optimisation, notifications and exact alarms must all be on. With one missing the top card may never appear, which is an Android system limit. On Chinese ROMs also enable Auto start and Background running in the system app manager, otherwise the alarm is cleared before it fires.</string>
+    <string name="help_10_title">Backup and restore</string>
+    <string name="help_10_body">Export writes WorkNote_date_time.taskbak into the system Download/WorkNote folder. It is plain JSON and you can open it yourself, and uninstalling the app does not remove it. Import is a replace: the existing notes are cleared, the backup is written in, and every reminder is rescheduled. Export before changing phones or signing keys.</string>
+    <string name="help_11_title">Look and feel</string>
+    <string name="help_11_body">Dark mode: follow system, light or dark. Font size from 1 to 10. A background picture picked from the gallery is shared by Home, Schedule and Me, blurred so that text on the white cards stays readable. Four language options: follow system, Simplified Chinese, Traditional Chinese, English. Note translation uses a translation app installed on the phone.</string>
+    <string name="help_12_title">Data and privacy</string>
+    <string name="help_12_body">All notes live only in the local SQLite database (worknote.db). There are no network requests, no account, no cloud sync and no analytics. Uninstalling the app removes the database with it, so export a backup from the Me page before switching phones.</string>
+</resources>
