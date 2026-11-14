@@ -5,7 +5,7 @@
   "description": "工作便签提醒 · 鸿蒙 Next 端",
   "main": "",
   "author": "",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "dependencies": {},
   "devDependencies": {
     "@ohos/hvigor": "5.0.0"

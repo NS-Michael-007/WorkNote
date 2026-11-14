@@ -4,6 +4,6 @@
   "description": "工作便签提醒 · 入口模块",
   "main": "",
   "author": "",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "dependencies": {}
 }

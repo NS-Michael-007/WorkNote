@@ -50,3 +50,6 @@ ohos-app/local.properties
 # 契约目录里由真机数据库导出的副本含个人便签内容，只留合成的 sample.taskbak
 /contract/real_worknote.db
 /contract/real_export.taskbak
+
+# Android 真机截图（含个人便签内容）：一律不进公开仓库
+/Screenshot_*.jpg

@@ -37,7 +37,7 @@ Release：<https://github.com/NS-Michael-007/WorkNote/releases/tag/v1.0.0>
 
 ## 四、Android 正式版装机（本机）
 
-手机：realme RMX5080 / Android 16，序列号 `HQDQBM6XMJBEPFLJ`。
+手机：realme RMX5080 / Android 16，序列号 `（已隐去）`。
 
 1. 换装前先在【我】页导出备份：`/sdcard/Download/工作便签提醒/WorkNote_20261108_1355.taskbak.json`（1,255 字节，含当时全部便签），并另存一份到电脑 `backup_before_release_20261108_1355.taskbak.json`。
 2. `adb uninstall com.workspace.worknote`（debug 与 release 签名不同，必须卸载）。
